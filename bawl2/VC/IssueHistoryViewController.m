@@ -23,6 +23,8 @@ static NSString * const kSimpleTableIdentifier = @"SampleTableCell";
 
 @implementation IssueHistoryViewController
 
+/*
+
 -(void) requestIssueHistory {
     NSString *requestString = [NSString stringWithFormat:@"https://bawl-rivne.rhcloud.com/issue/%@/history",[self.issue.issueId stringValue]];
     
@@ -138,7 +140,8 @@ static NSString * const kSimpleTableIdentifier = @"SampleTableCell";
     self.issue = [CurrentItems sharedItems].issue;
     [self.issueTitle setText:self.issue.issueDescription];
     [self requestIssueHistory];
-    [self.mapDelegate showTabBar];
+#pragma warning !!!
+    //[self.mapDelegate showTabBar];
     UIActivityIndicatorView *activityindicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     [activityindicator setColor: [UIColor bawlRedColor]];
     self.issueTable.backgroundView = activityindicator;
@@ -167,7 +170,7 @@ static NSString * const kSimpleTableIdentifier = @"SampleTableCell";
     
     return cell;
 }
-
+*/
 /*- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
@@ -196,7 +199,7 @@ static NSString * const kSimpleTableIdentifier = @"SampleTableCell";
     
     return 0;
 }*/
-
+/*
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSArray *history = self.issue.history;
     
@@ -216,4 +219,5 @@ static NSString * const kSimpleTableIdentifier = @"SampleTableCell";
         }
     }
 }
+ */
 @end

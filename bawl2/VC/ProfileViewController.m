@@ -41,6 +41,8 @@ static NSInteger const HTTP_RESPONSE_CODE_OK = 200;
 
 @implementation ProfileViewController
 
+/*
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -440,5 +442,5 @@ static NSInteger const HTTP_RESPONSE_CODE_OK = 200;
 {
     [self.activeField resignFirstResponder];
 }
-
+*/
 @end
