@@ -9,7 +9,7 @@
 #import "IssueCategories.h"
 #import "NetworkDataSorce.h"
 #import "CurrentItems.h"
-#import "NotificationsNames.h"
+#import "Constants.h"
 
 static IssueCategories *standartCategories_ = nil;
 
