@@ -7,13 +7,7 @@
 //
 
 #import "Issue.h"
-
-@interface Issue()
-
--(NSString*)pointHistoryToString;
-
-@end
-
+#import "Constants.h"
 
 @implementation Issue
 
@@ -22,122 +16,88 @@
     return @[@"NEW", @"APPROVED", @"CANCEL", @"TO_RESOLVE", @"RESOLVED"];
 }
 
--(NSString*)stringStatus
-{
-    return [[Issue stringStatusesArray] objectAtIndex:self.statusEnum];
-}
-
 -(instancetype)initWithDictionary:(NSDictionary *)issueDictionary
 {
     self = [super init];
     
-    NSString *camelStyleKey;
     if (self) {
-            //Loop method
-            for (NSString* key in issueDictionary) {
-                camelStyleKey = [self fromConstFontStyleToCamel:key];
-                if ([camelStyleKey isEqualToString:@"id"])
-                    camelStyleKey = @"issueId";
-                if ([camelStyleKey isEqualToString:@"description"])
-                    camelStyleKey = @"issueDescription";
-                [self setValue:[issueDictionary valueForKey:key] forKey:camelStyleKey];
+        _name = issueDictionary[@"NAME"];
+        _issueId = issueDictionary[@"ID"];
+        _attachments = issueDictionary[@"ATTACHMENTS"];
+        _categoryId = issueDictionary[@"CATEGORY_ID"];
+        _issueDescription = issueDictionary[@"DESCRIPTION"];
+        _mapPointer = issueDictionary[@"MAP_POINTER"];
+        _status = issueDictionary[@"STATUS"];
+
+        NSArray <NSDictionary*> *historyDics = issueDictionary[@"HISTORY"];
+        if (historyDics != nil)
+        {
+            NSMutableArray <IssueHistory*> *mAr = [[NSMutableArray alloc] init];
+            for(NSDictionary *historyDic in historyDics)
+            {
+                IssueHistory *history = [[IssueHistory alloc] initWithDictionary:historyDic];
+                [mAr addObject:history];
             }
-            // Instead of Loop method you can also use:
-            // [self setValuesForKeysWithDictionary:JSONDictionary];
-        if ([self.attachments isEqual:[NSNull null]]) {
-            self.attachments = @"defaultIssue";
+            _history = mAr;
+        }
+        
+        if ([_attachments isEqual:[NSNull null]]) {
+            _attachments = ImageNameForBLankIssue;
         }
     }
     return self;
 }
 
--(double)getLongitude
+-(NSNumber*)getNumberAsSubstringFromString:(NSString*)string BetweenString:(NSString*)str1 andString:(NSString*)str2
 {
-    NSString *mapPointer = [self.mapPointer copy];
-    NSString *resultedString = [self findMatchedStringByPattern:@"[1234567890.]+" andString:mapPointer];
-    mapPointer = [mapPointer stringByReplacingOccurrencesOfString:resultedString withString:@""];
-    return [[self findMatchedStringByPattern:@"[1234567890.]+" andString:mapPointer] doubleValue];
-}
-
--(double)getLatitude
-{
-    return [[self findMatchedStringByPattern:@"[1234567890.]+" andString:self.mapPointer] doubleValue];
-}
-
--(NSString *)findMatchedStringByPattern:(NSString *)inputPattern andString:(NSString *)inputString {
-    NSString *searchedString = inputString;
-    NSRange  searchedRange = NSMakeRange(0, [searchedString length]);
-    NSString *pattern = inputPattern;
-    NSError  *error = nil;
-    NSString *matchText;
+    NSNumber *result = nil;
     
-    NSRegularExpression* regex = [NSRegularExpression regularExpressionWithPattern: pattern options:0 error:&error];
-    NSArray* matches = [regex matchesInString:searchedString options:0 range: searchedRange];
-    for (NSTextCheckingResult* match in matches) {
-        matchText = [searchedString substringWithRange:[match range]];
-//        NSLog(@"match: %@", matchText);
-        break;
+    NSRange range1 = [self.mapPointer rangeOfString:str1];
+    NSRange range2 = [self.mapPointer rangeOfString:str2];
+    
+    if (range1.location != NSNotFound && range2.location != NSNotFound)
+    {
+        NSUInteger len = range2.location - range1.location;
+        NSString *substring =  [string substringWithRange:NSMakeRange(range1.location, len)];
+        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+        formatter.numberStyle = NSNumberFormatterDecimalStyle;
+        result = [formatter numberFromString:substring];
     }
-    return matchText;
+    return result;
 }
 
-//-(instancetype)init
-//{
-//    if (self=[super init]) {
-//        _stringStatus = [[NSArray alloc] initWithObjects:@"APPREVED", @"TO_RESOLVE", @"RESOLVED", nil];
-//    }
-//    return self;
-//}
+-(NSNumber*)longitude
+{
+    return [self getNumberAsSubstringFromString:self.mapPointer BetweenString:@"," andString:@")"];
+}
 
+-(NSNumber*)latitude
+{
+    return [self getNumberAsSubstringFromString:self.mapPointer BetweenString:@"(" andString:@","];
+}
 
+// this is just fog logging
 -(NSString*)description
 {
-    return [NSString stringWithFormat:@"This is a point with name - %@, mapInfo - %@, and such history:\n%@", self.name, self.mapInfo, [self pointHistoryToString]];
+    return [NSString stringWithFormat:@"This is a point with name - %@, mapInfo - %@", self.name, self.mapPointer];
 }
 
+//// this is just for description method
+//-(NSString*)pointHistoryToString;
+//{
+//    NSMutableString *mStr = [[NSMutableString alloc] init];
+//    
+//    for (IssueHistory *h in self.pointHistory)
+//    {
+//        [mStr appendString:[h description]];
+//        [mStr appendString:@"\n"];
+//    }
+//    
+//    if(mStr.length !=0)
+//        [mStr deleteCharactersInRange:NSMakeRange([mStr length]-1,1)];
+//    
+//    return mStr;
+//}
 
--(NSString*)pointHistoryToString;
-{
-    NSMutableString *mStr = [[NSMutableString alloc] init];
-    
-    for (IssueHistory *h in self.pointHistory)
-    {
-        [mStr appendString:[h description]];
-        [mStr appendString:@"\n"];
-    }
-    
-    if(mStr.length !=0)
-        [mStr deleteCharactersInRange:NSMakeRange([mStr length]-1,1)];
-    
-    return mStr;
-}
-
--(NSString *)fromConstFontStyleToCamel:(NSString *)inputString
-{
-    //Example PRIORITY_ID -> priorityId
-    
-    BOOL underscoreFound = NO;
-    unichar letter;
-    NSString *resultString = [[NSString alloc] init];
-    NSString *stringTypeLetter;
-    
-    for (int i = 0; i < inputString.length; ++i){
-        letter = [inputString characterAtIndex:i];
-        stringTypeLetter = [NSString stringWithCharacters:&letter length:1];
-        
-        if ([stringTypeLetter isEqualToString:@"_"]){
-            underscoreFound = YES;
-            continue;
-        }
-        if (underscoreFound == NO)
-            resultString = [resultString stringByAppendingString:[stringTypeLetter lowercaseString]];
-        else {
-            resultString = [resultString stringByAppendingString:stringTypeLetter];
-            underscoreFound = NO;
-        }
-    }
-    
-    return resultString;
-}
 
 @end

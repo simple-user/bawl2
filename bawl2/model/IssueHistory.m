@@ -13,8 +13,20 @@
 
 -(NSString*)description
 {
-    return [NSString stringWithFormat:@"UserId - %d, made an action - %@, at:%@", (unsigned int)self.userId, self.action, [self.date description]];
+    return [NSString stringWithFormat:@"UserId - %@, made an action - %@, at:%@", self.userId, self.action, self.stringDate];
 }
 
+
+
+-(instancetype)initWithDictionary:(NSDictionary*)dic;
+{
+    if(self = [super init])
+    {
+        _action = dic[@"ACTION"];
+        _stringDate = dic[@"DATE"];
+        _userId = dic[@"USER_ID"];
+    }
+    return self;
+}
 
 @end

@@ -8,6 +8,7 @@
 
 #import "CDUser.h"
 #import "NetworkDataSorce.h"
+#import "Constants.h"
 
 @interface CDUser()
 
@@ -94,7 +95,7 @@
              NSUInteger pos = cdUser.avatarString.length-3;
              NSRange range = NSMakeRange(pos, 3);
              NSString *fileExtension = [cdUser.avatarString substringWithRange:range];
-             if ([fileExtension isEqualToString:@"png"] || [cdUser.avatarString isEqualToString:@"defaultUser"])
+             if ([fileExtension isEqualToString:@"png"] || [cdUser.avatarString isEqualToString:ImageNameForBLankUser])
              {
                  cdUser.avatarData = UIImagePNGRepresentation(image);
                  NSLog(@"Update user avadtar in CD (png) for avatar: %@", cdUser.avatarString);

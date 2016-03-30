@@ -7,6 +7,8 @@
 //
 
 #import "HTTPConnector.h"
+#import "Constants.h"
+
 @interface HTTPConnector()
 
 @property(strong, nonatomic)NSString *globalURL;
@@ -82,9 +84,9 @@
 {
     if ([name isEqual:[NSNull null]])
         name = self.defaultIssueImage;
-    else if ([name isEqualToString:@"defaultUser"])
+    else if ([name isEqualToString:ImageNameForBLankUser])
         name = self.defaultUserImage;
-    else if ([name isEqualToString:@"defaultIssue"])
+    else if ([name isEqualToString:ImageNameForBLankIssue])
         name = self.defaultIssueImage;
         
     [self getRequestBlankToUrl:[NSString stringWithFormat:@"%@%@%@", self.globalURL, self.issueImage, name] andHandler:dataSorceHandler];

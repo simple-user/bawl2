@@ -21,6 +21,9 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="d7Q-9N-OWt">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="WDD-gh-r5x"/>
+                                </connections>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -37,6 +40,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Item" id="iEJ-Mn-1nQ"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="mapView" destination="d7Q-9N-OWt" id="yaS-FM-Ike"/>
                         <segue destination="kr9-Fn-EL6" kind="show" identifier="FromMapToLogIn" id="JG0-JV-m8A"/>
                         <segue destination="hHh-ss-yDt" kind="show" identifier="FromMapToDescription" id="Ah8-du-FDT"/>
                         <segue destination="JVX-rd-mug" kind="show" identifier="FromMapToProfile" id="DHh-b6-8sV"/>
@@ -1009,6 +1013,6 @@
         <image name="tittle" width="284" height="152"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="42Y-j6-ZxE"/>
+        <segue reference="DHh-b6-8sV"/>
     </inferredMetricsTieBreakers>
 </document>

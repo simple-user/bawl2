@@ -10,16 +10,19 @@
 #define Constants_h
 
 
-#define ManagedObjectDidInitNotification @"ManagedObjectDdidInitNotification"
-#define IssueCategoriesDidLoadNotification @"IssueCategoriesDidLoadNotification" 
+#define MyNotificationManagedObjectDidInit @"ManagedObjectDdidInitNotification"
+#define MyNotificationIssueCategoriesDidLoad @"IssueCategoriesDidLoadNotification" 
 
 #pragma mark - Segue identificators
 
-#define FromMapToLogInSeque @"FromMapToLogIn"
-#define FromMapToDescriptionSeque @"FromMapToDescription"
-#define FromMapToProfileSeque @"FromMapToProfile"
-#define FromDescriptionToHistorySeque @"FromDescriptionToHistory"
-#define FromDescriptionToProfileSeque @"FromDescriptionToProfile"
+#define MySequeFromMapToLogIn @"FromMapToLogIn"
+#define MySequeFromMapToDescription @"FromMapToDescription"
+#define MySequeFromMapToProfile @"FromMapToProfile"
+#define MySequeFromDescriptionToHistory @"FromDescriptionToHistory"
+#define MySequeFromDescriptionToProfile @"FromDescriptionToProfile"
 
+
+#define ImageNameForBLankUser @"defaultUser"
+#define ImageNameForBLankIssue @"defaultIssue"
 
 #endif /* NotificationsNames_h */

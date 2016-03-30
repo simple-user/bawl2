@@ -5,6 +5,8 @@
         <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="imageString" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="issueID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="CDUser" representedClassName="CDUser" syncable="YES">
@@ -16,7 +18,7 @@
         <attribute name="userId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
+        <element name="CDIssue" positionX="-54" positionY="27" width="128" height="150"/>
         <element name="CDUser" positionX="-63" positionY="-18" width="128" height="135"/>
-        <element name="CDIssue" positionX="-54" positionY="27" width="128" height="120"/>
     </elements>
 </model>

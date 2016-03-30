@@ -24,7 +24,7 @@ static IssueCategories *standartCategories_ = nil;
             if (issueCategories != nil)
             {
                 _categories = issueCategories;
-                [[NSNotificationCenter defaultCenter] postNotificationName:IssueCategoriesDidLoadNotification object:self];
+                [[NSNotificationCenter defaultCenter] postNotificationName:MyNotificationIssueCategoriesDidLoad object:self];
             }
             
             

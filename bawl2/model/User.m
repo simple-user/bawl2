@@ -7,6 +7,7 @@
 //
 
 #import "User.h"
+#import "Constants.h"
 
 @interface User()
 
@@ -42,7 +43,7 @@
         self.avatar = [dic objectForKey:@"AVATAR"];
         if ([self.avatar isEqual:[NSNull null]])
         {
-            self.avatar = @"defaultUser";
+            self.avatar = ImageNameForBLankUser;
         }
     }
     return self;

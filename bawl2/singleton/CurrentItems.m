@@ -99,7 +99,7 @@
         {
 
             self.managedObjectContext = self.managedDocument.managedObjectContext;
-            [[NSNotificationCenter defaultCenter] postNotificationName:ManagedObjectDidInitNotification object:self];
+            [[NSNotificationCenter defaultCenter] postNotificationName:MyNotificationManagedObjectDidInit object:self];
         }
         else
         {

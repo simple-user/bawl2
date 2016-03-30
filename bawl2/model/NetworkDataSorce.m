@@ -13,6 +13,7 @@
 #import "Parser.h"
 #import "CurrentItems.h"
 #import "CDUser.h"
+#import "Constants.h"
 
 #import <CoreText/CTFontManager.h>
 
@@ -215,7 +216,7 @@
             if([userDic count]>1)
             {
                 if ([[userDic objectForKey:@"AVATAR"] isEqual:[NSNull null]])
-                    [userDic setObject:@"defaultUser" forKey:@"AVATAR"];
+                    [userDic setObject:ImageNameForBLankUser forKey:@"AVATAR"];
                 [[NSUserDefaults standardUserDefaults] setObject:userDic forKey:@"userDictionary"];
                 tempUser = [[User alloc] initWitDictionary:userDic];
             }
@@ -248,7 +249,7 @@
 
                          if([userDic count]>1)
                          {
-                             [userDic setObject:@"defaultUser" forKey:@"AVATAR"];
+                             [userDic setObject:ImageNameForBLankUser forKey:@"AVATAR"];
                              [[NSUserDefaults standardUserDefaults] setObject:userDic forKey:@"userDictionary"];
                              user = [[User alloc] initWitDictionary:userDic];
                              CurrentItems *ci = [CurrentItems sharedItems];

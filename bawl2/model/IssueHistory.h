@@ -12,9 +12,11 @@
 
 
 @property(strong, nonatomic)NSString * action;
-@property(strong, nonatomic)NSDate *date;
-@property(nonatomic)NSUInteger userId;
+@property(strong, nonatomic)NSString *stringDate;
+@property(strong, nonatomic)NSNumber *userId;
 
+
+-(instancetype)initWithDictionary:(NSDictionary*)dic;
 
 
 @end
