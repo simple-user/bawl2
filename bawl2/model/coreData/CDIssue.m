@@ -9,6 +9,7 @@
 #import "CDIssue.h"
 #import "NetworkDataSorce.h"
 #import "Constants.h"
+#import "CDIssueHistoryAction.h"
 
 @implementation CDIssue
 
@@ -105,7 +106,7 @@
 {
     for (Issue *issue in issues)
     {
-        [self syncFromIssue:issue withContext:context];
+        [CDIssue syncFromIssue:issue withContext:context];
     }
 }
 
