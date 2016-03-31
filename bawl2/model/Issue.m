@@ -32,13 +32,13 @@
         NSArray <NSDictionary*> *historyDics = issueDictionary[@"HISTORY"];
         if (historyDics != nil)
         {
-            NSMutableArray <IssueHistory*> *mAr = [[NSMutableArray alloc] init];
+            NSMutableArray <IssueHistoryAction*> *mAr = [[NSMutableArray alloc] init];
             for(NSDictionary *historyDic in historyDics)
             {
-                IssueHistory *history = [[IssueHistory alloc] initWithDictionary:historyDic];
-                [mAr addObject:history];
+                IssueHistoryAction *historyAction= [[IssueHistoryAction alloc] initWithDictionary:historyDic];
+                [mAr addObject:historyAction];
             }
-            _history = mAr;
+            _historyActions = mAr;
         }
         
         if ([_attachments isEqual:[NSNull null]]) {

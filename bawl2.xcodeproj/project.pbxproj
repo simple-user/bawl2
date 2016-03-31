@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		84B8F7501CAC1639003A0477 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B8F74F1CAC1639003A0477 /* MapKit.framework */; };
+		84B8F7621CAD670A003A0477 /* CDIssueHistoryAction+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B8F7611CAD670A003A0477 /* CDIssueHistoryAction+CoreDataProperties.m */; };
+		84B8F7651CAD6795003A0477 /* CDIssueHistoryAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B8F7641CAD6795003A0477 /* CDIssueHistoryAction.m */; };
 		84DBF41E1CAB0A5F001D1EAC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF41D1CAB0A5F001D1EAC /* main.m */; };
 		84DBF4211CAB0A5F001D1EAC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF4201CAB0A5F001D1EAC /* AppDelegate.m */; };
 		84DBF4271CAB0A5F001D1EAC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84DBF4251CAB0A5F001D1EAC /* Main.storyboard */; };
@@ -26,7 +28,7 @@
 		84DBF47A1CAB16D8001D1EAC /* Issue.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF4641CAB16D8001D1EAC /* Issue.m */; };
 		84DBF47C1CAB16D8001D1EAC /* IssueCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF4681CAB16D8001D1EAC /* IssueCategory.m */; };
 		84DBF47D1CAB16D8001D1EAC /* IssueChangeStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF46A1CAB16D8001D1EAC /* IssueChangeStatus.m */; };
-		84DBF47E1CAB16D8001D1EAC /* IssueHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF46C1CAB16D8001D1EAC /* IssueHistory.m */; };
+		84DBF47E1CAB16D8001D1EAC /* IssueHistoryAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF46C1CAB16D8001D1EAC /* IssueHistoryAction.m */; };
 		84DBF47F1CAB16D8001D1EAC /* NetworkDataSorce.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF46E1CAB16D8001D1EAC /* NetworkDataSorce.m */; };
 		84DBF4801CAB16D8001D1EAC /* Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF4701CAB16D8001D1EAC /* Parser.m */; };
 		84DBF4811CAB16D8001D1EAC /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF4721CAB16D8001D1EAC /* Reachability.m */; };
@@ -53,6 +55,10 @@
 
 /* Begin PBXFileReference section */
 		84B8F74F1CAC1639003A0477 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		84B8F7601CAD670A003A0477 /* CDIssueHistoryAction+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CDIssueHistoryAction+CoreDataProperties.h"; path = "model/coreData/CDIssueHistoryAction+CoreDataProperties.h"; sourceTree = "<group>"; };
+		84B8F7611CAD670A003A0477 /* CDIssueHistoryAction+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CDIssueHistoryAction+CoreDataProperties.m"; path = "model/coreData/CDIssueHistoryAction+CoreDataProperties.m"; sourceTree = "<group>"; };
+		84B8F7631CAD6795003A0477 /* CDIssueHistoryAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDIssueHistoryAction.h; path = model/coreData/CDIssueHistoryAction.h; sourceTree = "<group>"; };
+		84B8F7641CAD6795003A0477 /* CDIssueHistoryAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDIssueHistoryAction.m; path = model/coreData/CDIssueHistoryAction.m; sourceTree = "<group>"; };
 		84DBF4191CAB0A5F001D1EAC /* bawl2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bawl2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84DBF41D1CAB0A5F001D1EAC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		84DBF41F1CAB0A5F001D1EAC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -88,8 +94,8 @@
 		84DBF4681CAB16D8001D1EAC /* IssueCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IssueCategory.m; path = model/IssueCategory.m; sourceTree = "<group>"; };
 		84DBF4691CAB16D8001D1EAC /* IssueChangeStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IssueChangeStatus.h; path = model/IssueChangeStatus.h; sourceTree = "<group>"; };
 		84DBF46A1CAB16D8001D1EAC /* IssueChangeStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IssueChangeStatus.m; path = model/IssueChangeStatus.m; sourceTree = "<group>"; };
-		84DBF46B1CAB16D8001D1EAC /* IssueHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IssueHistory.h; path = model/IssueHistory.h; sourceTree = "<group>"; };
-		84DBF46C1CAB16D8001D1EAC /* IssueHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IssueHistory.m; path = model/IssueHistory.m; sourceTree = "<group>"; };
+		84DBF46B1CAB16D8001D1EAC /* IssueHistoryAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IssueHistoryAction.h; path = model/IssueHistoryAction.h; sourceTree = "<group>"; };
+		84DBF46C1CAB16D8001D1EAC /* IssueHistoryAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IssueHistoryAction.m; path = model/IssueHistoryAction.m; sourceTree = "<group>"; };
 		84DBF46D1CAB16D8001D1EAC /* NetworkDataSorce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetworkDataSorce.h; path = model/NetworkDataSorce.h; sourceTree = "<group>"; };
 		84DBF46E1CAB16D8001D1EAC /* NetworkDataSorce.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetworkDataSorce.m; path = model/NetworkDataSorce.m; sourceTree = "<group>"; };
 		84DBF46F1CAB16D8001D1EAC /* Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Parser.h; path = model/Parser.h; sourceTree = "<group>"; };
@@ -238,8 +244,8 @@
 				84DBF4681CAB16D8001D1EAC /* IssueCategory.m */,
 				84DBF4691CAB16D8001D1EAC /* IssueChangeStatus.h */,
 				84DBF46A1CAB16D8001D1EAC /* IssueChangeStatus.m */,
-				84DBF46B1CAB16D8001D1EAC /* IssueHistory.h */,
-				84DBF46C1CAB16D8001D1EAC /* IssueHistory.m */,
+				84DBF46B1CAB16D8001D1EAC /* IssueHistoryAction.h */,
+				84DBF46C1CAB16D8001D1EAC /* IssueHistoryAction.m */,
 				84DBF46D1CAB16D8001D1EAC /* NetworkDataSorce.h */,
 				84DBF46E1CAB16D8001D1EAC /* NetworkDataSorce.m */,
 				84DBF46F1CAB16D8001D1EAC /* Parser.h */,
@@ -257,6 +263,10 @@
 		84DBF4841CAB16FF001D1EAC /* core data */ = {
 			isa = PBXGroup;
 			children = (
+				84B8F7631CAD6795003A0477 /* CDIssueHistoryAction.h */,
+				84B8F7641CAD6795003A0477 /* CDIssueHistoryAction.m */,
+				84B8F7601CAD670A003A0477 /* CDIssueHistoryAction+CoreDataProperties.h */,
+				84B8F7611CAD670A003A0477 /* CDIssueHistoryAction+CoreDataProperties.m */,
 				84DBF4851CAB171A001D1EAC /* CDIssue.h */,
 				84DBF4861CAB171A001D1EAC /* CDIssue.m */,
 				84DBF4871CAB171A001D1EAC /* CDIssue+CoreDataProperties.h */,
@@ -387,6 +397,7 @@
 			files = (
 				84DBF4A31CAB186C001D1EAC /* UIColor+Bawl.m in Sources */,
 				84DBF45A1CAB16A6001D1EAC /* CommentBox.m in Sources */,
+				84B8F7651CAD6795003A0477 /* CDIssueHistoryAction.m in Sources */,
 				84DBF4A21CAB186C001D1EAC /* AvatarView.m in Sources */,
 				84DBF47F1CAB16D8001D1EAC /* NetworkDataSorce.m in Sources */,
 				84DBF4591CAB16A6001D1EAC /* ChangerBox.m in Sources */,
@@ -399,6 +410,7 @@
 				84DBF4831CAB16D8001D1EAC /* User.m in Sources */,
 				84DBF44E1CAB1674001D1EAC /* MapViewController.m in Sources */,
 				84DBF4771CAB16D8001D1EAC /* Comment.m in Sources */,
+				84B8F7621CAD670A003A0477 /* CDIssueHistoryAction+CoreDataProperties.m in Sources */,
 				84DBF4AE1CAB18AE001D1EAC /* NSMutableArray+isEmpty.m in Sources */,
 				84DBF44F1CAB1674001D1EAC /* ProfileViewController.m in Sources */,
 				84DBF4791CAB16D8001D1EAC /* HTTPConnector.m in Sources */,
@@ -421,7 +433,7 @@
 				84DBF44B1CAB1674001D1EAC /* DescriptionViewController.m in Sources */,
 				84DBF4B01CAB18AE001D1EAC /* UIScrollView+getContentSize.m in Sources */,
 				84DBF4801CAB16D8001D1EAC /* Parser.m in Sources */,
-				84DBF47E1CAB16D8001D1EAC /* IssueHistory.m in Sources */,
+				84DBF47E1CAB16D8001D1EAC /* IssueHistoryAction.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,7 +9,7 @@
 #import "IssueHistoryViewController.h"
 #import "UIColor+Bawl.h"
 #import "ProfileViewController.h"
-#import "IssueHistory.h"
+// #import "IssueHistory.h"
 #import "CurrentItems.h"
 #import "NSMutableArray+isEmpty.h"
 

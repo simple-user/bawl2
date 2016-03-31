@@ -8,6 +8,14 @@
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="historyActions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDIssueHistoryAction" inverseName="issue" inverseEntity="CDIssueHistoryAction" syncable="YES"/>
+    </entity>
+    <entity name="CDIssueHistoryAction" representedClassName="CDIssueHistohyAction" syncable="YES">
+        <attribute name="action" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="actionNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="stringDate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="issue" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDIssue" inverseName="historyActions" inverseEntity="CDIssue" syncable="YES"/>
     </entity>
     <entity name="CDUser" representedClassName="CDUser" syncable="YES">
         <attribute name="avatarData" optional="YES" attributeType="Binary" syncable="YES"/>
@@ -18,7 +26,8 @@
         <attribute name="userId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CDIssue" positionX="-54" positionY="27" width="128" height="150"/>
-        <element name="CDUser" positionX="-63" positionY="-18" width="128" height="135"/>
+        <element name="CDIssue" positionX="-101" positionY="-72" width="128" height="163"/>
+        <element name="CDUser" positionX="-335" positionY="-297" width="128" height="135"/>
+        <element name="CDIssueHistoryAction" positionX="-569" positionY="-63" width="128" height="118"/>
     </elements>
 </model>

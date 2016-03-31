@@ -6,9 +6,9 @@
 //  Copyright (c) 2016 Admin. All rights reserved.
 //
 
-#import "IssueHistory.h"
+#import "IssueHistoryAction.h"
 
-@implementation IssueHistory
+@implementation IssueHistoryAction
 
 
 -(NSString*)description

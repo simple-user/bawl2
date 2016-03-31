@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface IssueHistory : NSObject
+@interface IssueHistoryAction : NSObject
 
 
 @property(strong, nonatomic)NSString * action;

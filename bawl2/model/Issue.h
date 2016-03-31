@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "IssueHistory.h"
+#import "IssueHistoryAction.h"
 
 
 //typedef enum : NSUInteger {
@@ -45,7 +45,7 @@
 @property (strong, nonatomic) NSString *attachments;
 @property (strong, nonatomic) NSString *categoryId;
 @property (strong, nonatomic) NSString *issueDescription;
-@property (strong, nonatomic) NSArray <IssueHistory*> *history;
+@property (strong, nonatomic) NSArray <IssueHistoryAction*> *historyActions;
 @property (strong, nonatomic) NSString *mapPointer;
 // @property (strong, nonatomic) NSNumber *priorityId;
 @property (strong, nonatomic) NSString *status;
