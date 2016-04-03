@@ -223,12 +223,12 @@
 
             if (resUser == nil)
             {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sign Up"
-                                                               message:@"Fail to sign Up!"
-                                                              delegate:nil
-                                                     cancelButtonTitle:@"OK"
-                                                     otherButtonTitles:nil];
-                [alert show];
+//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sign Up"
+//                                                               message:@"Fail to sign Up!"
+//                                                              delegate:nil
+//                                                     cancelButtonTitle:@"OK"
+//                                                     otherButtonTitles:nil];
+//                [alert show];
                 
             }
             else
@@ -249,12 +249,12 @@
                     dispatch_async(dispatch_get_main_queue(), ^ {
                         if (resUser == nil)
                         {
-                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sign Up"
-                                                                            message:@"Fail to log in with new user!"
-                                                                           delegate:nil
-                                                                  cancelButtonTitle:@"OK"
-                                                                  otherButtonTitles:nil];
-                            [alert show];
+//                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sign Up"
+//                                                                            message:@"Fail to log in with new user!"
+//                                                                           delegate:nil
+//                                                                  cancelButtonTitle:@"OK"
+//                                                                  otherButtonTitles:nil];
+//                            [alert show];
                             
                         }
                         else

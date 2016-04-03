@@ -197,12 +197,12 @@
 
             if (resUser == nil)
             {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Log In"
-                                                                message:@"Fail to log in!"
-                                                               delegate:nil
-                                                      cancelButtonTitle:@"OK"
-                                                      otherButtonTitles:nil];
-                [alert show];
+//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Log In"
+//                                                                message:@"Fail to log in!"
+//                                                               delegate:nil
+//                                                      cancelButtonTitle:@"OK"
+//                                                      otherButtonTitles:nil];
+//                [alert show];
 
             }
             else

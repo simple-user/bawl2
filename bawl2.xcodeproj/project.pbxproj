@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84725A7E1CB042A90000866D /* CDIssueHistoryAction+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 84725A791CB042A90000866D /* CDIssueHistoryAction+CoreDataProperties.m */; };
+		84725A7F1CB042A90000866D /* CDIssue+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 84725A7B1CB042A90000866D /* CDIssue+CoreDataProperties.m */; };
+		84725A801CB042A90000866D /* CDUser+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 84725A7D1CB042A90000866D /* CDUser+CoreDataProperties.m */; };
 		84B8F7501CAC1639003A0477 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B8F74F1CAC1639003A0477 /* MapKit.framework */; };
-		84B8F7621CAD670A003A0477 /* CDIssueHistoryAction+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B8F7611CAD670A003A0477 /* CDIssueHistoryAction+CoreDataProperties.m */; };
 		84B8F7651CAD6795003A0477 /* CDIssueHistoryAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B8F7641CAD6795003A0477 /* CDIssueHistoryAction.m */; };
 		84DBF41E1CAB0A5F001D1EAC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF41D1CAB0A5F001D1EAC /* main.m */; };
 		84DBF4211CAB0A5F001D1EAC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF4201CAB0A5F001D1EAC /* AppDelegate.m */; };
@@ -35,9 +37,7 @@
 		84DBF4821CAB16D8001D1EAC /* TextFieldValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF4741CAB16D8001D1EAC /* TextFieldValidation.m */; };
 		84DBF4831CAB16D8001D1EAC /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF4761CAB16D8001D1EAC /* User.m */; };
 		84DBF4911CAB171A001D1EAC /* CDIssue.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF4861CAB171A001D1EAC /* CDIssue.m */; };
-		84DBF4921CAB171A001D1EAC /* CDIssue+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF4881CAB171A001D1EAC /* CDIssue+CoreDataProperties.m */; };
 		84DBF4931CAB171A001D1EAC /* CDUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF48A1CAB171A001D1EAC /* CDUser.m */; };
-		84DBF4941CAB171A001D1EAC /* CDUser+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF48C1CAB171A001D1EAC /* CDUser+CoreDataProperties.m */; };
 		84DBF4951CAB171A001D1EAC /* CoreDataSorce.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF48E1CAB171A001D1EAC /* CoreDataSorce.m */; };
 		84DBF4961CAB171A001D1EAC /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF48F1CAB171A001D1EAC /* Model.xcdatamodeld */; };
 		84DBF49B1CAB17A5001D1EAC /* CustomTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF4991CAB17A5001D1EAC /* CustomTableCell.m */; };
@@ -54,9 +54,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		84725A781CB042A90000866D /* CDIssueHistoryAction+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CDIssueHistoryAction+CoreDataProperties.h"; path = "model/coreData/CDIssueHistoryAction+CoreDataProperties.h"; sourceTree = "<group>"; };
+		84725A791CB042A90000866D /* CDIssueHistoryAction+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CDIssueHistoryAction+CoreDataProperties.m"; path = "model/coreData/CDIssueHistoryAction+CoreDataProperties.m"; sourceTree = "<group>"; };
+		84725A7A1CB042A90000866D /* CDIssue+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CDIssue+CoreDataProperties.h"; path = "model/coreData/CDIssue+CoreDataProperties.h"; sourceTree = "<group>"; };
+		84725A7B1CB042A90000866D /* CDIssue+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CDIssue+CoreDataProperties.m"; path = "model/coreData/CDIssue+CoreDataProperties.m"; sourceTree = "<group>"; };
+		84725A7C1CB042A90000866D /* CDUser+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CDUser+CoreDataProperties.h"; path = "model/coreData/CDUser+CoreDataProperties.h"; sourceTree = "<group>"; };
+		84725A7D1CB042A90000866D /* CDUser+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CDUser+CoreDataProperties.m"; path = "model/coreData/CDUser+CoreDataProperties.m"; sourceTree = "<group>"; };
 		84B8F74F1CAC1639003A0477 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		84B8F7601CAD670A003A0477 /* CDIssueHistoryAction+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CDIssueHistoryAction+CoreDataProperties.h"; path = "model/coreData/CDIssueHistoryAction+CoreDataProperties.h"; sourceTree = "<group>"; };
-		84B8F7611CAD670A003A0477 /* CDIssueHistoryAction+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CDIssueHistoryAction+CoreDataProperties.m"; path = "model/coreData/CDIssueHistoryAction+CoreDataProperties.m"; sourceTree = "<group>"; };
 		84B8F7631CAD6795003A0477 /* CDIssueHistoryAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDIssueHistoryAction.h; path = model/coreData/CDIssueHistoryAction.h; sourceTree = "<group>"; };
 		84B8F7641CAD6795003A0477 /* CDIssueHistoryAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDIssueHistoryAction.m; path = model/coreData/CDIssueHistoryAction.m; sourceTree = "<group>"; };
 		84DBF4191CAB0A5F001D1EAC /* bawl2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bawl2.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,12 +112,8 @@
 		84DBF4761CAB16D8001D1EAC /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = model/User.m; sourceTree = "<group>"; };
 		84DBF4851CAB171A001D1EAC /* CDIssue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDIssue.h; path = model/coreData/CDIssue.h; sourceTree = "<group>"; };
 		84DBF4861CAB171A001D1EAC /* CDIssue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDIssue.m; path = model/coreData/CDIssue.m; sourceTree = "<group>"; };
-		84DBF4871CAB171A001D1EAC /* CDIssue+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CDIssue+CoreDataProperties.h"; path = "model/coreData/CDIssue+CoreDataProperties.h"; sourceTree = "<group>"; };
-		84DBF4881CAB171A001D1EAC /* CDIssue+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CDIssue+CoreDataProperties.m"; path = "model/coreData/CDIssue+CoreDataProperties.m"; sourceTree = "<group>"; };
 		84DBF4891CAB171A001D1EAC /* CDUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDUser.h; path = model/coreData/CDUser.h; sourceTree = "<group>"; };
 		84DBF48A1CAB171A001D1EAC /* CDUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDUser.m; path = model/coreData/CDUser.m; sourceTree = "<group>"; };
-		84DBF48B1CAB171A001D1EAC /* CDUser+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CDUser+CoreDataProperties.h"; path = "model/coreData/CDUser+CoreDataProperties.h"; sourceTree = "<group>"; };
-		84DBF48C1CAB171A001D1EAC /* CDUser+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CDUser+CoreDataProperties.m"; path = "model/coreData/CDUser+CoreDataProperties.m"; sourceTree = "<group>"; };
 		84DBF48D1CAB171A001D1EAC /* CoreDataSorce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataSorce.h; path = model/coreData/CoreDataSorce.h; sourceTree = "<group>"; };
 		84DBF48E1CAB171A001D1EAC /* CoreDataSorce.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreDataSorce.m; path = model/coreData/CoreDataSorce.m; sourceTree = "<group>"; };
 		84DBF4901CAB171A001D1EAC /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -265,18 +265,18 @@
 			children = (
 				84B8F7631CAD6795003A0477 /* CDIssueHistoryAction.h */,
 				84B8F7641CAD6795003A0477 /* CDIssueHistoryAction.m */,
-				84B8F7601CAD670A003A0477 /* CDIssueHistoryAction+CoreDataProperties.h */,
-				84B8F7611CAD670A003A0477 /* CDIssueHistoryAction+CoreDataProperties.m */,
 				84DBF4851CAB171A001D1EAC /* CDIssue.h */,
 				84DBF4861CAB171A001D1EAC /* CDIssue.m */,
-				84DBF4871CAB171A001D1EAC /* CDIssue+CoreDataProperties.h */,
-				84DBF4881CAB171A001D1EAC /* CDIssue+CoreDataProperties.m */,
 				84DBF4891CAB171A001D1EAC /* CDUser.h */,
 				84DBF48A1CAB171A001D1EAC /* CDUser.m */,
-				84DBF48B1CAB171A001D1EAC /* CDUser+CoreDataProperties.h */,
-				84DBF48C1CAB171A001D1EAC /* CDUser+CoreDataProperties.m */,
 				84DBF48D1CAB171A001D1EAC /* CoreDataSorce.h */,
 				84DBF48E1CAB171A001D1EAC /* CoreDataSorce.m */,
+				84725A781CB042A90000866D /* CDIssueHistoryAction+CoreDataProperties.h */,
+				84725A791CB042A90000866D /* CDIssueHistoryAction+CoreDataProperties.m */,
+				84725A7A1CB042A90000866D /* CDIssue+CoreDataProperties.h */,
+				84725A7B1CB042A90000866D /* CDIssue+CoreDataProperties.m */,
+				84725A7C1CB042A90000866D /* CDUser+CoreDataProperties.h */,
+				84725A7D1CB042A90000866D /* CDUser+CoreDataProperties.m */,
 				84DBF48F1CAB171A001D1EAC /* Model.xcdatamodeld */,
 			);
 			name = "core data";
@@ -395,6 +395,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84725A7F1CB042A90000866D /* CDIssue+CoreDataProperties.m in Sources */,
 				84DBF4A31CAB186C001D1EAC /* UIColor+Bawl.m in Sources */,
 				84DBF45A1CAB16A6001D1EAC /* CommentBox.m in Sources */,
 				84B8F7651CAD6795003A0477 /* CDIssueHistoryAction.m in Sources */,
@@ -407,10 +408,10 @@
 				84DBF4AF1CAB18AE001D1EAC /* NSString+stringIsEmpry.m in Sources */,
 				84DBF44C1CAB1674001D1EAC /* IssueHistoryViewController.m in Sources */,
 				84DBF44D1CAB1674001D1EAC /* LogInViewController.m in Sources */,
+				84725A7E1CB042A90000866D /* CDIssueHistoryAction+CoreDataProperties.m in Sources */,
 				84DBF4831CAB16D8001D1EAC /* User.m in Sources */,
 				84DBF44E1CAB1674001D1EAC /* MapViewController.m in Sources */,
 				84DBF4771CAB16D8001D1EAC /* Comment.m in Sources */,
-				84B8F7621CAD670A003A0477 /* CDIssueHistoryAction+CoreDataProperties.m in Sources */,
 				84DBF4AE1CAB18AE001D1EAC /* NSMutableArray+isEmpty.m in Sources */,
 				84DBF44F1CAB1674001D1EAC /* ProfileViewController.m in Sources */,
 				84DBF4791CAB16D8001D1EAC /* HTTPConnector.m in Sources */,
@@ -423,17 +424,16 @@
 				84DBF4821CAB16D8001D1EAC /* TextFieldValidation.m in Sources */,
 				84DBF47A1CAB16D8001D1EAC /* Issue.m in Sources */,
 				84DBF47D1CAB16D8001D1EAC /* IssueChangeStatus.m in Sources */,
-				84DBF4921CAB171A001D1EAC /* CDIssue+CoreDataProperties.m in Sources */,
 				84DBF4B11CAB18AE001D1EAC /* UIView+Addition.m in Sources */,
 				84DBF4951CAB171A001D1EAC /* CoreDataSorce.m in Sources */,
 				84DBF4911CAB171A001D1EAC /* CDIssue.m in Sources */,
 				84DBF49B1CAB17A5001D1EAC /* CustomTableCell.m in Sources */,
-				84DBF4941CAB171A001D1EAC /* CDUser+CoreDataProperties.m in Sources */,
 				84DBF4501CAB1674001D1EAC /* SingUpViewController.m in Sources */,
 				84DBF44B1CAB1674001D1EAC /* DescriptionViewController.m in Sources */,
 				84DBF4B01CAB18AE001D1EAC /* UIScrollView+getContentSize.m in Sources */,
 				84DBF4801CAB16D8001D1EAC /* Parser.m in Sources */,
 				84DBF47E1CAB16D8001D1EAC /* IssueHistoryAction.m in Sources */,
+				84725A801CB042A90000866D /* CDUser+CoreDataProperties.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

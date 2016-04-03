@@ -2,7 +2,7 @@
 //  CDIssueHistoryAction+CoreDataProperties.m
 //  bawl2
 //
-//  Created by Admin on 31.03.16.
+//  Created by Admin on 02.04.16.
 //  Copyright © 2016 Admin. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -14,9 +14,9 @@
 @implementation CDIssueHistoryAction (CoreDataProperties)
 
 @dynamic action;
+@dynamic actionNumber;
 @dynamic stringDate;
 @dynamic userID;
-@dynamic actionNumber;
 @dynamic issue;
 
 @end

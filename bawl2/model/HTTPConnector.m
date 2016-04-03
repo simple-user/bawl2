@@ -26,14 +26,14 @@
 @property(strong, nonatomic)NSString *comments;
 
 
--(void)postRequest:(NSData*) postData
+-(NSURLSessionDataTask*)postRequest:(NSData*) postData
              toURL:(NSString*) textUrl
         andHandler:(void(^)(NSData *data, NSError *error))handler;
 
--(void)getRequestBlankToUrl:(NSString*)textUrl
+-(NSURLSessionDataTask*)getRequestBlankToUrl:(NSString*)textUrl
                  andHandler:(void(^)(NSData* data, NSError *error))dataSorceHandler;
 
--(void)putRequestToUrl:(NSString*)textUrl
+-(NSURLSessionDataTask*)putRequestToUrl:(NSString*)textUrl
               withData:(NSData *) data
                  andHandler:(void(^)(NSData* data, NSError *error))dataSorceHandler;
 
@@ -112,10 +112,10 @@
     [self getRequestBlankToUrl:[self.globalURL stringByAppendingString:self.userSignOut] andHandler:dataSorceHandler];
 }
 
--(void)requestLogInWithData:(NSData*)data
-        andDataSorceHandler:(void(^)(NSData *data, NSError *error))dataSorceHandler;
+-(NSURLSessionDataTask*)requestLogInWithData:(NSData*)data
+                         andDataSorceHandler:(void(^)(NSData *data, NSError *error))dataSorceHandler;
 {
-    [self postRequest:data toURL:[self.globalURL stringByAppendingString:self.userLogIn] andHandler:dataSorceHandler];
+    return [self postRequest:data toURL:[self.globalURL stringByAppendingString:self.userLogIn] andHandler:dataSorceHandler];
 }
 
 -(void)requestSingUpWithData:(NSData*)data
@@ -144,7 +144,7 @@
 }
 
 
--(void)postRequest:(NSData*) postData
+-(NSURLSessionDataTask*)postRequest:(NSData*) postData
              toURL:(NSString*) textUrl
         andHandler:(void(^)(NSData *data, NSError *error))handler
 {
@@ -167,10 +167,10 @@
                                       ];
     
     [dataTask resume];
-    
+    return dataTask;
 }
 
--(void)getRequestBlankToUrl:(NSString*)textUrl andHandler:(void(^)(NSData* data, NSError *error))handler
+-(NSURLSessionDataTask*)getRequestBlankToUrl:(NSString*)textUrl andHandler:(void(^)(NSData* data, NSError *error))handler
 {
     NSURL *url = [NSURL URLWithString:textUrl];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -186,11 +186,11 @@
                                       ];
     
     [dataTask resume];
-    
+    return dataTask;
 }
 
     
--(void)putRequestToUrl:(NSString*)textUrl
+-(NSURLSessionDataTask*)putRequestToUrl:(NSString*)textUrl
               withData:(NSData *) data
             andHandler:(void(^)(NSData* data, NSError *error))handler
 {
@@ -215,7 +215,7 @@
                                       ];
     
     [dataTask resume];
-    
+    return dataTask;
 }
     
     

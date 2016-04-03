@@ -28,7 +28,7 @@
 
 -(void)requestImageWithName:(NSString*)name andHandler:(void (^)(UIImage *image, NSError *error))viewControllerHandler;
 
--(void)requestLogInWithUser:(NSString*)user
+-(NSURLSessionDataTask*)requestLogInWithUser:(NSString*)user
                     andPass:(NSString*)pass
    andViewControllerHandler:(void (^)(User *resPerson, NSError *error))viewControllerHandler;
 

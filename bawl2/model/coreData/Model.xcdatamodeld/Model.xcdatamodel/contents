@@ -10,7 +10,7 @@
         <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="historyActions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDIssueHistoryAction" inverseName="issue" inverseEntity="CDIssueHistoryAction" syncable="YES"/>
     </entity>
-    <entity name="CDIssueHistoryAction" representedClassName="CDIssueHistohyAction" syncable="YES">
+    <entity name="CDIssueHistoryAction" representedClassName="CDIssueHistoryAction" syncable="YES">
         <attribute name="action" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="actionNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="stringDate" optional="YES" attributeType="String" syncable="YES"/>
@@ -27,7 +27,7 @@
     </entity>
     <elements>
         <element name="CDIssue" positionX="-101" positionY="-72" width="128" height="163"/>
-        <element name="CDUser" positionX="-335" positionY="-297" width="128" height="135"/>
         <element name="CDIssueHistoryAction" positionX="-569" positionY="-63" width="128" height="118"/>
+        <element name="CDUser" positionX="-335" positionY="-297" width="128" height="135"/>
     </elements>
 </model>

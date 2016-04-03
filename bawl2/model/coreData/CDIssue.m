@@ -89,12 +89,12 @@
                                                  else
                                                  {
                                                      dispatch_async(dispatch_get_main_queue(), ^{
-                                                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error in updateAvatarforCDUser"
-                                                                                                         message:[NSString stringWithFormat:@"file name is - %@", cdIssue.imageString]
-                                                                                                        delegate:nil
-                                                                                               cancelButtonTitle:@"OK"
-                                                                                               otherButtonTitles:nil];
-                                                         [alert show];
+//                                                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error in updateAvatarforCDUser"
+//                                                                                                         message:[NSString stringWithFormat:@"file name is - %@", cdIssue.imageString]
+//                                                                                                        delegate:nil
+//                                                                                               cancelButtonTitle:@"OK"
+//                                                                                               otherButtonTitles:nil];
+//                                                         [alert show];
                                                      });
                                                  }
                                                  

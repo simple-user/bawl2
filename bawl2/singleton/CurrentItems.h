@@ -35,6 +35,8 @@
 @property(strong, nonatomic) UIManagedDocument *managedDocument;
 @property(strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
+@property(strong, nonatomic) NSMutableDictionary <NSString*, id> *activeRequests;
+
 +(instancetype)alloc __attribute__((unavailable("not available, use sharedItems")));
 -(instancetype)init __attribute__((unavailable("not available, use sharedItems")));
 -(instancetype)copy __attribute__((unavailable("not available, use sharedItems")));

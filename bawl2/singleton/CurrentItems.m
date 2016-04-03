@@ -114,13 +114,22 @@
     // check for fail
     if (someFail == YES)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Getting cache info"
-                                                        message:@"Fail while loading cache"
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Getting cache info"
+//                                                        message:@"Fail while loading cache"
+//                                                       delegate:nil
+//                                              cancelButtonTitle:@"OK"
+//                                              otherButtonTitles:nil];
+//        [alert show];
     }
+}
+
+-(NSMutableDictionary <NSString*, id> *)activeRequests
+{
+    if(_activeRequests==nil)
+    {
+        _activeRequests = [[NSMutableDictionary alloc] init];
+    }
+    return _activeRequests;
 }
 
 -(id<DataSorceProtocol>)dataSorce

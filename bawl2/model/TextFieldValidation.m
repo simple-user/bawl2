@@ -69,12 +69,12 @@
     
     if(res == NO)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Attention!"
-                                                        message:@"Clear fields!"
-                                                       delegate:nil
-                                              cancelButtonTitle:@"I understood"
-                                              otherButtonTitles:nil];
-        [alert show];
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Attention!"
+//                                                        message:@"Clear fields!"
+//                                                       delegate:nil
+//                                              cancelButtonTitle:@"I understood"
+//                                              otherButtonTitles:nil];
+//        [alert show];
     }
     
     return res;

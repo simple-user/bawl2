@@ -28,8 +28,12 @@
         _issueDescription = issueDictionary[@"DESCRIPTION"];
         _mapPointer = issueDictionary[@"MAP_POINTER"];
         _status = issueDictionary[@"STATUS"];
-
+        _coordinate.latitude = [self.latitude doubleValue];
+        _coordinate.longitude = [self.longitude doubleValue];
         NSArray <NSDictionary*> *historyDics = issueDictionary[@"HISTORY"];
+        // if we have a dictionary, so we can just create an array of one
+        if ([historyDics isKindOfClass:[NSDictionary class]])
+            historyDics = @[historyDics];
         if (historyDics != nil)
         {
             NSMutableArray <IssueHistoryAction*> *mAr = [[NSMutableArray alloc] init];
@@ -58,7 +62,7 @@
     if (range1.location != NSNotFound && range2.location != NSNotFound)
     {
         NSUInteger len = range2.location - range1.location;
-        NSString *substring =  [string substringWithRange:NSMakeRange(range1.location, len)];
+        NSString *substring =  [string substringWithRange:NSMakeRange(range1.location+1, len-1)];
         NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
         formatter.numberStyle = NSNumberFormatterDecimalStyle;
         result = [formatter numberFromString:substring];
@@ -75,6 +79,17 @@
 {
     return [self getNumberAsSubstringFromString:self.mapPointer BetweenString:@"(" andString:@","];
 }
+
+-(NSString*)title
+{
+    return self.name;
+}
+
+-(NSString*)subtitle
+{
+    return [NSString stringWithFormat:@"current status: %@", [self.status lowercaseStringWithLocale:[NSLocale currentLocale]]];
+}
+
 
 // this is just fog logging
 -(NSString*)description

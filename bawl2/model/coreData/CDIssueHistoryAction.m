@@ -6,8 +6,8 @@
 //  Copyright © 2016 Admin. All rights reserved.
 //
 
-#import "CDIssueHistoryAction.h"
 #import "CDIssue.h"
+#import "CDIssueHistoryAction.h"
 
 @implementation CDIssueHistoryAction
 
@@ -18,8 +18,10 @@
 {
     CDIssueHistoryAction *cdHistoryAction = nil;
     
+
+    
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"issue.issueID = %@ and actionNumber = %@", cdIssue.issueID, number];
-    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"CDIsuueHistoryAction"];
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"CDIssueHistoryAction"];
     request.predicate = predicate;
     
     NSError *error = nil;
@@ -36,7 +38,7 @@
     else if (cdHistoryActions.count < 1)
     {
         //creating
-        cdHistoryAction = [NSEntityDescription insertNewObjectForEntityForName:@"cdIssueHistory" inManagedObjectContext:context];
+        cdHistoryAction = [NSEntityDescription insertNewObjectForEntityForName:@"CDIssueHistoryAction" inManagedObjectContext:context];
         cdHistoryAction.action = historyAction.action;
         cdHistoryAction.stringDate = historyAction.stringDate;
         cdHistoryAction.userID = historyAction.userId;

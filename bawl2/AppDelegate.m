@@ -7,6 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import "IssueCategories.h"
+#import "CurrentItems.h"
+#import "NetworkDataSorce.h"
+#import "Constants.h"
 
 @interface AppDelegate ()
 
@@ -16,9 +20,33 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    [IssueCategories earlyPreparing];
+    [[CurrentItems sharedItems] startInitManagedObjectcontext];
     return YES;
 }
+
+
+-(void)checkCurrentUser
+{
+    NSDictionary *userDictionary = [[NSUserDefaults standardUserDefaults] objectForKey:@"userDictionary"];
+    if(userDictionary!=nil)
+    {
+        CurrentItems *ci = [CurrentItems sharedItems];
+        NetworkDataSorce *dataSorce = [[NetworkDataSorce alloc] init];
+        NSURLSessionDataTask* requestDataTask = [dataSorce requestLogInWithUser:[userDictionary objectForKey:@"LOGIN"]
+                                                                        andPass:[userDictionary objectForKey:@"PASSWORD"]
+                    andViewControllerHandler:^(User *resUser, NSError *error)
+         {
+             dispatch_async(dispatch_get_main_queue(), ^ {
+                 ci.user = resUser;
+                 [ci.activeRequests removeObjectForKey:ActiveRequestCheckCurrentUser];
+                 [[NSNotificationCenter defaultCenter] postNotificationName:MyNotificationUserCheckedAndLogIned object:nil];
+             });
+         }];
+        [ci.activeRequests setObject:requestDataTask forKey:ActiveRequestCheckCurrentUser];
+    }
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

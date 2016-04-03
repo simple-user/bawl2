@@ -207,8 +207,8 @@
 }
 
 
--(void)requestLogInWithUser:(NSString*)login
-                    andPass:(NSString*)password
+-(NSURLSessionDataTask*)requestLogInWithUser:(NSString*)login
+                                     andPass:(NSString*)password
    andViewControllerHandler:(void (^)(User *resPerson, NSError *error))viewControllerHandler{
     
     NSDictionary *dictionary = [[NSDictionary alloc] initWithObjectsAndKeys:
@@ -220,7 +220,7 @@
                                                          error:&err];
     
     HTTPConnector *connector = [[HTTPConnector alloc] init];
-    [connector requestLogInWithData:postData
+    NSURLSessionDataTask* requestDataTask = [connector requestLogInWithData:postData
              andDataSorceHandler:^(NSData *data, NSError *error) {
                  User *tempUser = nil;
         if(data.length >0 && error == nil)
@@ -241,7 +241,7 @@
         viewControllerHandler(tempUser, error);
 
         }];
-    
+    return requestDataTask;
 }
 
 

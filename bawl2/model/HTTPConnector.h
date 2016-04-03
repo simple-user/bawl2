@@ -23,7 +23,7 @@
                     andDatasorceHandler:(void(^)(NSData* data, NSError *error))dataSorceHandler;
 
 
--(void)requestLogInWithData:(NSData*)data
+-(NSURLSessionDataTask*)requestLogInWithData:(NSData*)data
         andDataSorceHandler:(void(^)(NSData *data, NSError *error))dataSorceHandler;
 
 -(void)requestSingUpWithData:(NSData*)data
