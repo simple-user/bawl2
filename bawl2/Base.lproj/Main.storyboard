@@ -36,11 +36,17 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Bawl (Map)" id="WjN-q6-QKa">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="Oxj-sC-fzu"/>
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="iEJ-Mn-1nQ"/>
+                        <barButtonItem key="leftBarButtonItem" title="Profile" id="Oxj-sC-fzu"/>
+                        <barButtonItem key="rightBarButtonItem" title="Log In" id="iEJ-Mn-1nQ">
+                            <connections>
+                                <action selector="sequeToLogInButton:" destination="BYZ-38-t0r" id="NDL-JN-fDe"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="leftBarButton" destination="Oxj-sC-fzu" id="mer-AX-oh8"/>
                         <outlet property="mapView" destination="d7Q-9N-OWt" id="yaS-FM-Ike"/>
+                        <outlet property="rightBarButton" destination="iEJ-Mn-1nQ" id="NuE-mB-Rfh"/>
                         <segue destination="kr9-Fn-EL6" kind="show" identifier="FromMapToLogIn" id="JG0-JV-m8A"/>
                         <segue destination="hHh-ss-yDt" kind="show" identifier="FromMapToDescription" id="Ah8-du-FDT"/>
                         <segue destination="JVX-rd-mug" kind="show" identifier="FromMapToProfile" id="DHh-b6-8sV"/>
@@ -48,7 +54,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="985" y="402"/>
+            <point key="canvasLocation" x="998" y="358"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="j6g-iN-BQ8">

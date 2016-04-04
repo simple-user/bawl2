@@ -8,6 +8,8 @@
 
 #import "Comment.h"
 #import "NetworkDataSorce.h"
+#import "CDUser.h"
+#import "CurrentItems.h"
 
 @implementation Comment
 
@@ -46,10 +48,13 @@
                 
                 [datasorce requestImageWithName:avatarStringName andHandler:^(UIImage *image, NSError *error) {
                     _userImage = image;
+                    CurrentItems *ci = [CurrentItems sharedItems];
+                    [ci.managedObjectContext performBlock:^{
+                        [CDUser setAvatar:image forCDUserFromUser:user withContext:ci.managedObjectContext];
+                    }];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         imageView.image = image;
                         [dictionary setObject:image forKey:avatarStringName];
-                        
                         [[NSNotificationCenter defaultCenter] postNotificationName:@"updateAvatarImages" object:nil userInfo:@{avatarStringName : image}];
                     });
                 }];

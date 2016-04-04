@@ -6,7 +6,10 @@
 //  Copyright © 2016 Admin. All rights reserved.
 //
 
+#import "Constants.h"
+
 #import "MapViewController.h"
+#import "CurrentItems.h"
 #import "NetworkDataSorce.h"
 #import "UIColor+Bawl.h"
 #import <MapKit/MapKit.h>
@@ -14,11 +17,15 @@
 @interface MapViewController () <MKMapViewDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) id<DataSorceProtocol> dataSorce;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *leftBarButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *rightBarButton;
+@property (nonatomic) BOOL isUserLogined;
 
 @end
 
 @implementation MapViewController
 
+#pragma mark - Lasy Instantiation
 
 -(id<DataSorceProtocol>)dataSorce
 {
@@ -29,14 +36,81 @@
     return _dataSorce;
 }
 
+#pragma mark - Load/appear view controller
+
+-(void)viewDidLoad
+{
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.barTintColor = [UIColor bawlRedColor];
+    //    UIFont *newFont = [UIFont fontWithName:@"ComicSansMS-Italic" size:25];
+    //    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor],
+    //                                                                    NSFontAttributeName : newFont};
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self updateBarButtons];
+    [[NSNotificationCenter defaultCenter] addObserverForName:MyNotificationUserCheckedAndLogIned
+                                                      object:nil
+                                                       queue:[NSOperationQueue mainQueue]
+                                                  usingBlock:^(NSNotification * _Nonnull note) {
+                                                      [self updateBarButtons];
+                                                  }];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
+#pragma mark - Loadin information about current user
+
+-(void)updateBarButtons
+{
+    CurrentItems *ci = [CurrentItems sharedItems];
+    if (ci.user != nil)
+    {
+        // so change bar button to sign out
+        self.isUserLogined = YES;
+        self.rightBarButton.title = @"Log Out";
+        self.leftBarButton.enabled = YES;
+    }
+    else
+    {
+        self.isUserLogined = NO;
+        self.leftBarButton.enabled = NO;
+
+        // at first check info about request user
+        if ([ci.activeRequests objectForKey:ActiveRequestCheckCurrentUser]!=nil)
+        {
+            // so we are logining user. wait for notification
+            self.rightBarButton.title = @"wait...";
+        }
+        else
+        {
+            // no user, and no active request
+            self.rightBarButton.title = @"Log In";
+        }
+    }
+}
+
+
+#pragma mark - Loading Map View
+
 -(void)setMapView:(MKMapView *)mapView
 {
     _mapView = mapView;
     _mapView.mapType = MKMapTypeHybrid;
+    CLLocationCoordinate2D center = CLLocationCoordinate2DMake(50.619020, 26.252073);
+    MKCoordinateSpan span = MKCoordinateSpanMake(0.2, 0.2);
+    MKCoordinateRegion region = MKCoordinateRegionMake(center, span);
+    [_mapView setRegion:region];
     [self updateAnnotations];
 }
-
-
 
 -(void)updateAnnotations
 {
@@ -50,21 +124,7 @@
     
 }
 
-//- (MKAnnotationView *)mapView:(MKMapView *)sender
-//            viewForAnnotation:(id <MKAnnotation>)annotation
-//{
-//    MKAnnotationView *aView = [sender dequeueReusableAnnotationViewWithIdentifier:IDENT];
-//    if (!aView) {
-//        aView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation
-//                                                reuseIdentifier:IDENT];
-//        // set canShowCallout to YES and build aView’s callout accessory views here
-//    }
-//    aView.annotation = annotation; // yes, this happens twice if no dequeue
-//    // maybe load up accessory views here (if not too expensive)?
-//    // or reset them and wait until mapView:didSelectAnnotationView:  to load actual data
-//    return aView;
-//}
-//
+#pragma mark - Map View Delegate
 
 -(MKAnnotationView*)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
@@ -84,6 +144,67 @@
     aView.annotation = annotation;
     return aView;
 }
-		
+
+-(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
+{
+    [self performSegueWithIdentifier:MySequeFromMapToDescription sender:view];
+}
+
+
+
+-(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
+{
+    CurrentItems *ci = [CurrentItems sharedItems];
+    ci.issue = view.annotation;
+}
+
+
+#pragma mark action
+- (IBAction)sequeToLogInButton:(UIBarButtonItem *)sender {
+    
+    if (!self.isUserLogined)
+    {
+        [self performSegueWithIdentifier:MySequeFromMapToLogIn sender:self];
+    }
+    else
+    {
+        CurrentItems *ci = [CurrentItems sharedItems];
+        __weak MapViewController *wSelf = self;
+        sender.tintColor = [sender.tintColor colorWithAlphaComponent:0.3];
+        sender.enabled = NO;
+        
+        [self.dataSorce requestSignOutWithHandler:^(NSString *stringAnswer, NSError *error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if([stringAnswer isEqualToString:[@"Bye " stringByAppendingString:ci.user.name]])
+                {
+                    // alert - good
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Log Out"
+                                                                    message:@"You loged out successfully!"
+                                                                   delegate:nil
+                                                          cancelButtonTitle:@"OK"
+                                                          otherButtonTitles:nil];
+                    [alert show];
+                }
+                else
+                {
+                    // alert - bad
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Log Out"
+                                                                    message:[@"Something has gone wrong! (server answer: )" stringByAppendingString:stringAnswer]
+                                                                   delegate:nil
+                                                          cancelButtonTitle:@"OK"
+                                                          otherButtonTitles:nil];
+                    [alert show];
+                }
+                ci.user = nil;
+                [wSelf updateBarButtons];
+                sender.tintColor = [sender.tintColor colorWithAlphaComponent:1];
+                sender.enabled = YES;
+            });
+        }];
+    }
+}
+
+
+
 
 @end

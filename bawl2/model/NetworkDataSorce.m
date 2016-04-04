@@ -116,14 +116,16 @@
                 CurrentItems *ci = [CurrentItems sharedItems];
                 if(ci.managedObjectContext!=nil)
                 {
-                    for (Issue *issue in issues)
-                    {
-                        CDIssue *tempCDIssue = [CDIssue syncFromIssue:issue withContext:ci.managedObjectContext];
-                        [CDIssueHistoryAction syncFromHistoryActions:issue.historyActions
-                                                          forCDIssue:tempCDIssue
-                                                         withContext:ci.managedObjectContext];
-                    }
-                    
+                    [ci.managedObjectContext performBlock:^{
+                        for (Issue *issue in issues)
+                        {
+                            CDIssue *tempCDIssue = [CDIssue syncFromIssue:issue withContext:ci.managedObjectContext];
+                            [CDIssueHistoryAction syncFromHistoryActions:issue.historyActions
+                                                              forCDIssue:tempCDIssue
+                                                             withContext:ci.managedObjectContext];
+                        }
+                       
+                    }];
                 }
             }
         }

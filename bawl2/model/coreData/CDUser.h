@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import <UIKit/UIKit.h>
 #import "User.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 +(CDUser*)syncFromUser:(User*)user withContext:(NSManagedObjectContext*)context;
 +(void)syncFromUsers:(NSArray<User*>*)users withContext:(NSManagedObjectContext*)context;
+
++(BOOL)setAvatar:(UIImage*)image forCDUserFromUser:(User*)user withContext:(NSManagedObjectContext*)context;
 
 
 

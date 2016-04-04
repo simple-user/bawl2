@@ -76,13 +76,46 @@
         if(![cdUser.avatarString isEqualToString:user.avatar])
         {
             cdUser.avatarString = user.avatar;
-            [CDUser updateAvatarforCDUser:cdUser];
+            // [CDUser updateAvatarforCDUser:cdUser];
         }
         NSLog(@"Update user with CD");
         
     }
     
     return cdUser;
+}
+
++(BOOL)setAvatar:(UIImage*)image forCDUserFromUser:(User*)user withContext:(NSManagedObjectContext*)context
+{
+    CDUser *cdUser = nil;
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"userId = %d", user.userId];
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"CDUser"];
+    request.predicate = predicate;
+    NSError *error= nil;
+    NSArray <CDUser*> *cdUsers = [context executeFetchRequest:request error:&error];
+    
+    if (cdUsers.count ==1)
+    {
+        cdUser = [cdUsers firstObject];
+        
+        NSUInteger pos = cdUser.avatarString.length-3;
+        NSRange range = NSMakeRange(pos, 3);
+        NSString *fileExtension = [cdUser.avatarString substringWithRange:range];
+        if ([fileExtension isEqualToString:@"png"] || [cdUser.avatarString isEqualToString:ImageNameForBLankUser])
+        {
+            cdUser.avatarData = UIImagePNGRepresentation(image);
+            NSLog(@"(setAvatar) in CD (png) for avatar: %@", cdUser.avatarString);
+        }
+        else if ([fileExtension isEqualToString:@"jpg"])
+        {
+            cdUser.avatarData = UIImageJPEGRepresentation(image, 1.0);
+            NSLog(@"(setAvatar) in CD (jpg) for avatar: %@", cdUser.avatarString);
+            
+        }
+        return YES;
+    }
+    return NO;
 }
 
 
@@ -98,12 +131,12 @@
              if ([fileExtension isEqualToString:@"png"] || [cdUser.avatarString isEqualToString:ImageNameForBLankUser])
              {
                  cdUser.avatarData = UIImagePNGRepresentation(image);
-                 NSLog(@"Update user avadtar in CD (png) for avatar: %@", cdUser.avatarString);
+                 NSLog(@"(updateAvatarforCDUser:) in CD (png) for avatar: %@", cdUser.avatarString);
              }
              else if ([fileExtension isEqualToString:@"jpg"])
              {
                  cdUser.avatarData = UIImageJPEGRepresentation(image, 1.0);
-                 NSLog(@"Update user avadtar in CD (jpg) for avatar: %@", cdUser.avatarString	);
+                 NSLog(@"(updateAvatarforCDUser:) in CD (jpg) for avatar: %@", cdUser.avatarString	);
 
              }
              else

@@ -53,7 +53,6 @@
 @property (strong, nonatomic) NSMutableArray <CommentBox*> *commentBoxArr;
 
 @property (strong,nonatomic) NSMutableDictionary <NSString*, UIImage*> *avatarNamesAndImagesDic;
-// @property (strong,nonatomic) NSMutableDictionary <NSString*, UIImageView*> *avatarNamesAndImageViewsDic;
 
 @property(nonatomic) CGFloat avatarSize;
 @property(nonatomic) CGFloat contentStaticHeight;
@@ -116,25 +115,14 @@
 
 -(void)viewDidLoad
 {
-    
     CurrentItems *cItems = [CurrentItems sharedItems];
     [cItems.issueImageDelegates addObject:self];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.barTintColor = [UIColor bawlRedColor];
-    UIFont *newFont = [UIFont fontWithName:@"ComicSansMS-Italic" size:25];
-    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor],
-                                                                    NSFontAttributeName : newFont};
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
-    
     self.avatarSize = self.contentView.frame.size.width / 10;
-    
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                           action:@selector(dismissKeyboard)];
     
     [self.coverScrollView addGestureRecognizer:tap];
-
-    
 }
 
 -(void)dismissKeyboard
@@ -144,22 +132,35 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
-    [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(orientationChanged:)    name:UIDeviceOrientationDidChangeNotification  object:nil];
-    CurrentItems *cItems = [CurrentItems sharedItems];
+    [self addObservers];
     [self setDataToView];
     [self prepareUIChangeStatusElements];
-    [self.tabBarController.tabBar.items objectAtIndex:1].title = @"Description";
+    [self requestUsersAndComments];
+}
+
+-(void)setDataToView
+{
+    CurrentItems *ci = [CurrentItems sharedItems];
+    self.titleLabel.text = ci.issue.name;
+    self.titleLabel.textColor = [UIColor bawlRedColor];
+    self.descriptionLabel.text = ci.issue.issueDescription;
+    self.currentStatusLabel.text = ci.issue.status;
+    self.categoryImageView.image = [[IssueCategories standartCategories] imageForCurrentCategory];
     
-    if(cItems.issueImage==nil)
+    if(ci.issueImage==nil)
     {
         self.issueImageView.image = nil;
     }
-     else if( ![self.issueImageView.image isEqual:cItems.issueImage])
+    else if( ![self.issueImageView.image isEqual:ci.issueImage])
     {
-        self.issueImageView.image = cItems.issueImage;
+        self.issueImageView.image = ci.issueImage;
     }
     
-    [self requestUsersAndComments];
+}
+
+-(void)addObservers
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(orientationChanged:)    name:UIDeviceOrientationDidChangeNotification  object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardDidShow:)
@@ -173,8 +174,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateAvatarImages:)
                                                  name:@"updateAvatarImages" object:nil];
-    
+
 }
+
 
 -(void)updateAvatarImages:(NSNotification*)notification
 {
@@ -225,17 +227,6 @@
 
 }
 
-
--(void)setDataToView
-{
-    Issue *currentIssue = [CurrentItems sharedItems].issue;
-    self.titleLabel.text = currentIssue.name;
-    self.titleLabel.textColor = [UIColor bawlRedColor];
-    self.descriptionLabel.text = currentIssue.issueDescription;
-    self.currentStatusLabel.text = currentIssue.status;
-    
-    self.categoryImageView.image = [[IssueCategories standartCategories] imageForCurrentCategory];
-}
 
 -(void)orientationChanged:(NSNotification*)notification
 {

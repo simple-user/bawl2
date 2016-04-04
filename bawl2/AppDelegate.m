@@ -22,6 +22,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [IssueCategories earlyPreparing];
     [[CurrentItems sharedItems] startInitManagedObjectcontext];
+    [self checkCurrentUser];
     return YES;
 }
 
