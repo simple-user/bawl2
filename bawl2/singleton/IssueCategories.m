@@ -65,4 +65,16 @@ static IssueCategories *standartCategories_ = nil;
     return nil;
 }
 
+
++(IssueCategory*)categoryForName:(NSString*)name
+{
+    IssueCategories *standartCategories = [IssueCategories standartCategories];
+    for (IssueCategory *cat in standartCategories.categories)
+    {
+        if([cat.name isEqualToString:name])
+            return cat;
+    }
+    return nil;
+}
+
 @end

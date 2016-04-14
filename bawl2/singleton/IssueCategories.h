@@ -21,6 +21,10 @@
 +(instancetype)standartCategories;
 +(void)earlyPreparing;
 
++(IssueCategory*)categoryForName:(NSString*)name;
+
 -(UIImage*)imageForCurrentCategory;
+
+
 
 @end

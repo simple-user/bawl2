@@ -8,7 +8,7 @@
 
 
 #import "TextFieldValidation.h"
-
+#import "MyAlert.h"
 
 
 @interface TextFieldValidation()
@@ -69,12 +69,7 @@
     
     if(res == NO)
     {
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Attention!"
-//                                                        message:@"Clear fields!"
-//                                                       delegate:nil
-//                                              cancelButtonTitle:@"I understood"
-//                                              otherButtonTitles:nil];
-//        [alert show];
+        [MyAlert alertWithTitle:@"We have a problem" andMessage:@"There are clear text fields"];
     }
     
     return res;

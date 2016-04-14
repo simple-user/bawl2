@@ -23,7 +23,7 @@
 
 static NSString const * const AVATAR_NO_IMAGE = @"no_avatar.png";
 static NSString const * const DOMAIN_CHANGE_USER_DETAILS = @"https://bawl-rivne.rhcloud.com/users/";
-static NSInteger const HTTP_RESPONSE_CODE_OK = 200;
+// static NSInteger const HTTP_RESPONSE_CODE_OK = 200;
 
 @interface ProfileViewController ()
 

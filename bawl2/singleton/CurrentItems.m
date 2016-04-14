@@ -9,6 +9,7 @@
 #import "CurrentItems.h"
 #import "NetworkDataSorce.h"
 #import "Constants.h"
+#import "MyAlert.h"
 
 
 
@@ -114,12 +115,7 @@
     // check for fail
     if (someFail == YES)
     {
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Getting cache info"
-//                                                        message:@"Fail while loading cache"
-//                                                       delegate:nil
-//                                              cancelButtonTitle:@"OK"
-//                                              otherButtonTitles:nil];
-//        [alert show];
+        [MyAlert alertWithTitle:@"Getting cache info" andMessage:@"Fail while loading cache"];
     }
 }
 

@@ -9,6 +9,7 @@
 #import "CDUser.h"
 #import "NetworkDataSorce.h"
 #import "Constants.h"
+#import "MyAlert.h"
 
 @interface CDUser()
 
@@ -142,12 +143,7 @@
              else
              {
                  dispatch_async(dispatch_get_main_queue(), ^{
-//                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error in updateAvatarforCDUser"
-//                                                                     message:[NSString stringWithFormat:@"file name is - %@", cdUser.avatarString]
-//                                                                    delegate:nil
-//                                                           cancelButtonTitle:@"OK"
-//                                                           otherButtonTitles:nil];
-//                     [alert show];
+                     [MyAlert alertWithTitle:@"Error in updateAvatarforCDUser" andMessage:[NSString stringWithFormat:@"file name is - %@", cdUser.avatarString]];
                  });
              }
              

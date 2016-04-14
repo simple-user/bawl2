@@ -13,7 +13,7 @@
 #import "User.h"
 #import "TextFieldValidation.h"
 #import "CurrentItems.h"
-
+#import "MyAlert.h"
 
 
 @interface SingUpViewController () <UITextFieldDelegate>
@@ -223,13 +223,7 @@
 
             if (resUser == nil)
             {
-//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sign Up"
-//                                                               message:@"Fail to sign Up!"
-//                                                              delegate:nil
-//                                                     cancelButtonTitle:@"OK"
-//                                                     otherButtonTitles:nil];
-//                [alert show];
-                
+                [MyAlert alertWithTitle:@"Sign Up" andMessage:@"Fail to sign Up!"];
             }
             else
             {
@@ -249,13 +243,7 @@
                     dispatch_async(dispatch_get_main_queue(), ^ {
                         if (resUser == nil)
                         {
-//                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sign Up"
-//                                                                            message:@"Fail to log in with new user!"
-//                                                                           delegate:nil
-//                                                                  cancelButtonTitle:@"OK"
-//                                                                  otherButtonTitles:nil];
-//                            [alert show];
-                            
+                            [MyAlert alertWithTitle:@"Sign Up" andMessage:@"Fail to log in with new user!"];
                         }
                         else
                         {

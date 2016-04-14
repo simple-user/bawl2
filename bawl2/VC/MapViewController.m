@@ -12,6 +12,7 @@
 #import "CurrentItems.h"
 #import "NetworkDataSorce.h"
 #import "UIColor+Bawl.h"
+#import "MyAlert.h"
 #import <MapKit/MapKit.h>
 
 @interface MapViewController () <MKMapViewDelegate>
@@ -58,6 +59,7 @@
                                                   usingBlock:^(NSNotification * _Nonnull note) {
                                                       [self updateBarButtons];
                                                   }];
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -109,6 +111,8 @@
     MKCoordinateSpan span = MKCoordinateSpanMake(0.2, 0.2);
     MKCoordinateRegion region = MKCoordinateRegionMake(center, span);
     [_mapView setRegion:region];
+    UILongPressGestureRecognizer *longTap = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(segueToNewIssue:)];
+    [_mapView addGestureRecognizer:longTap];
     [self updateAnnotations];
 }
 
@@ -122,6 +126,14 @@
         });
     }];
     
+}
+
+-(void)segueToNewIssue:(UILongPressGestureRecognizer*)longTap
+{
+    CGPoint originPoint = [longTap locationInView:self.mapView];
+    CLLocationCoordinate2D coordinatePoint = [self.mapView convertPoint:originPoint toCoordinateFromView:self.mapView];
+    
+
 }
 
 #pragma mark - Map View Delegate
@@ -147,7 +159,7 @@
 
 -(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
-    [self performSegueWithIdentifier:MySequeFromMapToDescription sender:view];
+    [self performSegueWithIdentifier:MySegueFromMapToDescription sender:view];
 }
 
 
@@ -164,7 +176,7 @@
     
     if (!self.isUserLogined)
     {
-        [self performSegueWithIdentifier:MySequeFromMapToLogIn sender:self];
+        [self performSegueWithIdentifier:MySegueFromMapToLogIn sender:self];
     }
     else
     {
@@ -178,22 +190,12 @@
                 if([stringAnswer isEqualToString:[@"Bye " stringByAppendingString:ci.user.name]])
                 {
                     // alert - good
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Log Out"
-                                                                    message:@"You loged out successfully!"
-                                                                   delegate:nil
-                                                          cancelButtonTitle:@"OK"
-                                                          otherButtonTitles:nil];
-                    [alert show];
+                    [MyAlert alertWithTitle:@"Log Out" andMessage:@"You loged out successfully!"];
                 }
                 else
                 {
                     // alert - bad
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Log Out"
-                                                                    message:[@"Something has gone wrong! (server answer: )" stringByAppendingString:stringAnswer]
-                                                                   delegate:nil
-                                                          cancelButtonTitle:@"OK"
-                                                          otherButtonTitles:nil];
-                    [alert show];
+                    [MyAlert alertWithTitle:@"Log Out" andMessage:[@"Something has gone wrong! (server answer: )" stringByAppendingString:stringAnswer]];
                 }
                 ci.user = nil;
                 [wSelf updateBarButtons];

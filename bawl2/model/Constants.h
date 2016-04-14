@@ -18,11 +18,13 @@
 
 #pragma mark - Segue identificators
 
-#define MySequeFromMapToLogIn @"FromMapToLogIn"
-#define MySequeFromMapToDescription @"FromMapToDescription"
-#define MySequeFromMapToProfile @"FromMapToProfile"
-#define MySequeFromDescriptionToHistory @"FromDescriptionToHistory"
-#define MySequeFromDescriptionToProfile @"FromDescriptionToProfile"
+#define MySegueFromMapToLogIn @"FromMapToLogIn"
+#define MySegueFromMapToDescription @"FromMapToDescription"
+#define MySegueFromMapToProfile @"FromMapToProfile"
+#define MySegueFromDescriptionToHistory @"FromDescriptionToHistory"
+#define MySegueFromDescriptionToProfile @"FromDescriptionToProfile"
+#define MySegueFromMapToNewItemModal @"fromMapToNewItem"
+#define MySegueFromNewIssueToGetPhoto @"FromNewIssueToGetPhoto"
 
 #pragma mark - default names for blank images (user, issue)
 
@@ -33,5 +35,10 @@
 
 #define ActiveRequestCheckCurrentUser @"check current user"
 
+
+#pragma mark - CustomSell
+
+#define CustomCellName @"name"
+#define CustomCellCategory @"category"
 
 #endif /* NotificationsNames_h */

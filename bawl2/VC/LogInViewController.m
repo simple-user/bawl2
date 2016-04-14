@@ -13,7 +13,7 @@
 #import "SingUpViewController.h"
 #import "TextFieldValidation.h"
 #import "CurrentItems.h"
-
+#import "MyAlert.h"
 
 
 @interface LogInViewController () <UITextFieldDelegate>
@@ -59,6 +59,8 @@
                                                                           action:@selector(dismissKeyboard)];
     
     [self.view addGestureRecognizer:tap];
+    
+    
 }
 
 -(void)dismissKeyboard
@@ -197,12 +199,7 @@
 
             if (resUser == nil)
             {
-//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Log In"
-//                                                                message:@"Fail to log in!"
-//                                                               delegate:nil
-//                                                      cancelButtonTitle:@"OK"
-//                                                      otherButtonTitles:nil];
-//                [alert show];
+                [MyAlert alertWithTitle:@"Log In" andMessage:@"Fail to log in!"];
 
             }
             else

@@ -17,6 +17,7 @@
 #import "Comment.h"
 #import "CommentBox.h"
 #import "ProfileViewController.h"
+#import "MyAlert.h"
 
 
 
@@ -250,13 +251,7 @@
     if (currentUser == nil)
     {
         // no user
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add comment"
-//                                                        message:@"You have to log in first."
-//                                                       delegate:nil
-//                                              cancelButtonTitle:@"OK"
-//                                              otherButtonTitles:nil];
-//        [alert show];
-
+        [MyAlert alertWithTitle:@"Add comment" andMessage:@"You have to log in first."];
         return;
     }
     
@@ -949,12 +944,7 @@
                              if (stringAnswer == nil)
                              {
                                  // good
-//                                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Status change"
-//                                                                                 message:@"Status changed successfully!"
-//                                                                                delegate:nil
-//                                                                       cancelButtonTitle:@"OK"
-//                                                                       otherButtonTitles:nil];
-//                                 [alert show];
+                                 [MyAlert alertWithTitle:@"Status change" andMessage:@"Status changed successfully!"];
                                  [CurrentItems sharedItems].issue = issue;
                                  [[NSNotificationCenter defaultCenter] postNotificationName:@"renewMap" object:self];
                                  
@@ -969,12 +959,7 @@
                              else
                              {
                                  // bad
-//                                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Status change"
-//                                                                                 message:[NSString stringWithFormat:@"Fail to change, answer:%@", stringAnswer]
-//                                                                                delegate:nil
-//                                                                       cancelButtonTitle:@"OK"
-//                                                                       otherButtonTitles:nil];
-//                                 [alert show];
+                                 [MyAlert alertWithTitle:@"Status change" andMessage:[NSString stringWithFormat:@"Fail to change, answer:%@", stringAnswer]];
                              }
                          });
                      }];
