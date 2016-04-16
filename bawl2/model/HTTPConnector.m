@@ -6,10 +6,11 @@
 //  Copyright (c) 2016 Admin. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import "HTTPConnector.h"
 #import "Constants.h"
 
-@interface HTTPConnector()
+@interface HTTPConnector() <NSURLSessionTaskDelegate>
 
 @property(strong, nonatomic)NSString *globalURL;
 @property(strong, nonatomic)NSString *allPersURL;
@@ -24,6 +25,7 @@
 @property(strong, nonatomic)NSString *defaultIssueImage;
 @property(strong, nonatomic)NSString *defaultUserImage;
 @property(strong, nonatomic)NSString *comments;
+@property(strong, nonatomic)NSString *addIssueImage;
 
 
 -(NSURLSessionDataTask*)postRequest:(NSData*) postData
@@ -37,6 +39,10 @@
               withData:(NSData *) data
                  andHandler:(void(^)(NSData* data, NSError *error))dataSorceHandler;
 
+-(void)requestSendImage:(UIImage*)image
+                 ofType:(NSString*)type
+              toTextURL:(NSString*)textUrl
+             andHandler:(void(^)(NSData *data, NSError *error))handler;
 
 @end
 
@@ -60,9 +66,15 @@
         _defaultIssueImage = @"no_attach.png";
         _defaultUserImage = @"no_avatar.png";
         _comments = @"issue/commentIDNumber/comments";
+        _addIssueImage = @"image/add/issue";
         
     }
     return self;
+}
+
+-(void)requestSendIssueImage:(UIImage *)image ofType:(NSString *)type andHandler:(void (^)(NSData *, NSError *))handler
+{
+    [self requestSendImage:image ofType:type toTextURL:[self.globalURL stringByAppendingString:self.addIssueImage] andHandler:handler];
 }
 
 -(void)requestIssues:(void(^)(NSData *data, NSError *error))dataSorceHandler
@@ -218,9 +230,62 @@
     return dataTask;
 }
     
+-(void)requestSendImage:(UIImage*)image
+                 ofType:(NSString*)type
+              toTextURL:(NSString*)textUrl
+             andHandler:(void(^)(NSData *data, NSError *error))handler
+{
+    NSData *data = nil;
+    NSString *imageContentType = nil;
+    if([type isEqualToString:@"jpg"])
+    {
+        data = UIImageJPEGRepresentation(image, 1.0);
+        imageContentType = @"image/jpeg";
+    }
+    else // png :)
+    {
+        data = UIImagePNGRepresentation(image);
+        imageContentType = @"image/png";
+    }
+    
+    NSString *boundary = @"---------------------------14737809831466499882746641449";
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
+    NSURL *url = [NSURL URLWithString: textUrl];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:@"POST"];
+    [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
+    
+    NSMutableData *body = [NSMutableData data];
     
     
+    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"file\"; filename=\"image.%@\"\r\n", type] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"Content-Type: %@\r\n\r\n", imageContentType] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:data];
+    [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     
 
+    
+    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:config
+                                                          delegate:self
+                                                     delegateQueue:nil];
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                                completionHandler:
+                                      ^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                                          handler(data, error);
+                                      }];
+    [dataTask resume];
 
+
+}
+
+-(void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didSendBodyData:(int64_t)bytesSent totalBytesSent:(int64_t)totalBytesSent totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
+{
+    float progress = (double)totalBytesSent / (double)totalBytesExpectedToSend;
+    [[NSNotificationCenter defaultCenter] postNotificationName:MyNotificationUploadIssueImageInfo
+                                                        object:self userInfo:@{CustomDictionaryKeyUploadIssueImageInfoForProgress : [NSNumber numberWithFloat:progress]}];
+}
+    
 @end

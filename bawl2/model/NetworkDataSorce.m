@@ -320,5 +320,21 @@
 
 }
 
+-(void)requestSendImage:(UIImage*)image
+                 ofType:(NSString*)type
+            withHandler:(void(^)(NSString *fileName, NSError *error))handler
+{
+    HTTPConnector *connector = [[HTTPConnector alloc] init];
+    [connector requestSendIssueImage:image ofType:type 
+          andHandler:^(NSData *data, NSError *error) {
+              NSString *filename = nil;
+              if (data.length > 0 && error == nil)
+              {
+                  filename = [Parser parseAnswer:data andReturnObjectForKey:@"filename"];
+              }
+              handler(filename, error);
+          }];
+}
+
 
 @end

@@ -15,6 +15,7 @@
 #define MyNotificationManagedObjectDidInit @"ManagedObjectDdidInitNotification"
 #define MyNotificationIssueCategoriesDidLoad @"IssueCategoriesDidLoadNotification" 
 #define MyNotificationUserCheckedAndLogIned @"UserCheckedAndLogIned"
+#define MyNotificationUploadIssueImageInfo @"UploadIssueImageInfo"
 
 #pragma mark - Segue identificators
 
@@ -40,5 +41,8 @@
 
 #define CustomCellName @"name"
 #define CustomCellCategory @"category"
+
+#pragma mark - names dof keys in custom dictionaries
+#define CustomDictionaryKeyUploadIssueImageInfoForProgress @"UploadIssueImageInfoForProgress"
 
 #endif /* NotificationsNames_h */

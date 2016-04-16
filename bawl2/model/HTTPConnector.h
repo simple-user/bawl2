@@ -36,6 +36,10 @@
                                    withData:(NSData*)data
          andDataSorceHandler:(void(^)(NSData *data, NSError *error))dataSorceHandler;
 
+-(void)requestSendIssueImage:(UIImage*)image
+                      ofType:(NSString*)type
+                 andHandler:(void(^)(NSData *data, NSError *error))handler;
+
 
 
 

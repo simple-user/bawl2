@@ -41,4 +41,9 @@
                         toStatus:(NSString*)stringStatus
         andViewControllerHandler:(void (^)(NSString *stringAnswer, Issue *issue, NSError *error))viewControllerHandler;
 
+-(void)requestSendImage:(UIImage*)image
+                 ofType:(NSString*)type
+            withHandler:(void(^)(NSString *fileName, NSError *error))handler;
+
+
 @end

@@ -16,6 +16,7 @@
 
 @protocol DataSorceProtocol <NSObject>
 
+@required
 
 -(void)requestCategories:(void (^)(NSArray<IssueCategory*> * issueCategories, NSError *error))viewControllerHandler;
 
@@ -46,6 +47,11 @@
 -(void)requestChangeStatusWithID:(NSNumber*)issueIdNumber
                         toStatus:(NSString*)stringStatus
         andViewControllerHandler:(void (^)(NSString *stringAnswer, Issue *issue, NSError *error))viewControllerHandler; // e.g. user is not logined (string answer parametr)
+
+
+-(void)requestSendImage:(UIImage*)image
+                 ofType:(NSString*)type
+             withHandler:(void(^)(NSString *fileName, NSError *error))handler;
 
 
 
