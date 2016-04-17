@@ -237,7 +237,7 @@
 {
     NSData *data = nil;
     NSString *imageContentType = nil;
-    if([type isEqualToString:@"jpg"])
+    if([type caseInsensitiveCompare:@"jpg"] == NSOrderedSame)
     {
         data = UIImageJPEGRepresentation(image, 1.0);
         imageContentType = @"image/jpeg";
@@ -258,15 +258,14 @@
     NSMutableData *body = [NSMutableData data];
     
     
-    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"file\"; filename=\"image.%@\"\r\n", type] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithFormat:@"Content-Type: %@\r\n\r\n", imageContentType] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:data];
     [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    
+    [request setHTTPBody:body];
 
-    
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:config
                                                           delegate:self
@@ -274,6 +273,8 @@
     NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
                                                 completionHandler:
                                       ^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                                          NSDictionary *testDic = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
+                                          NSLog(@"\n\n------Result of uploading image ------\n%@\n----------------",testDic);
                                           handler(data, error);
                                       }];
     [dataTask resume];
