@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "NewItemViewController.h"
+#import "NewItemViewControllerPhotoInfoDelegate.h"
 
 @interface TakePhotoViewController : UIViewController
 

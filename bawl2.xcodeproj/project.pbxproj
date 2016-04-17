@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84522C851CC449B400B84D01 /* NewItemViewControllerPhotoInfoDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84522C841CC449B400B84D01 /* NewItemViewControllerPhotoInfoDelegate.m */; };
 		84725A7E1CB042A90000866D /* CDIssueHistoryAction+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 84725A791CB042A90000866D /* CDIssueHistoryAction+CoreDataProperties.m */; };
 		84725A7F1CB042A90000866D /* CDIssue+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 84725A7B1CB042A90000866D /* CDIssue+CoreDataProperties.m */; };
 		84725A801CB042A90000866D /* CDUser+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 84725A7D1CB042A90000866D /* CDUser+CoreDataProperties.m */; };
@@ -57,6 +58,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		84522C831CC449B400B84D01 /* NewItemViewControllerPhotoInfoDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewItemViewControllerPhotoInfoDelegate.h; path = "UI custom obj/NewItemViewControllerPhotoInfoDelegate.h"; sourceTree = "<group>"; };
+		84522C841CC449B400B84D01 /* NewItemViewControllerPhotoInfoDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewItemViewControllerPhotoInfoDelegate.m; path = "UI custom obj/NewItemViewControllerPhotoInfoDelegate.m"; sourceTree = "<group>"; };
 		84725A781CB042A90000866D /* CDIssueHistoryAction+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CDIssueHistoryAction+CoreDataProperties.h"; path = "model/coreData/CDIssueHistoryAction+CoreDataProperties.h"; sourceTree = "<group>"; };
 		84725A791CB042A90000866D /* CDIssueHistoryAction+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CDIssueHistoryAction+CoreDataProperties.m"; path = "model/coreData/CDIssueHistoryAction+CoreDataProperties.m"; sourceTree = "<group>"; };
 		84725A7A1CB042A90000866D /* CDIssue+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CDIssue+CoreDataProperties.h"; path = "model/coreData/CDIssue+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -239,6 +242,8 @@
 				84DBF4551CAB16A6001D1EAC /* ChangerBox.m */,
 				84DBF4561CAB16A6001D1EAC /* CommentBox.h */,
 				84DBF4571CAB16A6001D1EAC /* CommentBox.m */,
+				84522C831CC449B400B84D01 /* NewItemViewControllerPhotoInfoDelegate.h */,
+				84522C841CC449B400B84D01 /* NewItemViewControllerPhotoInfoDelegate.m */,
 			);
 			name = "UI Custom object";
 			sourceTree = "<group>";
@@ -448,6 +453,7 @@
 				84DBF49B1CAB17A5001D1EAC /* CustomTableCell.m in Sources */,
 				84DBF4501CAB1674001D1EAC /* SingUpViewController.m in Sources */,
 				84DBF44B1CAB1674001D1EAC /* DescriptionViewController.m in Sources */,
+				84522C851CC449B400B84D01 /* NewItemViewControllerPhotoInfoDelegate.m in Sources */,
 				84DBF4B01CAB18AE001D1EAC /* UIScrollView+getContentSize.m in Sources */,
 				84DBF4801CAB16D8001D1EAC /* Parser.m in Sources */,
 				84DBF47E1CAB16D8001D1EAC /* IssueHistoryAction.m in Sources */,

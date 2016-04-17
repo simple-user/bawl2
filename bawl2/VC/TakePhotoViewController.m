@@ -16,6 +16,11 @@
 @property (weak, nonatomic) IBOutlet UIProgressView *progress;
 @property (weak, nonatomic) IBOutlet UIImageView *photoView;
 
+// prepare for out
+// it will be setted only by tapping OK
+@property(strong, nonatomic) NSString *outFileName;
+@property(strong, nonatomic) UIImage *outImage;
+
 @end
 
 @implementation TakePhotoViewController
@@ -59,6 +64,11 @@
     [self presentViewController:imagePicker animated:YES completion:NULL];
 }
 
+- (IBAction)done:(UIBarButtonItem *)sender {
+    self.photoDelegate.filenameOfLoadedToServerPhoto = self.outFileName;
+    self.photoDelegate.image = self.outImage;
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 #pragma mark - Imasge Picker Controller Delegate
 
@@ -83,13 +93,22 @@
                          ofType:stringType
                     withHandler:^(NSString *fileName, NSError *error) {
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            self.progress.hidden = YES;
-                            self.photoView.alpha = 0.0;
-                            self.photoView.image = imageForSend;
-                            [UIView animateWithDuration:0.4
-                                             animations:^{
-                                                 self.photoView.alpha = 1.0;
-                                             }];
+                            if(fileName != nil && error == nil)
+                            {
+                                self.progress.hidden = YES;
+                                self.photoView.alpha = 0.0;
+                                self.photoView.image = imageForSend;
+                                [UIView animateWithDuration:0.4
+                                                 animations:^{
+                                                     self.photoView.alpha = 1.0;
+                                                 }];
+                                self.outFileName = fileName;
+                                self.outImage = imageForSend;
+                            }
+                            else
+                            {
+                                [MyAlert alertWithTitle:@"Image upload" andMessage:@"Image upload faild"];
+                            }
                         });
                     }];
     

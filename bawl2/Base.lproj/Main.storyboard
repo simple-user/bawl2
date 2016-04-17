@@ -249,15 +249,26 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IBT-DN-Pm1">
+                                                    <rect key="frame" x="514" y="8" width="45" height="45"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="45" id="9Br-3m-tRH"/>
+                                                        <constraint firstAttribute="height" constant="45" id="chh-Pl-MCD"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="XRS-LY-mTn" firstAttribute="leading" secondItem="p4n-tB-eP9" secondAttribute="leading" constant="8" id="4nz-aH-coY"/>
+                                                <constraint firstItem="IBT-DN-Pm1" firstAttribute="top" secondItem="p4n-tB-eP9" secondAttribute="top" constant="8" id="4tU-Gp-ux6"/>
                                                 <constraint firstItem="XRS-LY-mTn" firstAttribute="centerY" secondItem="p4n-tB-eP9" secondAttribute="centerY" id="5uM-Lz-KPB"/>
                                                 <constraint firstItem="XRS-LY-mTn" firstAttribute="top" secondItem="p4n-tB-eP9" secondAttribute="top" constant="8" id="JrI-JQ-T5S"/>
+                                                <constraint firstItem="IBT-DN-Pm1" firstAttribute="centerY" secondItem="p4n-tB-eP9" secondAttribute="centerY" id="StI-t1-JKT"/>
+                                                <constraint firstAttribute="trailing" secondItem="IBT-DN-Pm1" secondAttribute="trailing" constant="8" id="YAi-7W-tJv"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
                                                     <exclude reference="JrI-JQ-T5S"/>
+                                                    <exclude reference="4tU-Gp-ux6"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -282,6 +293,7 @@
                         <outlet property="categoryPicker" destination="rFd-RK-Wum" id="xeq-7V-9Bd"/>
                         <outlet property="descriptionTextView" destination="vca-qX-nuU" id="UPt-dB-Ew3"/>
                         <outlet property="nameTextField" destination="wdy-6n-EvF" id="ceC-Oe-ghv"/>
+                        <outlet property="photoView" destination="IBT-DN-Pm1" id="Gh2-i1-IWZ"/>
                         <segue destination="4aP-zE-f4Z" kind="show" identifier="FromNewIssueToGetPhoto" id="u4i-7d-5fx"/>
                     </connections>
                 </tableViewController>
@@ -349,7 +361,11 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Issue Photo" id="6SL-z9-Mzt">
-                        <barButtonItem key="rightBarButtonItem" title="Done" id="ZHR-PP-pZa"/>
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="ZHR-PP-pZa">
+                            <connections>
+                                <action selector="done:" destination="4aP-zE-f4Z" id="Frg-ff-TiT"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="photoView" destination="OCc-lO-WFu" id="94c-aO-vUt"/>

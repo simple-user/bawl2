@@ -10,6 +10,7 @@
 #import "Constants.h"
 #import "IssueCategories.h"
 #import "TakePhotoViewController.h"
+#import "NewItemViewControllerPhotoInfoDelegate.h"
 
 @interface NewItemViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 // name section
@@ -25,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *descriptionTextView;
 //photo section
 @property(strong, nonatomic) NewItemViewControllerPhotoInfoDelegate *photoDelegate;
+@property (weak, nonatomic) IBOutlet UIImageView *photoView;
 
 
 
@@ -34,6 +36,17 @@
 
 @implementation NewItemViewController
 
+
+#pragma mark - Lasy Instantiation
+-(NewItemViewControllerPhotoInfoDelegate*)photoDelegate
+{
+    if(_photoDelegate == nil)
+        _photoDelegate = [[NewItemViewControllerPhotoInfoDelegate alloc] init];
+    return _photoDelegate;
+}
+
+
+#pragma mark - Load / Appear
 
 -(void)viewDidLoad
 {
@@ -52,6 +65,11 @@
                                                   }];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    //even if it's nil!
+    self.photoView.image = self.photoDelegate.image;
+}
 
 #pragma mark - Text Field Delegate
 -(BOOL)textFieldShouldReturn:(UITextField *)textField

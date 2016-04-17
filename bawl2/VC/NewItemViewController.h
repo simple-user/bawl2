@@ -21,9 +21,3 @@
 
 @end
 
-
-@interface NewItemViewControllerPhotoInfoDelegate : NSObject
-
-@property(strong, nonatomic) NSString *filenameOfLoadedToServerPhoto;
-
-@end
