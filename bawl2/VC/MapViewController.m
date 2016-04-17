@@ -132,7 +132,7 @@
 {
     CGPoint originPoint = [longTap locationInView:self.mapView];
     CLLocationCoordinate2D coordinatePoint = [self.mapView convertPoint:originPoint toCoordinateFromView:self.mapView];
-    
+    [self performSegueWithIdentifier:MySegueFromMapToNewItemModal sender:self];
 
 }
 
