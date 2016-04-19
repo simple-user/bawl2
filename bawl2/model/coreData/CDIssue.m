@@ -56,6 +56,7 @@
         cdIssue.status = issue.status;
         cdIssue.latitude = issue.latitude;
         cdIssue.longitude = issue.longitude;
+        cdIssue.category = issue.categoryId;
     }
     else
     {

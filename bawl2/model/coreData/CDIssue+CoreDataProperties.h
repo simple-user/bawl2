@@ -2,7 +2,7 @@
 //  CDIssue+CoreDataProperties.h
 //  bawl2
 //
-//  Created by Admin on 02.04.16.
+//  Created by Admin on 19.04.16.
 //  Copyright © 2016 Admin. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -10,9 +10,9 @@
 //
 
 #import "CDIssue.h"
-@class CDIssueHistoryAction;
 
 NS_ASSUME_NONNULL_BEGIN
+@class CDIssueHistoryAction;
 
 @interface CDIssue (CoreDataProperties)
 
@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSNumber *latitude;
 @property (nullable, nonatomic, retain) NSNumber *longitude;
 @property (nullable, nonatomic, retain) NSString *status;
+@property (nullable, nonatomic, retain) NSString *category;
 @property (nullable, nonatomic, retain) NSSet<CDIssueHistoryAction *> *historyActions;
 
 @end

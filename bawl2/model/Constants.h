@@ -26,6 +26,7 @@
 #define MySegueFromDescriptionToProfile @"FromDescriptionToProfile"
 #define MySegueFromMapToNewItemModal @"fromMapToNewItem"
 #define MySegueFromNewIssueToGetPhoto @"FromNewIssueToGetPhoto"
+#define MySegueUnwindSegueFromNewItemToMap @"UnwindSegueFromNewItemToMap"
 
 #pragma mark - default names for blank images (user, issue)
 

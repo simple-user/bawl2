@@ -8,22 +8,16 @@
 
 #import "NewItemViewController.h"
 #import "Constants.h"
-#import "IssueCategories.h"
 #import "TakePhotoViewController.h"
 #import "NewItemViewControllerPhotoInfoDelegate.h"
+#import "MyAlert.h"
 
 @interface NewItemViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
-// name section
-@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 //category section
 @property (weak, nonatomic) IBOutlet UIImageView *categoryImage;
 @property (weak, nonatomic) IBOutlet UILabel *categoryName;
 @property (weak, nonatomic) IBOutlet UIPickerView *categoryPicker;
 @property (nonatomic) BOOL isCategoryPickerCellEnable;
-// preparing for out
-@property (strong, nonatomic) NSString *selectedCategory;
-//description section
-@property (weak, nonatomic) IBOutlet UITextView *descriptionTextView;
 //photo section
 @property(strong, nonatomic) NewItemViewControllerPhotoInfoDelegate *photoDelegate;
 @property (weak, nonatomic) IBOutlet UIImageView *photoView;
@@ -156,7 +150,7 @@
     if(cats == nil)
         return 0;
     else
-    return [[cats categories] count];
+        return [[cats categories] count];
 }
 
 #pragma mark - Picker View delegate
@@ -168,10 +162,10 @@
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    self.selectedCategory = [[[[IssueCategories standartCategories] categories] objectAtIndex:row] name];
-    IssueCategory *cat = [IssueCategories categoryForName:self.selectedCategory];
+    IssueCategory *cat = [[[IssueCategories standartCategories] categories] objectAtIndex:row];
     if(cat!=nil)
     {
+        self.selectedCategory = cat;
         self.categoryImage.image = cat.image;
         self.categoryName.text = cat.name;
         if (self.categoryImage.hidden==YES)
@@ -186,6 +180,7 @@
     }
     else
     {
+        self.selectedCategory = nil;
         self.categoryImage.hidden = YES;
         self.categoryImage.alpha = 0;
         self.categoryName.hidden = YES;
@@ -195,6 +190,28 @@
         
     }
 }
+
+#pragma mark - Actions
+
+
+- (IBAction)cancelController:(UIBarButtonItem *)sender {
+    [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:NULL];
+}
+
+
+- (IBAction)doneWithController:(UIBarButtonItem *)sender {
+    if (!(self.nameTextField.text.length!=0
+        && self.selectedCategory!=nil
+        && self.descriptionTextView.text.length!=0
+        && self.photoView.image!=nil))
+        {
+            [MyAlert alertWithTitle:@"Check" andMessage:@"Fill all fields :)"];
+            return;
+        }
+
+    
+}
+
 
 #pragma mark - Segue
 
@@ -206,7 +223,14 @@
         tfvc.nameOfIssue = self.nameTextField.text;
         tfvc.photoDelegate = self.photoDelegate;
     }
+    else if([segue.identifier isEqualToString:MySegueUnwindSegueFromNewItemToMap])
+    {
+        // sending of request will be on map
+    }
+    
 }
+
+
 
 
 @end

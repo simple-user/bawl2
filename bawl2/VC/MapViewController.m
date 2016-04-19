@@ -6,14 +6,15 @@
 //  Copyright © 2016 Admin. All rights reserved.
 //
 
-#import "Constants.h"
+#import <MapKit/MapKit.h>
 
+#import "Constants.h"
 #import "MapViewController.h"
 #import "CurrentItems.h"
 #import "NetworkDataSorce.h"
 #import "UIColor+Bawl.h"
 #import "MyAlert.h"
-#import <MapKit/MapKit.h>
+#import "NewItemViewController.h"
 
 @interface MapViewController () <MKMapViewDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -21,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *leftBarButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *rightBarButton;
 @property (nonatomic) BOOL isUserLogined;
+
+@property(nonatomic)CLLocationCoordinate2D newItemCoordinate;
 
 @end
 
@@ -85,7 +88,7 @@
     {
         self.isUserLogined = NO;
         self.leftBarButton.enabled = NO;
-
+        
         // at first check info about request user
         if ([ci.activeRequests objectForKey:ActiveRequestCheckCurrentUser]!=nil)
         {
@@ -128,12 +131,31 @@
     
 }
 
+
+#pragma mark - Segue
+
 -(void)segueToNewIssue:(UILongPressGestureRecognizer*)longTap
 {
     CGPoint originPoint = [longTap locationInView:self.mapView];
-    CLLocationCoordinate2D coordinatePoint = [self.mapView convertPoint:originPoint toCoordinateFromView:self.mapView];
+    self.newItemCoordinate = [self.mapView convertPoint:originPoint toCoordinateFromView:self.mapView];
     [self performSegueWithIdentifier:MySegueFromMapToNewItemModal sender:self];
+    
+    
+}
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:MySegueFromMapToNewItemModal])
+    {
+        UINavigationController *navigationController = (UINavigationController*)segue.destinationViewController;
+        NewItemViewController *newItemController = (NewItemViewController*)navigationController.topViewController;
+        newItemController.mapLoaction = self.newItemCoordinate;
+    }
+}
+
+-(IBAction)doneForNewItem:(UIStoryboardSegue*)segue
+{
+    
 }
 
 #pragma mark - Map View Delegate

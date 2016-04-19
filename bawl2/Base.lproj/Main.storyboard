@@ -283,8 +283,16 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="New Issue" id="Or8-xP-wny">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="YRM-hk-NeW"/>
-                        <barButtonItem key="rightBarButtonItem" title="Done" id="LnI-o1-og9"/>
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="YRM-hk-NeW">
+                            <connections>
+                                <action selector="cancelController:" destination="igm-Zf-x6h" id="8pA-l0-3gt"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="LnI-o1-og9">
+                            <connections>
+                                <action selector="doneWithController:" destination="igm-Zf-x6h" id="wFt-PW-jlg"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="800"/>
@@ -296,9 +304,11 @@
                         <outlet property="nameTextField" destination="wdy-6n-EvF" id="ceC-Oe-ghv"/>
                         <outlet property="photoView" destination="IBT-DN-Pm1" id="Gh2-i1-IWZ"/>
                         <segue destination="4aP-zE-f4Z" kind="show" identifier="FromNewIssueToGetPhoto" id="u4i-7d-5fx"/>
+                        <segue destination="dO8-LV-Fxb" kind="unwind" identifier="UnwindSegueFromNewItemToMap" unwindAction="doneForNewItem:" id="wIG-SE-bRz"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rQB-8O-snx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="dO8-LV-Fxb" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2427" y="-413"/>
         </scene>
