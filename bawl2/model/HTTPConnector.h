@@ -22,6 +22,9 @@
                              andPosData:(NSData*)data
                     andDatasorceHandler:(void(^)(NSData* data, NSError *error))dataSorceHandler;
 
+-(void)requestSendNewIssue:(NSData*)data
+               withHandler:(void(^)(NSData* data, NSError *error))handler;
+
 
 -(NSURLSessionDataTask*)requestLogInWithData:(NSData*)data
         andDataSorceHandler:(void(^)(NSData *data, NSError *error))dataSorceHandler;

@@ -336,5 +336,44 @@
           }];
 }
 
+-(void)requestAddNewIssue:(Issue*)issue
+              withHandler:(void(^)(Issue *returnedIssue, NSError *error))handler
+{
+    NSDictionary *dic = @{@"name" : issue.name,
+                          @"desc" : issue.issueDescription,
+                          @"point" : issue.mapPointer,
+                          @"status" : @"NEW",
+                          @"category" : issue.categoryId,
+                          @"attach" : issue.attachments};
+    NSError *err;
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:dic
+                                                       options:0
+                                                         error:&err];
+    HTTPConnector *con = [[HTTPConnector alloc] init];
+    [con requestSendNewIssue:postData withHandler:^(NSData *data, NSError *error) {
+        Issue *issue = nil;
+        if(data.length >0 && error == nil)
+        {
+            NSDictionary *issueDic = [NSJSONSerialization JSONObjectWithData:data
+                                                                            options:0
+                                                                              error:NULL];
+            
+            if([issueDic count]>1)
+            {
+                issue = [[Issue alloc] initWithDictionary:issueDic];
+                CurrentItems *ci = [CurrentItems sharedItems];
+                if(ci.managedObjectContext != nil)
+                {
+                    CDIssue *cdIssue = [CDIssue syncFromIssue:issue withContext:ci.managedObjectContext];
+                    [CDIssueHistoryAction syncFromHistoryActions:issue.historyActions forCDIssue:cdIssue withContext:ci.managedObjectContext];
+                }
+            }
+        }
+        handler(issue, error);
+    }];
+    
+    
+}
+
 
 @end

@@ -10,25 +10,23 @@
 #import <UIKit/UIKit.h>
 #import "AvatarView.h"
 
-@interface CommentBox : NSObject
+@interface CommentBox : UIView
 
 
 @property(strong, nonatomic)NSNumber *userID;
 @property(nonatomic)NSNumber *issueID;
 
-@property(strong, nonatomic) UIView *commentView;
-@property(strong, nonatomic) UILabel *commentLabelName;
-@property(strong, nonatomic) UILabel *commentLabelMessage;
+
+// @property(strong, nonatomic) UIView *commentView;
+@property(strong, nonatomic) NSString *name;
+@property(strong, nonatomic) NSString *message;
 
 @property(strong, nonatomic) NSString *avatarStringName;
-@property(strong, nonatomic) AvatarView *avatar;
-
-@property(strong, nonatomic) UIButton *buttonName;
-@property(strong, nonatomic) UIButton *buttonMessage;
-@property(strong, nonatomic) UIButton *buttonImage;
+@property(strong, nonatomic) UIImage *avatarImage;
 
 @property(strong, nonatomic) NSLayoutConstraint *commentMessageHeightConstraint;
 
+@property(nonatomic)NSUInteger index;
 @property(nonatomic)BOOL isBig;
 @property(nonatomic)BOOL isNeedResize;
 @property(nonatomic)CGFloat messageBigHeight;

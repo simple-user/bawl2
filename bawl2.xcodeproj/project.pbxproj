@@ -51,6 +51,7 @@
 		84DBF4B11CAB18AE001D1EAC /* UIView+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF4AB1CAB18AE001D1EAC /* UIView+Addition.m */; };
 		84DBF4B21CAB18AE001D1EAC /* UIViewController+backViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF4AD1CAB18AE001D1EAC /* UIViewController+backViewController.m */; };
 		84E15C351CBEEF8E0018BD9F /* TakePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E15C341CBEEF8E0018BD9F /* TakePhotoViewController.m */; };
+		84E294181CC94EE30015F2CA /* commentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E294171CC94EE30015F2CA /* commentView.xib */; };
 		84E2B43F1CBAA1210027B1A0 /* MyAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E2B43E1CBAA1210027B1A0 /* MyAlert.m */; };
 		84E2B4421CBAB23F0027B1A0 /* NewItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E2B4411CBAB23F0027B1A0 /* NewItemViewController.m */; };
 		84E358D21CAC14D800521AA4 /* CurrentItems.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E358CF1CAC14D800521AA4 /* CurrentItems.m */; };
@@ -143,6 +144,7 @@
 		84DBF4B31CAB1934001D1EAC /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = model/Constants.h; sourceTree = "<group>"; };
 		84E15C331CBEEF8E0018BD9F /* TakePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TakePhotoViewController.h; path = VC/TakePhotoViewController.h; sourceTree = "<group>"; };
 		84E15C341CBEEF8E0018BD9F /* TakePhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TakePhotoViewController.m; path = VC/TakePhotoViewController.m; sourceTree = "<group>"; };
+		84E294171CC94EE30015F2CA /* commentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = commentView.xib; path = "UI custom obj/comment/commentView.xib"; sourceTree = "<group>"; };
 		84E2B43D1CBAA1210027B1A0 /* MyAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyAlert.h; path = model/MyAlert.h; sourceTree = "<group>"; };
 		84E2B43E1CBAA1210027B1A0 /* MyAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyAlert.m; path = model/MyAlert.m; sourceTree = "<group>"; };
 		84E2B4401CBAB23F0027B1A0 /* NewItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewItemViewController.h; path = VC/NewItemViewController.h; sourceTree = "<group>"; };
@@ -237,11 +239,10 @@
 		84DBF4511CAB1694001D1EAC /* UI Custom object */ = {
 			isa = PBXGroup;
 			children = (
+				84E294161CC94E9D0015F2CA /* comment */,
 				84DBF4971CAB1796001D1EAC /* CustomTableCell */,
 				84DBF4541CAB16A6001D1EAC /* ChangerBox.h */,
 				84DBF4551CAB16A6001D1EAC /* ChangerBox.m */,
-				84DBF4561CAB16A6001D1EAC /* CommentBox.h */,
-				84DBF4571CAB16A6001D1EAC /* CommentBox.m */,
 				84522C831CC449B400B84D01 /* NewItemViewControllerPhotoInfoDelegate.h */,
 				84522C841CC449B400B84D01 /* NewItemViewControllerPhotoInfoDelegate.m */,
 			);
@@ -333,6 +334,16 @@
 			name = categories;
 			sourceTree = "<group>";
 		};
+		84E294161CC94E9D0015F2CA /* comment */ = {
+			isa = PBXGroup;
+			children = (
+				84E294171CC94EE30015F2CA /* commentView.xib */,
+				84DBF4561CAB16A6001D1EAC /* CommentBox.h */,
+				84DBF4571CAB16A6001D1EAC /* CommentBox.m */,
+			);
+			name = comment;
+			sourceTree = "<group>";
+		};
 		84E358CD1CAC148600521AA4 /* singleton */ = {
 			isa = PBXGroup;
 			children = (
@@ -405,6 +416,7 @@
 				84DBF4291CAB0A5F001D1EAC /* Assets.xcassets in Resources */,
 				84DBF4271CAB0A5F001D1EAC /* Main.storyboard in Resources */,
 				84DBF49C1CAB17A5001D1EAC /* CustomTableCell.xib in Resources */,
+				84E294181CC94EE30015F2CA /* commentView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

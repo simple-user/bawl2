@@ -18,11 +18,7 @@
 @property(nonatomic) CLLocationCoordinate2D mapLoaction;
 
 //out
-@property (weak, nonatomic) IBOutlet UITextField *nameTextField;  // --->out
-@property (strong, nonatomic) IssueCategory *selectedCategory;   // ---> out
-@property (weak, nonatomic) IBOutlet UITextView *descriptionTextView;  // --->out
-
-
+@property(strong, nonatomic)Issue *createdIssue; // out
 
 @end
 

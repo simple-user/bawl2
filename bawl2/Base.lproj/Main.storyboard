@@ -883,7 +883,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YB2-fd-gOK" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading Image..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sBa-r8-RJH">
                                                 <rect key="frame" x="236" y="263" width="127" height="21"/>
@@ -1036,45 +1036,51 @@
                                             <constraint firstItem="mC8-Hz-Dl9" firstAttribute="leading" secondItem="YB2-fd-gOK" secondAttribute="leadingMargin" id="yD8-6V-QVT"/>
                                             <constraint firstAttribute="trailing" secondItem="m17-JH-xuA" secondAttribute="trailing" constant="8" id="yi9-9p-Kbi"/>
                                         </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="dZn-e6-slZ"/>
+                                            </mask>
+                                        </variation>
+                                    </view>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ID7-3X-pCP" userLabel="cover scroll during new comment is adding">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="240" id="ey0-7w-cmb"/>
+                                            <constraint firstAttribute="height" constant="128" id="kly-8f-fuS"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="ey0-7w-cmb"/>
+                                                <exclude reference="kly-8f-fuS"/>
+                                            </mask>
+                                        </variation>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="YB2-fd-gOK" secondAttribute="bottom" id="APK-Df-IJ8"/>
+                                    <constraint firstAttribute="trailing" secondItem="ID7-3X-pCP" secondAttribute="trailing" id="Hez-Ql-YVm"/>
                                     <constraint firstAttribute="trailing" secondItem="YB2-fd-gOK" secondAttribute="trailing" id="LUg-WJ-glH"/>
+                                    <constraint firstItem="ID7-3X-pCP" firstAttribute="top" secondItem="X7Q-cd-rrd" secondAttribute="top" id="Z01-Vm-dGR"/>
                                     <constraint firstItem="YB2-fd-gOK" firstAttribute="top" secondItem="X7Q-cd-rrd" secondAttribute="top" id="iob-5F-UXk"/>
                                     <constraint firstItem="YB2-fd-gOK" firstAttribute="leading" secondItem="X7Q-cd-rrd" secondAttribute="leading" id="nvt-4c-gR0"/>
+                                    <constraint firstAttribute="bottom" secondItem="ID7-3X-pCP" secondAttribute="bottom" id="sR8-n9-g8H"/>
+                                    <constraint firstItem="ID7-3X-pCP" firstAttribute="leading" secondItem="X7Q-cd-rrd" secondAttribute="leading" id="ykL-df-Fgc"/>
                                 </constraints>
                             </scrollView>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ID7-3X-pCP" userLabel="cover scroll during new comment is adding">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="240" id="ey0-7w-cmb"/>
-                                    <constraint firstAttribute="height" constant="128" id="kly-8f-fuS"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="ey0-7w-cmb"/>
-                                        <exclude reference="kly-8f-fuS"/>
-                                    </mask>
-                                </variation>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ID7-3X-pCP" firstAttribute="leading" secondItem="X7Q-cd-rrd" secondAttribute="leading" id="2aE-ml-OWJ"/>
+                            <constraint firstItem="YB2-fd-gOK" firstAttribute="height" secondItem="Hna-L6-63t" secondAttribute="height" id="0Tc-7Y-qII"/>
                             <constraint firstItem="X7Q-cd-rrd" firstAttribute="top" secondItem="HUO-cY-Bmp" secondAttribute="top" id="B9E-z2-Cem"/>
                             <constraint firstItem="Hna-L6-63t" firstAttribute="leading" secondItem="HUO-cY-Bmp" secondAttribute="leading" id="Cja-NX-x4J"/>
                             <constraint firstAttribute="trailing" secondItem="X7Q-cd-rrd" secondAttribute="trailing" id="FZL-ZM-5za"/>
                             <constraint firstAttribute="bottom" secondItem="Hna-L6-63t" secondAttribute="bottom" id="NPt-d4-JVs"/>
                             <constraint firstItem="YB2-fd-gOK" firstAttribute="width" secondItem="HUO-cY-Bmp" secondAttribute="width" id="X3D-Z0-KLd"/>
-                            <constraint firstItem="ID7-3X-pCP" firstAttribute="trailing" secondItem="X7Q-cd-rrd" secondAttribute="trailing" id="Xdq-Wp-g12"/>
-                            <constraint firstItem="ID7-3X-pCP" firstAttribute="top" secondItem="X7Q-cd-rrd" secondAttribute="top" id="Xq5-lB-2g6"/>
                             <constraint firstAttribute="bottom" secondItem="X7Q-cd-rrd" secondAttribute="bottom" id="eVg-9g-YCn"/>
                             <constraint firstAttribute="trailing" secondItem="Hna-L6-63t" secondAttribute="trailing" id="oMS-jL-tAQ"/>
                             <constraint firstItem="X7Q-cd-rrd" firstAttribute="leading" secondItem="HUO-cY-Bmp" secondAttribute="leading" id="q4a-XD-G3K"/>
                             <constraint firstItem="Hna-L6-63t" firstAttribute="top" secondItem="HUO-cY-Bmp" secondAttribute="top" id="qdv-Em-gqS"/>
-                            <constraint firstItem="ID7-3X-pCP" firstAttribute="bottom" secondItem="X7Q-cd-rrd" secondAttribute="bottom" id="wzz-SK-NNB"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
@@ -1092,11 +1098,10 @@
                         <outlet property="issueImageView" destination="ds8-KB-sHS" id="KJb-IV-UHH"/>
                         <outlet property="scrollView" destination="X7Q-cd-rrd" id="JfC-Qh-cUz"/>
                         <outlet property="titleLabel" destination="a9A-rp-NSL" id="o5O-0J-3pE"/>
-                        <outlet property="viewBetweenCommentAndChare" destination="g4Y-6D-zT0" id="H9a-6A-6sF"/>
+                        <outlet property="viewBetweenCommentAndShare" destination="g4Y-6D-zT0" id="ZKA-K5-ATI"/>
                         <outletCollection property="viewsVertical" destination="1MG-mw-vKe" id="0Hq-QM-aam"/>
                         <outletCollection property="viewsVertical" destination="mC8-Hz-Dl9" id="qQL-r8-4d5"/>
                         <outletCollection property="viewsVertical" destination="ds8-KB-sHS" id="TDq-uN-apO"/>
-                        <outletCollection property="viewsVertical" destination="g4Y-6D-zT0" id="arX-11-g8u"/>
                         <outletCollection property="constraintsVertical" destination="H9c-te-uxa" id="gWg-Wu-3Sx"/>
                         <outletCollection property="constraintsVertical" destination="shY-od-hGh" id="EwI-3E-kNF"/>
                         <outletCollection property="constraintsVertical" destination="3X9-ht-rLP" id="9TC-or-zQo"/>
@@ -1355,6 +1360,6 @@
         <image name="tittle" width="284" height="152"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="DHh-b6-8sV"/>
+        <segue reference="42Y-j6-ZxE"/>
     </inferredMetricsTieBreakers>
 </document>

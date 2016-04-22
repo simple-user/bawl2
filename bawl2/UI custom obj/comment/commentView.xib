@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" verticalHuggingPriority="249" id="iN0-l3-epB" customClass="CommentBox">
+            <rect key="frame" x="0.0" y="0.0" width="569" height="120"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sFG-PH-BHg" userLabel="Avatar">
+                    <rect key="frame" x="4" y="4" width="112" height="112"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="sFG-PH-BHg" secondAttribute="height" multiplier="1:1" id="m9V-fu-RNh"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y7K-4q-41n" userLabel="Avatar Button">
+                    <rect key="frame" x="4" y="4" width="112" height="112"/>
+                    <connections>
+                        <action selector="avatarButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="D41-Vv-QnN"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nuN-7I-BTa" userLabel="Name">
+                    <rect key="frame" x="124" y="4" width="441" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PWr-ZF-fwL" userLabel="Name button">
+                    <rect key="frame" x="124" y="4" width="441" height="30"/>
+                    <connections>
+                        <action selector="snameButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="gTE-c7-27U"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nBU-18-GTe" userLabel="Message">
+                    <rect key="frame" x="124" y="38" width="441" height="78"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="78" id="h48-Sn-oku"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Glc-uo-RsS" userLabel="Message Button">
+                    <rect key="frame" x="124" y="38" width="441" height="78"/>
+                    <connections>
+                        <action selector="messageButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="wH0-gt-osQ"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Glc-uo-RsS" firstAttribute="trailing" secondItem="nBU-18-GTe" secondAttribute="trailing" id="1iY-KI-twG"/>
+                <constraint firstItem="nuN-7I-BTa" firstAttribute="leading" secondItem="PWr-ZF-fwL" secondAttribute="leading" id="1rk-ca-0Yy"/>
+                <constraint firstItem="nuN-7I-BTa" firstAttribute="leading" secondItem="sFG-PH-BHg" secondAttribute="trailing" constant="8" id="2LW-PB-bRO"/>
+                <constraint firstItem="nBU-18-GTe" firstAttribute="leading" secondItem="sFG-PH-BHg" secondAttribute="trailing" constant="8" id="3Mn-fF-Rod"/>
+                <constraint firstItem="sFG-PH-BHg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="4" id="58a-rT-3Bx"/>
+                <constraint firstItem="Glc-uo-RsS" firstAttribute="top" secondItem="nBU-18-GTe" secondAttribute="top" id="5HE-GQ-LBf"/>
+                <constraint firstItem="Glc-uo-RsS" firstAttribute="leading" secondItem="nBU-18-GTe" secondAttribute="leading" id="GNT-lY-d1Q"/>
+                <constraint firstAttribute="bottom" secondItem="sFG-PH-BHg" secondAttribute="bottom" constant="4" id="PQ4-qJ-n53"/>
+                <constraint firstAttribute="trailing" secondItem="nuN-7I-BTa" secondAttribute="trailing" constant="4" id="VcS-ni-y1H"/>
+                <constraint firstItem="Y7K-4q-41n" firstAttribute="bottom" secondItem="sFG-PH-BHg" secondAttribute="bottom" id="cZd-BD-25I"/>
+                <constraint firstItem="Y7K-4q-41n" firstAttribute="top" secondItem="sFG-PH-BHg" secondAttribute="top" id="cqJ-he-JFJ"/>
+                <constraint firstItem="Y7K-4q-41n" firstAttribute="leading" secondItem="sFG-PH-BHg" secondAttribute="leading" id="hLe-EA-wkw"/>
+                <constraint firstItem="PWr-ZF-fwL" firstAttribute="bottom" secondItem="nuN-7I-BTa" secondAttribute="bottom" id="lKu-12-6rL"/>
+                <constraint firstItem="nuN-7I-BTa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="4" id="lmE-Ne-5jf"/>
+                <constraint firstItem="nuN-7I-BTa" firstAttribute="trailing" secondItem="PWr-ZF-fwL" secondAttribute="trailing" id="lxR-Xd-Rej"/>
+                <constraint firstAttribute="bottom" secondItem="nBU-18-GTe" secondAttribute="bottom" constant="4" id="oGb-Gd-6Nl"/>
+                <constraint firstAttribute="trailing" secondItem="nBU-18-GTe" secondAttribute="trailing" constant="4" id="oYj-6I-WjF"/>
+                <constraint firstItem="nBU-18-GTe" firstAttribute="top" secondItem="nuN-7I-BTa" secondAttribute="bottom" constant="4" id="q4D-qB-5gg"/>
+                <constraint firstItem="sFG-PH-BHg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="4" id="r7y-KH-9aF"/>
+                <constraint firstItem="PWr-ZF-fwL" firstAttribute="top" secondItem="nuN-7I-BTa" secondAttribute="top" id="ugQ-90-uHu"/>
+                <constraint firstItem="Y7K-4q-41n" firstAttribute="trailing" secondItem="sFG-PH-BHg" secondAttribute="trailing" id="v3W-l6-G0P"/>
+                <constraint firstItem="Glc-uo-RsS" firstAttribute="bottom" secondItem="nBU-18-GTe" secondAttribute="bottom" id="vVy-Sb-ZE6"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="avatarButton" destination="Y7K-4q-41n" id="zhN-qk-9o9"/>
+                <outlet property="avatarView" destination="sFG-PH-BHg" id="PMT-Uf-w0x"/>
+                <outlet property="messageButton" destination="Glc-uo-RsS" id="tSJ-7q-thA"/>
+                <outlet property="messageLabel" destination="nBU-18-GTe" id="I8q-ld-yQJ"/>
+                <outlet property="nameButton" destination="PWr-ZF-fwL" id="W74-cv-S2V"/>
+                <outlet property="nameLabel" destination="nuN-7I-BTa" id="7uh-cz-wZv"/>
+            </connections>
+            <point key="canvasLocation" x="609.5" y="216"/>
+        </view>
+    </objects>
+</document>

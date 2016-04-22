@@ -24,19 +24,21 @@
 @property (strong, nonatomic) NSString *status;
 // @property (strong, nonatomic) NSNumber *priorityId;
 
-@property (strong, nonatomic, readonly) NSNumber *longitude;
-@property (strong, nonatomic, readonly) NSNumber *latitude;
+@property (strong, nonatomic, readonly) NSNumber *longitude; // just get method!!!
+@property (strong, nonatomic, readonly) NSNumber *latitude;  // just get method!!!
 
-@property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
+// @property (nonatomic) CLLocationCoordinate2D coordinate;
 //@property (strong,nonatomic,readonly) NSString *tittle;
 
-@property (nonatomic, readonly, copy) NSString *title;
-@property (nonatomic, readonly, copy) NSString *subtitle;
+@property (nonatomic, readonly, copy) NSString *title;       // just get method!!!
+@property (nonatomic, readonly, copy) NSString *subtitle;    // just get method!!!
 
 
 -(instancetype)initWithDictionary:(NSDictionary *)issueDictionary;
 +(NSArray*)stringStatusesArray;
 
+
+-(void)addCoordinateInfo;
 @end
 
 

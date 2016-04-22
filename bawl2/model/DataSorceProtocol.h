@@ -32,6 +32,7 @@
                   andHandler:(void (^)(NSArray <NSDictionary <NSString*,id> *> *commentDics, NSError *error))handler;
 
 
+
 -(void)requestImageWithName:(NSString*)name andHandler:(void (^)(UIImage *image, NSError *error))viewControllerHandler;
 
 -(void)requestLogInWithUser:(NSString*)user
@@ -52,6 +53,9 @@
 -(void)requestSendImage:(UIImage*)image
                  ofType:(NSString*)type
              withHandler:(void(^)(NSString *fileName, NSError *error))handler;
+
+-(void)requestAddNewIssue:(Issue*)issue
+            withHandler:(void(^)(Issue *returnedIssue, NSError *error))handler;
 
 
 

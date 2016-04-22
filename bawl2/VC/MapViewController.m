@@ -50,11 +50,11 @@
     //    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor],
     //                                                                    NSFontAttributeName : newFont};
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    [super viewDidLoad];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
     [self updateBarButtons];
     [[NSNotificationCenter defaultCenter] addObserverForName:MyNotificationUserCheckedAndLogIned
                                                       object:nil
@@ -62,13 +62,13 @@
                                                   usingBlock:^(NSNotification * _Nonnull note) {
                                                       [self updateBarButtons];
                                                   }];
-    
+    [super viewDidAppear:animated];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [super viewWillDisappear:animated];
 }
 
 
@@ -155,7 +155,11 @@
 
 -(IBAction)doneForNewItem:(UIStoryboardSegue*)segue
 {
-    
+    if([segue.identifier isEqualToString:MySegueUnwindSegueFromNewItemToMap])
+    {
+        NewItemViewController *newItemContr = (NewItemViewController*)segue.sourceViewController;
+        [self.mapView addAnnotation:newItemContr.createdIssue];
+    }
 }
 
 #pragma mark - Map View Delegate

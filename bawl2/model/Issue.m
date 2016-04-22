@@ -9,6 +9,11 @@
 #import "Issue.h"
 #import "Constants.h"
 
+@interface Issue()
+@property (nonatomic) CLLocationCoordinate2D coordinate;
+
+@end
+
 @implementation Issue
 
 +(NSArray*)stringStatusesArray
@@ -28,10 +33,10 @@
         _issueDescription = issueDictionary[@"DESCRIPTION"];
         _mapPointer = issueDictionary[@"MAP_POINTER"];
         _status = issueDictionary[@"STATUS"];
-        _coordinate.latitude = [self.latitude doubleValue];
-        _coordinate.longitude = [self.longitude doubleValue];
+        [self addCoordinateInfo];
         NSArray <NSDictionary*> *historyDics = issueDictionary[@"HISTORY"];
         // if we have a dictionary, so we can just create an array of one
+        // our server returs different types, wich depends on count of history actions
         if ([historyDics isKindOfClass:[NSDictionary class]])
             historyDics = @[historyDics];
         if (historyDics != nil)
@@ -50,6 +55,17 @@
         }
     }
     return self;
+}
+
+-(void)addCoordinateInfo
+{
+    _coordinate.latitude = [self.latitude doubleValue];
+    _coordinate.longitude = [self.longitude doubleValue];
+}
+
+-(void)setCoordinate:(CLLocationCoordinate2D)coordinate
+{
+    _coordinate = coordinate;
 }
 
 -(NSNumber*)getNumberAsSubstringFromString:(NSString*)string BetweenString:(NSString*)str1 andString:(NSString*)str2

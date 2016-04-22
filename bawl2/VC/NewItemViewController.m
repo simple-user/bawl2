@@ -11,20 +11,22 @@
 #import "TakePhotoViewController.h"
 #import "NewItemViewControllerPhotoInfoDelegate.h"
 #import "MyAlert.h"
+#import "NetworkDataSorce.h"
 
 @interface NewItemViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
+//name section
+@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 //category section
 @property (weak, nonatomic) IBOutlet UIImageView *categoryImage;
 @property (weak, nonatomic) IBOutlet UILabel *categoryName;
 @property (weak, nonatomic) IBOutlet UIPickerView *categoryPicker;
 @property (nonatomic) BOOL isCategoryPickerCellEnable;
+@property (strong, nonatomic) IssueCategory *selectedCategory;
+//sdescription secrion
+@property (weak, nonatomic) IBOutlet UITextView *descriptionTextView;
 //photo section
 @property(strong, nonatomic) NewItemViewControllerPhotoInfoDelegate *photoDelegate;
 @property (weak, nonatomic) IBOutlet UIImageView *photoView;
-
-
-
-
 
 @end
 
@@ -101,7 +103,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    if(indexPath.section==1 && indexPath.row==0)
+    if(indexPath.section==1 && indexPath.row==0) // category
     {
         self.isCategoryPickerCellEnable = !self.isCategoryPickerCellEnable;
         // next two rows - are just some f*king miracle
@@ -112,6 +114,7 @@
             IssueCategory *cat = [[[IssueCategories standartCategories] categories] firstObject];
             if(cat!=nil)
             {
+                self.selectedCategory = cat;
                 self.categoryImage.image = cat.image;
                 self.categoryName.text = cat.name;
                 self.categoryImage.hidden = NO;
@@ -208,6 +211,28 @@
             [MyAlert alertWithTitle:@"Check" andMessage:@"Fill all fields :)"];
             return;
         }
+    
+    NetworkDataSorce *dataSorce = [[NetworkDataSorce alloc] init];
+    Issue *issueForSend = [[Issue alloc] init];
+    issueForSend.name = self.nameTextField.text;
+    issueForSend.issueDescription = self.descriptionTextView.text;
+    issueForSend.categoryId = [self.selectedCategory.categoryId stringValue];
+    issueForSend.attachments = self.photoDelegate.filenameOfLoadedToServerPhoto;
+    // LatLng(50.66181, 26.16304)
+    issueForSend.mapPointer = [NSString stringWithFormat:@"LatLng(%f, %f)", self.mapLoaction.latitude, self.mapLoaction.longitude];
+    
+    [dataSorce requestAddNewIssue:issueForSend withHandler:^(Issue *returnedIssue, NSError *error) {
+       // if it's OK unwind to map
+        if(returnedIssue!=nil)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.createdIssue = returnedIssue;
+                [self.createdIssue addCoordinateInfo];
+                [self performSegueWithIdentifier:MySegueUnwindSegueFromNewItemToMap sender:self];
+            });
+        }
+            
+    }];
 
     
 }

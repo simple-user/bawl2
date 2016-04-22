@@ -26,6 +26,7 @@
 @property(strong, nonatomic)NSString *defaultUserImage;
 @property(strong, nonatomic)NSString *comments;
 @property(strong, nonatomic)NSString *addIssueImage;
+@property(strong, nonatomic)NSString *addNewIssue;
 
 
 -(NSURLSessionDataTask*)postRequest:(NSData*) postData
@@ -67,6 +68,7 @@
         _defaultUserImage = @"no_avatar.png";
         _comments = @"issue/commentIDNumber/comments";
         _addIssueImage = @"image/add/issue";
+        _addNewIssue = @"issue";
         
     }
     return self;
@@ -116,6 +118,12 @@
 {
     NSString *strUrl = [[self.globalURL stringByAppendingString:self.comments] stringByReplacingOccurrencesOfString:@"commentIDNumber" withString:strID];
     [self postRequest:data toURL:strUrl andHandler:dataSorceHandler];
+}
+
+-(void)requestSendNewIssue:(NSData*)data
+               withHandler:(void(^)(NSData* data, NSError *error))handler
+{
+    [self postRequest:data toURL:[self.globalURL stringByAppendingString:self.addNewIssue] andHandler:handler];
 }
 
 

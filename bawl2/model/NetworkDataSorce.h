@@ -45,5 +45,8 @@
                  ofType:(NSString*)type
             withHandler:(void(^)(NSString *fileName, NSError *error))handler;
 
+-(void)requestAddNewIssue:(Issue*)issue
+              withHandler:(void(^)(Issue *returnedIssue, NSError *error))handler;
+
 
 @end
