@@ -163,19 +163,6 @@
 
 }
 
-// when avatar image is loaded, it sends notificstion to update all images with this string file name
--(void)updateAvatarImages:(NSNotification*)notification
-{
-    NSDictionary *userInfo = notification.userInfo;
-    for (CommentBox *box in self.commentBoxArr)
-    {
-        if ([box.avatarStringName isEqualToString:userInfo.allKeys.firstObject])
-        {
-            box.avatarImage = [userInfo objectForKey:box.avatarStringName];
-        }
-    }
-}
-
 -(void)viewWillDisappear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -198,6 +185,21 @@
     self.contentStaticHeight = self.viewBetweenCommentAndShare.frame.origin.y + self.viewBetweenCommentAndShare.frame.size.height;
 }
 
+// when avatar image is loaded, it sends notificstion to update all images with this string file name
+#pragma mark update Avatars with notification
+-(void)updateAvatarImages:(NSNotification*)notification
+{
+    NSDictionary *userInfo = notification.userInfo;
+    for (CommentBox *box in self.commentBoxArr)
+    {
+        if ([box.avatarStringName isEqualToString:userInfo.allKeys.firstObject])
+        {
+            box.avatarImage = [userInfo objectForKey:box.avatarStringName];
+        }
+    }
+}
+
+
 
 // test method
 -(void)drawTwoComments
@@ -207,7 +209,6 @@
     [cb fillWithName:@"first Name"
           andMessage:@"First smessage"
  andAvatarStringName:nil
-      andAvatarImage:[UIImage imageNamed:@"deletedUser"]
 andAvatarHeightWidth:self.avatarSize
   andButtonsDelegate:nil
             andIndex:1
@@ -224,7 +225,6 @@ andAvatarHeightWidth:self.avatarSize
     [cb fillWithName:@"second Name"
           andMessage:@"second smessage"
  andAvatarStringName:nil
-      andAvatarImage:[UIImage imageNamed:@"deletedUser"]
 andAvatarHeightWidth:self.avatarSize
   andButtonsDelegate:nil
             andIndex:2
@@ -413,22 +413,27 @@ andAvatarHeightWidth:self.avatarSize
     NSArray *nibContext = [[NSBundle mainBundle] loadNibNamed:@"commentView" owner:nil options:nil];
     CommentBox *cb = [nibContext firstObject];
     Comment *comment = [[Comment alloc] initWithCommentDictionary:commentDic andUser:user andUIImage:cb.avatarImage andImageDictionary:self.avatarNamesAndImagesDic];
-    [cb fillWithName:@"first Name"
-          andMessage:@"First smessage"
- andAvatarStringName:nil
-      andAvatarImage:[UIImage imageNamed:@"deletedUser"]
+    [cb fillWithName:comment.userName
+          andMessage:comment.userMessage
+ andAvatarStringName:user.avatar
 andAvatarHeightWidth:self.avatarSize
   andButtonsDelegate:nil
-            andIndex:1
-           andUserId:@1];
+            andIndex:index
+           andUserId:@(user.userId)];
     
+    cb.alpha=0.0;
     [self.contentView addSubview:cb];
     [cb.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor].active=YES;
     [cb.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor].active=YES;
-    [cb.topAnchor constraintEqualToAnchor:self.viewBetweenCommentAndShare.bottomAnchor].active=YES;
+    [cb.topAnchor constraintEqualToAnchor:self.viewToConnectDynamicItems.bottomAnchor].active=YES;
     self.viewToConnectDynamicItems = cb;
-
-    
+    [self.commentBoxArr addObject:cb];
+    self.contentDynamicHeight += cb.frame.size.height;
+    self.contentViewHeightConstraint.constant += cb.frame.size.height;
+    [self.view layoutIfNeeded];
+    [UIView animateWithDuration:0.3 animations:^{
+        cb.alpha = 1.0;
+    }];
 }
 
 -(void)commentAvatarTapped:(UIButton*)sender

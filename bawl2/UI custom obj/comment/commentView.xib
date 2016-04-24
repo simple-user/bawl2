@@ -11,13 +11,14 @@
             <rect key="frame" x="0.0" y="0.0" width="569" height="120"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sFG-PH-BHg" userLabel="Avatar">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YDs-Dc-m5W" userLabel="AvatarView" customClass="AvatarView">
                     <rect key="frame" x="4" y="4" width="112" height="112"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="112" id="pMG-9s-8Vc"/>
-                        <constraint firstAttribute="width" constant="112" id="qH4-LO-NE9"/>
+                        <constraint firstAttribute="width" constant="112" id="EwE-Q7-J4O"/>
+                        <constraint firstAttribute="height" constant="112" id="rAF-Ld-Utz"/>
                     </constraints>
-                </imageView>
+                </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nuN-7I-BTa" userLabel="Name">
                     <rect key="frame" x="124" y="4" width="441" height="30"/>
                     <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -25,6 +26,12 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PWr-ZF-fwL" userLabel="Name button">
+                    <rect key="frame" x="124" y="4" width="441" height="30"/>
+                    <connections>
+                        <action selector="snameButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="gTE-c7-27U"/>
+                    </connections>
+                </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nBU-18-GTe" userLabel="Message">
                     <rect key="frame" x="124" y="38" width="441" height="78"/>
                     <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -47,50 +54,42 @@
                         <action selector="avatarButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="D41-Vv-QnN"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PWr-ZF-fwL" userLabel="Name button">
-                    <rect key="frame" x="124" y="4" width="441" height="30"/>
-                    <connections>
-                        <action selector="snameButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="gTE-c7-27U"/>
-                    </connections>
-                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="Glc-uo-RsS" firstAttribute="trailing" secondItem="nBU-18-GTe" secondAttribute="trailing" id="1iY-KI-twG"/>
                 <constraint firstItem="nuN-7I-BTa" firstAttribute="leading" secondItem="PWr-ZF-fwL" secondAttribute="leading" id="1rk-ca-0Yy"/>
-                <constraint firstItem="nuN-7I-BTa" firstAttribute="leading" secondItem="sFG-PH-BHg" secondAttribute="trailing" constant="8" id="2LW-PB-bRO"/>
-                <constraint firstItem="nBU-18-GTe" firstAttribute="leading" secondItem="sFG-PH-BHg" secondAttribute="trailing" constant="8" id="3Mn-fF-Rod"/>
-                <constraint firstItem="sFG-PH-BHg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="4" id="58a-rT-3Bx"/>
                 <constraint firstItem="Glc-uo-RsS" firstAttribute="top" secondItem="nBU-18-GTe" secondAttribute="top" id="5HE-GQ-LBf"/>
+                <constraint firstItem="Y7K-4q-41n" firstAttribute="top" secondItem="YDs-Dc-m5W" secondAttribute="top" id="ACr-Vm-ggc"/>
+                <constraint firstItem="Y7K-4q-41n" firstAttribute="bottom" secondItem="YDs-Dc-m5W" secondAttribute="bottom" id="GAo-FR-VTB"/>
                 <constraint firstItem="Glc-uo-RsS" firstAttribute="leading" secondItem="nBU-18-GTe" secondAttribute="leading" id="GNT-lY-d1Q"/>
-                <constraint firstAttribute="bottom" secondItem="sFG-PH-BHg" secondAttribute="bottom" constant="4" id="PQ4-qJ-n53"/>
+                <constraint firstItem="nBU-18-GTe" firstAttribute="leading" secondItem="nuN-7I-BTa" secondAttribute="leading" id="Gad-BZ-GDx"/>
+                <constraint firstItem="YDs-Dc-m5W" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="4" id="O5P-pv-LHN"/>
+                <constraint firstItem="nuN-7I-BTa" firstAttribute="leading" secondItem="YDs-Dc-m5W" secondAttribute="trailing" constant="8" id="QBY-xX-BDg"/>
                 <constraint firstAttribute="trailing" secondItem="nuN-7I-BTa" secondAttribute="trailing" constant="4" id="VcS-ni-y1H"/>
-                <constraint firstItem="Y7K-4q-41n" firstAttribute="bottom" secondItem="sFG-PH-BHg" secondAttribute="bottom" id="cZd-BD-25I"/>
-                <constraint firstItem="Y7K-4q-41n" firstAttribute="top" secondItem="sFG-PH-BHg" secondAttribute="top" id="cqJ-he-JFJ"/>
-                <constraint firstItem="Y7K-4q-41n" firstAttribute="leading" secondItem="sFG-PH-BHg" secondAttribute="leading" id="hLe-EA-wkw"/>
+                <constraint firstItem="Y7K-4q-41n" firstAttribute="trailing" secondItem="YDs-Dc-m5W" secondAttribute="trailing" id="XvR-0O-WrD"/>
+                <constraint firstItem="Y7K-4q-41n" firstAttribute="leading" secondItem="YDs-Dc-m5W" secondAttribute="leading" id="YUf-vy-wta"/>
                 <constraint firstItem="PWr-ZF-fwL" firstAttribute="bottom" secondItem="nuN-7I-BTa" secondAttribute="bottom" id="lKu-12-6rL"/>
                 <constraint firstItem="nuN-7I-BTa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="4" id="lmE-Ne-5jf"/>
                 <constraint firstItem="nuN-7I-BTa" firstAttribute="trailing" secondItem="PWr-ZF-fwL" secondAttribute="trailing" id="lxR-Xd-Rej"/>
                 <constraint firstAttribute="bottom" secondItem="nBU-18-GTe" secondAttribute="bottom" constant="4" id="oGb-Gd-6Nl"/>
                 <constraint firstAttribute="trailing" secondItem="nBU-18-GTe" secondAttribute="trailing" constant="4" id="oYj-6I-WjF"/>
                 <constraint firstItem="nBU-18-GTe" firstAttribute="top" secondItem="nuN-7I-BTa" secondAttribute="bottom" constant="4" id="q4D-qB-5gg"/>
-                <constraint firstItem="sFG-PH-BHg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="4" id="r7y-KH-9aF"/>
-                <constraint firstItem="sFG-PH-BHg" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="ts4-R8-eYz"/>
+                <constraint firstItem="Glc-uo-RsS" firstAttribute="leading" secondItem="YDs-Dc-m5W" secondAttribute="trailing" constant="8" id="rFW-WT-eoe"/>
                 <constraint firstItem="PWr-ZF-fwL" firstAttribute="top" secondItem="nuN-7I-BTa" secondAttribute="top" id="ugQ-90-uHu"/>
-                <constraint firstItem="Y7K-4q-41n" firstAttribute="trailing" secondItem="sFG-PH-BHg" secondAttribute="trailing" id="v3W-l6-G0P"/>
                 <constraint firstItem="Glc-uo-RsS" firstAttribute="bottom" secondItem="nBU-18-GTe" secondAttribute="bottom" id="vVy-Sb-ZE6"/>
+                <constraint firstItem="YDs-Dc-m5W" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="4" id="yeR-yr-W6Y"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
                 <mask key="constraints">
-                    <exclude reference="58a-rT-3Bx"/>
-                    <exclude reference="PQ4-qJ-n53"/>
+                    <exclude reference="rFW-WT-eoe"/>
                 </mask>
             </variation>
             <connections>
                 <outlet property="avatarButton" destination="Y7K-4q-41n" id="zhN-qk-9o9"/>
-                <outlet property="avatarHeightConstraint" destination="pMG-9s-8Vc" id="Trg-et-HvV"/>
-                <outlet property="avatarView" destination="sFG-PH-BHg" id="PMT-Uf-w0x"/>
-                <outlet property="avatarWidthConstraint" destination="qH4-LO-NE9" id="tX6-vU-NDl"/>
+                <outlet property="avatarHeightConstraint" destination="rAF-Ld-Utz" id="3ig-b1-H0q"/>
+                <outlet property="avatarView" destination="YDs-Dc-m5W" id="UH3-2L-VOX"/>
+                <outlet property="avatarWidthConstraint" destination="EwE-Q7-J4O" id="AHQ-VB-gUD"/>
                 <outlet property="messageButton" destination="Glc-uo-RsS" id="tSJ-7q-thA"/>
                 <outlet property="messageHeightConstraint" destination="h48-Sn-oku" id="1kq-2j-irJ"/>
                 <outlet property="messageLabel" destination="nBU-18-GTe" id="I8q-ld-yQJ"/>

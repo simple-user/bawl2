@@ -7,9 +7,10 @@
 //
 
 #import "CommentBox.h"
+#import "AvatarView.h"
 
 @interface CommentBox()
-@property (weak, nonatomic) IBOutlet UIImageView *avatarView;
+@property (weak, nonatomic) IBOutlet AvatarView *avatarView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *messageLabel;
 
@@ -64,7 +65,6 @@
 -(void)fillWithName:(NSString*)name
          andMessage:(NSString*)message
 andAvatarStringName:(NSString*)avatarStringName
-     andAvatarImage:(UIImage*)avatarImage
 andAvatarHeightWidth:(CGFloat)avatarHeightWidth
  andButtonsDelegate:(id)delegate
            andIndex:(NSUInteger)index
@@ -72,9 +72,12 @@ andAvatarHeightWidth:(CGFloat)avatarHeightWidth
 {
     self.nameLabel.text = name;
     [self justifyMessage:message]; //self.messageLabel.text = message; --> setting with attributed string + sizetofit + numberLines
-    self.avatarView.image = avatarImage;
     self.avatarHeightConstraint.constant = avatarHeightWidth;
     self.avatarWidthConstraint.constant = avatarHeightWidth;
+    self.avatarStringName = avatarStringName;
+    self.buttonsDelegate = delegate;
+    self.index = index;
+    self.userID  =userID;
     
     // temp init
     self.messageSmallHeight = self.messageHeightConstraint.constant;
@@ -156,6 +159,7 @@ andAvatarHeightWidth:(CGFloat)avatarHeightWidth
 {
     return self.avatarHeightConstraint.constant;
 }
+
 
 #pragma mark - Actions
 

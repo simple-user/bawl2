@@ -60,12 +60,12 @@
                     });
                 }];
             }
-//            // if we have image already downloaded. (not nil and not [NSNull null])
-//            // so just set it to image
-//            else if (![avatarImageFromDic isKindOfClass:[NSNull class]])
-//            {
-//                image =avatarImageFromDic;
-//            }
+            // if we have image already downloaded. (not nil and not [NSNull null])
+            // so just set it to image
+            else if (![avatarImageFromDic isKindOfClass:[NSNull class]])
+            {
+                image = avatarImageFromDic;
+            }
         }
         
     }

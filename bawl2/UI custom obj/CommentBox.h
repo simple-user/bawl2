@@ -42,16 +42,19 @@
 @property(nonatomic)CGFloat messageSmallHeight;
 
 
+
+
 -(instancetype)init;
 
 -(void)fillWithName:(NSString*)name
          andMessage:(NSString*)message
 andAvatarStringName:(NSString*)avatarStringName
-     andAvatarImage:(UIImage*)avatarImage
       andAvatarHeightWidth:(CGFloat)avatarHeightWidth
  andButtonsDelegate:(id)delegate
            andIndex:(NSUInteger)index
           andUserId:(NSNumber*)userID;
+
+
 
 
 
