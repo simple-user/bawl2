@@ -14,8 +14,8 @@
 @interface DescriptionViewController : UIViewController
 
 
--(void)setDataToView;
--(void)prepareUIChangeStatusElements;
--(void)clearOldDynamicElements;
+//-(void)setDataToView;
+//-(void)prepareUIChangeStatusElements;
+//-(void)clearOldDynamicElements;
 
 @end

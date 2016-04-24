@@ -1099,13 +1099,6 @@
                         <outlet property="scrollView" destination="X7Q-cd-rrd" id="JfC-Qh-cUz"/>
                         <outlet property="titleLabel" destination="a9A-rp-NSL" id="o5O-0J-3pE"/>
                         <outlet property="viewBetweenCommentAndShare" destination="g4Y-6D-zT0" id="ZKA-K5-ATI"/>
-                        <outletCollection property="viewsVertical" destination="1MG-mw-vKe" id="0Hq-QM-aam"/>
-                        <outletCollection property="viewsVertical" destination="mC8-Hz-Dl9" id="qQL-r8-4d5"/>
-                        <outletCollection property="viewsVertical" destination="ds8-KB-sHS" id="TDq-uN-apO"/>
-                        <outletCollection property="constraintsVertical" destination="H9c-te-uxa" id="gWg-Wu-3Sx"/>
-                        <outletCollection property="constraintsVertical" destination="shY-od-hGh" id="EwI-3E-kNF"/>
-                        <outletCollection property="constraintsVertical" destination="3X9-ht-rLP" id="9TC-or-zQo"/>
-                        <outletCollection property="constraintsVertical" destination="rTS-M8-xhL" id="jMK-Sz-5mW"/>
                         <segue destination="DvL-gc-8V2" kind="show" identifier="FromDescriptionToHistory" id="VUf-6T-5qU"/>
                         <segue destination="JVX-rd-mug" kind="show" identifier="FromDescriptionToProfile" id="42Y-j6-ZxE"/>
                     </connections>

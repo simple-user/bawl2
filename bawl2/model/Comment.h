@@ -20,7 +20,7 @@
 
 -(instancetype)initWithCommentDictionary:(NSDictionary <NSString*,id> *)commentDictionary
                                  andUser:(User *)user
-                          andUIImageView:(UIImageView*)imageView
+                          andUIImage:(UIImage*)image
                       andImageDictionary:(NSMutableDictionary <NSString*, UIImage*> *) dictionary;
 
 
