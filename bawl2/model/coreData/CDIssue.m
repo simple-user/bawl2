@@ -70,32 +70,32 @@
 
 +(void)updateImageforCDIssue:(CDIssue*)cdIssue
 {
-    [[CDIssue networkDataSorce] requestImageWithName:cdIssue.imageString
+    [[CDIssue networkDataSorce] requestImageWithName:cdIssue.imageString andImageType:ImageNameSimpleIssueImage
                                          andHandler:^(UIImage *image, NSError *error) {
-                                             if (image!=nil)
-                                             {
-                                                 NSUInteger pos = cdIssue.imageString.length-3;
-                                                 NSRange range = NSMakeRange(pos, 3);
-                                                 NSString *fileExtension = [cdIssue.imageString substringWithRange:range];
-                                                 if ([fileExtension isEqualToString:@"png"] || [cdIssue.imageString isEqualToString:ImageNameForBLankUser])
-                                                 {
-                                                     cdIssue.imageData = UIImagePNGRepresentation(image);
-                                                     NSLog(@"Update issue image in CD (png) for avatar: %@", cdIssue.imageString);
-                                                 }
-                                                 else if ([fileExtension isEqualToString:@"jpg"])
-                                                 {
-                                                     cdIssue.imageData = UIImageJPEGRepresentation(image, 1.0);
-                                                     NSLog(@"Update issue image in CD (jpg) for avatar: %@", cdIssue.imageString);
-                                                     
-                                                 }
-                                                 else
-                                                 {
-                                                     dispatch_async(dispatch_get_main_queue(), ^{
-                                                         [MyAlert alertWithTitle:@"Error in updateAvatarforCDUser" andMessage:[NSString stringWithFormat:@"file name is - %@", cdIssue.imageString]];
-                                                     });
-                                                 }
-                                                 
-                                             }
+         if (image!=nil)
+         {
+             NSUInteger pos = cdIssue.imageString.length-3;
+             NSRange range = NSMakeRange(pos, 3);
+             NSString *fileExtension = [cdIssue.imageString substringWithRange:range];
+             if ([fileExtension isEqualToString:@"png"] || [cdIssue.imageString isEqualToString:ImageNameForBLankUser])
+             {
+                 cdIssue.imageData = UIImagePNGRepresentation(image);
+                 NSLog(@"Update issue image in CD (png) for avatar: %@", cdIssue.imageString);
+             }
+             else if ([fileExtension isEqualToString:@"jpg"])
+             {
+                 cdIssue.imageData = UIImageJPEGRepresentation(image, 1.0);
+                 NSLog(@"Update issue image in CD (jpg) for avatar: %@", cdIssue.imageString);
+                 
+             }
+             else
+             {
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                     [MyAlert alertWithTitle:@"Error in updateAvatarforCDUser" andMessage:[NSString stringWithFormat:@"file name is - %@", cdIssue.imageString]];
+                 });
+             }
+             
+         }
                                          }];
 }
 

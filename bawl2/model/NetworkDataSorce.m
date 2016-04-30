@@ -177,19 +177,116 @@
 }
 
 
--(void)requestImageWithName:(NSString*)name andHandler:(void (^)(UIImage *image, NSError *error))viewControllerHandler
+-(void)requestImageWithName:(NSString*)name andImageType:(NSString*)imageType andHandler:(void (^)(UIImage *image, NSError *error))viewControllerHandler
 {
-    HTTPConnector *connector = [[HTTPConnector alloc] init];
-    [connector requestImageWithName:name andDataSorceHandler:^(NSData *data, NSError *error) {
-        UIImage *image = nil;
-        if (data.length > 0 && error==nil)
+    
+    CurrentItems *ci = [CurrentItems sharedItems];
+    ActiveRequest *activeRequest = nil;
+    //stop previous if it exists
+    if([imageType isEqualToString:ImageNameCurrentUserImage])
+    {
+        activeRequest = [ci.activeRequests objectForKey:ActiveRequestGetCurrentUserImage];
+        if(activeRequest!=nil) // if exists -> stop
         {
-            image = [[UIImage alloc] initWithData:data];
-            
+            [activeRequest.dataTask cancel];
+            NSLog(@"_requestImageWithName_: Download user image canceled! (filename:%@)", activeRequest.name);
         }
-        viewControllerHandler(image, error);
-    }];
+    }
+    else if([imageType isEqualToString:ImageNameCurrentIssueImage])
+    {
+        activeRequest = [ci.activeRequests objectForKey:ActiveRequestGetCurrentIssueImage];
+        if(activeRequest!=nil)
+        {
+            [activeRequest.dataTask cancel];
+            NSLog(@"_requestImageWithName_: Download issue image canceled! (filename:%@)",  activeRequest.name);
+        }
+    }
 
+    //download new image (or get local)
+    NSURLSessionDataTask *dataTask = nil;
+    if([name isEqualToString:ImageNameForBLankUser])
+    {
+        NSLog(@"_requestImageWithName_: local file for blank user (filename:%@)", name);
+        viewControllerHandler([UIImage imageNamed:ImageNameNoUser], nil);
+    }
+    else if ([name isEqualToString:ImageNameForBLankIssue])
+    {
+        NSLog(@"_requestImageWithName_: local file for blank issue (filename:%@)", name);
+        viewControllerHandler([UIImage imageNamed:ImageNameNoUser], nil);
+    }
+    else if([name isEqual:[NSNull null]])
+    {
+        // it can't get here, because [NSNull null] is replaced in init methods
+        // but for safety...
+        // it can be either blank user and blank issue
+        // so we need to check type
+        NSLog(@"_requestImageWithName_: local file for [NSNull null]");
+        if([imageType isEqualToString:ImageNameCurrentUserImage] || [imageType isEqualToString:ImageNameSimpleUserImage])
+            viewControllerHandler([UIImage imageNamed:ImageNameNoUser], nil);
+        else if ([imageType isEqualToString:ImageNameCurrentIssueImage] || [imageType isEqualToString:ImageNameSimpleIssueImage])
+            viewControllerHandler([UIImage imageNamed:ImageNameNoUser], nil);
+    }
+    else
+    {
+        HTTPConnector *connector = [[HTTPConnector alloc] init];
+        
+        dataTask = [connector requestImageWithName:name andDataSorceHandler:^(NSData *data, NSError *error) {
+            UIImage *image = nil;
+            if (data.length > 0 && error==nil)
+            {
+                image = [[UIImage alloc] initWithData:data];
+                
+            }
+            // here dowloadin is complited, so we can del dataTask
+            if([imageType isEqualToString:ImageNameCurrentUserImage])
+            {
+                ActiveRequest *ar = [ci.activeRequests objectForKey:ActiveRequestGetCurrentUserImage];
+                if (ar != nil)
+                {
+                    [ci.activeRequests removeObjectForKey:ActiveRequestGetCurrentUserImage];
+                    NSLog(@"_requestImageWithName_: Download user image done! (filename:%@)", ar.name);
+                }
+                else
+                {
+                    NSLog(@"_requestImageWithName_: Download user image done! BUT WE DIDN'T FIND ACTIVE REQUEST");
+                }
+            }
+            else if([imageType isEqualToString:ImageNameCurrentIssueImage])
+            {
+                ActiveRequest *ar = [ci.activeRequests objectForKey:ActiveRequestGetCurrentIssueImage];
+                if (ar != nil)
+                {
+                    [ci.activeRequests removeObjectForKey:ActiveRequestGetCurrentIssueImage];
+                    NSLog(@"_requestImageWithName_: Download issue image done! (filename:%@)", ar.name);
+                }
+                else
+                {
+                    NSLog(@"_requestImageWithName_: Download issue image done! BUT WE DIDN'T FIND ACTIVE REQUEST");
+                }
+            }
+            viewControllerHandler(image, error);
+        }];
+    }
+    
+    // hook info if it's currrent user image or current issue image
+    // but we are doing it only if data task is not nil!
+    // otherwise is seems we'he took local file
+    if(dataTask != nil)
+    {
+        if([imageType isEqualToString:ImageNameCurrentUserImage])
+        {
+            activeRequest = [[ActiveRequest alloc] initWithName:name andDataTask:dataTask];
+            [ci.activeRequests setObject:activeRequest forKey:ActiveRequestGetCurrentUserImage];
+            NSLog(@"_requestImageWithName_: New download user image data task added! (filename:%@)", name);
+        }
+        else if([imageType isEqualToString:ImageNameCurrentIssueImage])
+        {
+            activeRequest = [[ActiveRequest alloc] initWithName:name andDataTask:dataTask];
+            [ci.activeRequests setObject:activeRequest forKey:ActiveRequestGetCurrentIssueImage];
+            NSLog(@"_requestImageWithName_: New download issue image data task added! (filename:%@)", name);
+        }
+    }
+    
 }
 
 
@@ -209,7 +306,7 @@
 }
 
 
--(NSURLSessionDataTask*)requestLogInWithUser:(NSString*)login
+-(void)requestLogInWithUser:(NSString*)login
                                      andPass:(NSString*)password
    andViewControllerHandler:(void (^)(User *resPerson, NSError *error))viewControllerHandler{
     
@@ -222,7 +319,9 @@
                                                          error:&err];
     
     HTTPConnector *connector = [[HTTPConnector alloc] init];
-    NSURLSessionDataTask* requestDataTask = [connector requestLogInWithData:postData
+    CurrentItems *ci = [CurrentItems sharedItems];
+    ActiveRequest *activeRequest = nil;
+    NSURLSessionDataTask* dataTask = [connector requestLogInWithData:postData
              andDataSorceHandler:^(NSData *data, NSError *error) {
                  User *tempUser = nil;
         if(data.length >0 && error == nil)
@@ -239,11 +338,30 @@
                 tempUser = [[User alloc] initWitDictionary:userDic];
             }
         }
-             
+        // here reques is done, so we can remove info from singleton active requests
+        ActiveRequest *ar = [ci.activeRequests objectForKey:ActiveRequestLogInUser];
+        if (ar != nil)
+        {
+         [ci.activeRequests removeObjectForKey:ActiveRequestLogInUser];
+         NSLog(@"_requestLogInWithUser_: Logging done! (user name:%@)", ar.name);
+        }
+        else
+        {
+         NSLog(@"_requestLogInWithUser_: Logging done! BUT WE DIDN'T FIND ACTIVE REQUEST");
+        }
         viewControllerHandler(tempUser, error);
-
         }];
-    return requestDataTask;
+    // hook previous data task, and stop it if it exists
+    activeRequest = [ci.activeRequests objectForKey:ActiveRequestLogInUser];
+    if(activeRequest!=nil) // if exists -> stop
+    {
+        [activeRequest.dataTask cancel];
+        NSLog(@"_requestLogInWithUser_: Logging canceled! (user name:%@)",  activeRequest.name);
+    }
+    // then set new object for this value
+    activeRequest = [[ActiveRequest alloc] initWithName:login andDataTask:dataTask];
+    [ci.activeRequests setObject:activeRequest forKey:ActiveRequestLogInUser];
+    NSLog(@"_requestLogInWithUser_: New logging user data task added! (user name:%@)", login);
 }
 
 

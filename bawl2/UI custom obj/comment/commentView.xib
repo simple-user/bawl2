@@ -19,6 +19,9 @@
                         <constraint firstAttribute="height" constant="112" id="rAF-Ld-Utz"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y7K-4q-41n" userLabel="Avatar Button">
+                    <rect key="frame" x="4" y="4" width="112" height="112"/>
+                </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nuN-7I-BTa" userLabel="Name">
                     <rect key="frame" x="124" y="4" width="441" height="30"/>
                     <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -28,9 +31,6 @@
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PWr-ZF-fwL" userLabel="Name button">
                     <rect key="frame" x="124" y="4" width="441" height="30"/>
-                    <connections>
-                        <action selector="snameButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="gTE-c7-27U"/>
-                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nBU-18-GTe" userLabel="Message">
                     <rect key="frame" x="124" y="38" width="441" height="78"/>
@@ -46,12 +46,6 @@
                     <rect key="frame" x="124" y="38" width="441" height="78"/>
                     <connections>
                         <action selector="messageTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="H6n-li-AqB"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y7K-4q-41n" userLabel="Avatar Button">
-                    <rect key="frame" x="4" y="4" width="112" height="112"/>
-                    <connections>
-                        <action selector="avatarButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="D41-Vv-QnN"/>
                     </connections>
                 </button>
             </subviews>
@@ -90,7 +84,6 @@
                 <outlet property="avatarHeightConstraint" destination="rAF-Ld-Utz" id="3ig-b1-H0q"/>
                 <outlet property="avatarView" destination="YDs-Dc-m5W" id="UH3-2L-VOX"/>
                 <outlet property="avatarWidthConstraint" destination="EwE-Q7-J4O" id="AHQ-VB-gUD"/>
-                <outlet property="messageButton" destination="Glc-uo-RsS" id="tSJ-7q-thA"/>
                 <outlet property="messageHeightConstraint" destination="h48-Sn-oku" id="1kq-2j-irJ"/>
                 <outlet property="messageLabel" destination="nBU-18-GTe" id="I8q-ld-yQJ"/>
                 <outlet property="nameButton" destination="PWr-ZF-fwL" id="W74-cv-S2V"/>

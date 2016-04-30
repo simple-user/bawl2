@@ -15,7 +15,7 @@
 -(void)requestUsers:(void(^)(NSData *data, NSError *error))dataSorceHandler;
 -(void)requestIssues:(void(^)(NSData *data, NSError *error))dataSorceHandler;
 -(void)requestCategories:(void(^)(NSData *data, NSError *error))dataSorceHandler;
--(void)requestImageWithName:(NSString*)name andDataSorceHandler:(void(^)(NSData *data, NSError *error))dataSorceHandler;
+-(NSURLSessionDataTask*)requestImageWithName:(NSString*)name andDataSorceHandler:(void(^)(NSData *data, NSError *error))dataSorceHandler;
 
 -(void)requestCommentWithID:(NSString*)strID andDataSorceHandler:(void(^)(NSData *data, NSError *error))dataSorceHandler;
 -(void)requestSendNewCommentWithIssueID:(NSString*)strID

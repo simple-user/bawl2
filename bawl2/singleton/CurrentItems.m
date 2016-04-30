@@ -119,7 +119,7 @@
     }
 }
 
--(NSMutableDictionary <NSString*, id> *)activeRequests
+-(NSMutableDictionary <NSString*, ActiveRequest*> *)activeRequests
 {
     if(_activeRequests==nil)
     {
@@ -162,61 +162,94 @@
 -(void)setUser:(User *)user
 {
     _user = user;
-    NSString *unchangedName = self.user.avatar;
-    [self.dataSorce requestImageWithName:self.user.avatar andHandler:^(UIImage *image, NSError *error) {
-        if ([unchangedName isEqualToString:self.user.avatar])
+    // NSString *unchangedName = _user.avatar;
+    // we don't even need to check name after download image, because when we start
+    // download new one - prewious will be canceled
+    [self.dataSorce requestImageWithName:_user.avatar andImageType:ImageNameCurrentUserImage
+    andHandler:^(UIImage *image, NSError *error) {
+        NSLog(@"We've got response from server about current user avatar.");
+        if(image!=nil)
         {
             self.userImage = image;
             [self.userImageDelegates makeObjectsPerformSelector:@selector(userImageDidLoad)];
         }
-    }];
-
-    
-}
-
--(void)setUser:(User *)user withChangingImageViewBloc:(void(^)()) changinImageView
-{
-    self.user = user;
-    
-    NSString *unchangedName = self.user.avatar;
-    [self.dataSorce requestImageWithName:self.user.avatar andHandler:^(UIImage *image, NSError *error) {
-        if ([unchangedName isEqualToString:self.user.avatar])
+        else
         {
-            self.userImage = image;
-            changinImageView();
+            //fail load user avatar
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MyAlert alertWithTitle:@"We have a problem cap!" andMessage:[NSString stringWithFormat:@"Avatar download for user %@ failed.", self.user.name]];
+                self.userImage = [UIImage imageNamed:ImageNameNoUser];
+                [self.userImageDelegates makeObjectsPerformSelector:@selector(userImageDidFailedLoad)];
+            });
         }
     }];
-    
 }
+//
+//-(void)setUser:(User *)user withChangingImageViewBloc:(void(^)()) changinImageView
+//{
+//    self.user = user;
+//    
+//    NSString *unchangedName = self.user.avatar;
+//    [self.dataSorce requestImageWithName:self.user.avatar andHandler:^(UIImage *image, NSError *error) {
+//        if ([unchangedName isEqualToString:self.user.avatar])
+//        {
+//            self.userImage = image;
+//            changinImageView();
+//        }
+//    }];
+//    
+//}
 
 -(void)setIssue:(Issue *)issue
 {
     _issue = issue;
-    NSString *unchangedName = self.issue.attachments;
-    [self.dataSorce requestImageWithName:self.issue.attachments andHandler:^(UIImage *image, NSError *error) {
-        if ([unchangedName isEqualToString:self.issue.attachments])
+    self.issueImage = nil;
+    // NSString *unchangedName = self.issue.attachments;
+    //temp
+    NSString *tempAttach = _issue.attachments;
+    [self.dataSorce requestImageWithName:_issue.attachments andImageType:ImageNameCurrentIssueImage
+    andHandler:^(UIImage *image, NSError *error) {
+        if(image != nil)
         {
+            NSLog(@"_setIssue_: current issue image is DOWNLOADED. (filename:%@)", tempAttach);
             self.issueImage = image;
             [self.issueImageDelegates makeObjectsPerformSelector:@selector(issueImageDidLoad)];
         }
-    }];
-}
-
--(void)setIssue:(Issue *)issue withChangingImageViewBloc:(void(^)()) changinImageView
-{
-    self.issue = issue;
-    
-    NSString *unchangedName = self.issue.attachments;
-    [self.dataSorce requestImageWithName:self.issue.attachments andHandler:^(UIImage *image, NSError *error) {
-        if ([unchangedName isEqualToString:self.issue.attachments])
+        else
         {
-            self.issueImage = image;
-            changinImageView();
-            
+            NSLog(@"_setIssue_: current issue image download is FAILED . (filename:%@)", tempAttach);
+            self.issueImage = [UIImage imageNamed:ImageNameNoIssue];
+            [self.issueImageDelegates makeObjectsPerformSelector:@selector(issueImageDidFailedLoad)];
         }
+        
+        
     }];
     
+    
+//    [self.dataSorce requestImageWithName:self.issue.attachments andHandler:^(UIImage *image, NSError *error) {
+//        if ([unchangedName isEqualToString:self.issue.attachments])
+//        {
+//            self.issueImage = image;
+//            [self.issueImageDelegates makeObjectsPerformSelector:@selector(issueImageDidLoad)];
+//        }
+//    }];
 }
+//
+//-(void)setIssue:(Issue *)issue withChangingImageViewBloc:(void(^)()) changinImageView
+//{
+//    self.issue = issue;
+//    
+//    NSString *unchangedName = self.issue.attachments;
+//    [self.dataSorce requestImageWithName:self.issue.attachments andHandler:^(UIImage *image, NSError *error) {
+//        if ([unchangedName isEqualToString:self.issue.attachments])
+//        {
+//            self.issueImage = image;
+//            changinImageView();
+//            
+//        }
+//    }];
+//    
+//}
 
 
 

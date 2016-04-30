@@ -10,6 +10,7 @@
 #import "NetworkDataSorce.h"
 #import "CDUser.h"
 #import "CurrentItems.h"
+#import "Constants.h"
 
 @implementation Comment
 
@@ -47,7 +48,7 @@
             if (avatarImageFromDic==nil)
             {
                 [dictionary setObject:(UIImage*)[NSNull null] forKey:avatarStringName];
-                [datasorce requestImageWithName:avatarStringName andHandler:^(UIImage *downloadedImage, NSError *error) {
+                [datasorce requestImageWithName:avatarStringName  andImageType:ImageNameSimpleUserImage andHandler:^(UIImage *downloadedImage, NSError *error) {
                     _userImage = downloadedImage;
                     CurrentItems *ci = [CurrentItems sharedItems];
                     [ci.managedObjectContext performBlock:^{

@@ -94,7 +94,7 @@
 {
     [self getRequestBlankToUrl:[self.globalURL stringByAppendingString:self.allCategories] andHandler:dataSorceHandler];
 }
--(void)requestImageWithName:(NSString*)name andDataSorceHandler:(void(^)(NSData *data, NSError *error))dataSorceHandler
+-(NSURLSessionDataTask*)requestImageWithName:(NSString*)name andDataSorceHandler:(void(^)(NSData *data, NSError *error))dataSorceHandler
 {
     if ([name isEqual:[NSNull null]])
         name = self.defaultIssueImage;
@@ -103,7 +103,7 @@
     else if ([name isEqualToString:ImageNameForBLankIssue])
         name = self.defaultIssueImage;
         
-    [self getRequestBlankToUrl:[NSString stringWithFormat:@"%@%@%@", self.globalURL, self.issueImage, name] andHandler:dataSorceHandler];
+    return [self getRequestBlankToUrl:[NSString stringWithFormat:@"%@%@%@", self.globalURL, self.issueImage, name] andHandler:dataSorceHandler];
 }
 
 -(void)requestCommentWithID:(NSString*)strID andDataSorceHandler:(void(^)(NSData *data, NSError *error))dataSorceHandler

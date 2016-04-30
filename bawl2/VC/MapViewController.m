@@ -44,17 +44,18 @@
 
 -(void)viewDidLoad
 {
+    [super viewDidLoad];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = [UIColor bawlRedColor];
     //    UIFont *newFont = [UIFont fontWithName:@"ComicSansMS-Italic" size:25];
     //    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor],
     //                                                                    NSFontAttributeName : newFont};
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
-    [super viewDidLoad];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [self updateBarButtons];
     [[NSNotificationCenter defaultCenter] addObserverForName:MyNotificationUserCheckedAndLogIned
                                                       object:nil
@@ -62,17 +63,21 @@
                                                   usingBlock:^(NSNotification * _Nonnull note) {
                                                       [self updateBarButtons];
                                                   }];
-    [super viewDidAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserverForName:MyNotificationUserCheckAndLogInFaild
+                                                      object:nil queue:[NSOperationQueue mainQueue]
+                                                  usingBlock:^(NSNotification * _Nonnull note) {
+                                                      [self updateBarButtons];
+                                                  }];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
-#pragma mark - Loadin information about current user
+#pragma mark - Loading information about current user
 
 -(void)updateBarButtons
 {
@@ -90,7 +95,7 @@
         self.leftBarButton.enabled = NO;
         
         // at first check info about request user
-        if ([ci.activeRequests objectForKey:ActiveRequestCheckCurrentUser]!=nil)
+        if ([ci.activeRequests objectForKey:ActiveRequestLogInUser]!=nil)
         {
             // so we are logining user. wait for notification
             self.rightBarButton.title = @"wait...";
@@ -136,6 +141,19 @@
 
 -(void)segueToNewIssue:(UILongPressGestureRecognizer*)longTap
 {
+    static BOOL isShowedMessage = NO;
+    if([CurrentItems sharedItems].user == nil)
+    {
+        if(isShowedMessage == NO)
+        {
+            isShowedMessage = YES;
+            [MyAlert alertWithTitle:@"Adding new issue" andMessage:@"By making long tap you can add new issue. Log in first to get access."];
+        }
+        return;
+    }
+    // if user is not logined - then show message once
+    // after user log in - log out - then show message egain (once)
+    isShowedMessage = NO;
     CGPoint originPoint = [longTap locationInView:self.mapView];
     self.newItemCoordinate = [self.mapView convertPoint:originPoint toCoordinateFromView:self.mapView];
     [self performSegueWithIdentifier:MySegueFromMapToNewItemModal sender:self];
@@ -231,6 +249,7 @@
         }];
     }
 }
+
 
 
 

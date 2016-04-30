@@ -18,10 +18,11 @@
 #import "CommentBox.h"
 #import "ProfileViewController.h"
 #import "MyAlert.h"
+#import "Constants.h"
 
 
 
-@interface DescriptionViewController () <IssueImageDelegate>
+@interface DescriptionViewController () <IssueImageDelegate, CommentBoxButtonsDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *categoryImageView;
 
 @property (weak, nonatomic) IBOutlet UILabel *currentStatusLabel;
@@ -55,7 +56,7 @@
 @property(nonatomic) CGFloat contentStaticHeight;
 @property(nonatomic) CGFloat contentDynamicHeight;
 
-@property(strong, nonatomic)NSNumber *callingSegueToProfileUserId;
+// @property(strong, nonatomic)NSNumber *callingSegueToProfileUserId;
 
 @end
 
@@ -135,6 +136,7 @@
     
     if(ci.issueImage==nil)
     {
+        // so image is still downloading
         self.issueImageView.image = nil;
     }
     else if( ![self.issueImageView.image isEqual:ci.issueImage])
@@ -212,7 +214,7 @@
 andAvatarHeightWidth:self.avatarSize
   andButtonsDelegate:nil
             andIndex:1
-           andUserId:@1];
+             andUser:nil];
     
     [self.contentView addSubview:cb];
     [cb.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor].active=YES;
@@ -228,7 +230,7 @@ andAvatarHeightWidth:self.avatarSize
 andAvatarHeightWidth:self.avatarSize
   andButtonsDelegate:nil
             andIndex:2
-           andUserId:@2];
+             andUser:nil];
     
     [self.contentView addSubview:cb];
     [cb.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor].active=YES;
@@ -238,7 +240,7 @@ andAvatarHeightWidth:self.avatarSize
 
 
 #pragma mark - IssueImageDelegate
--(void)issueImageDidLoad
+-(void)updateIssueImage
 {
     CurrentItems *cItems = [CurrentItems sharedItems];
     if (![self.issueImageView.image isEqual:cItems.issueImage])
@@ -250,6 +252,15 @@ andAvatarHeightWidth:self.avatarSize
     }
 }
 
+-(void)issueImageDidLoad
+{
+    [self updateIssueImage];
+}
+
+-(void)issueImageDidFailedLoad
+{
+    [self updateIssueImage];
+}
 
 
 #pragma mark - actions
@@ -412,6 +423,7 @@ andAvatarHeightWidth:self.avatarSize
 {
     NSArray *nibContext = [[NSBundle mainBundle] loadNibNamed:@"commentView" owner:nil options:nil];
     CommentBox *cb = [nibContext firstObject];
+    cb.buttonsDelegate = self;
     Comment *comment = [[Comment alloc] initWithCommentDictionary:commentDic andUser:user andUIImage:cb.avatarImage andImageDictionary:self.avatarNamesAndImagesDic];
     [cb fillWithName:comment.userName
           andMessage:comment.userMessage
@@ -419,7 +431,7 @@ andAvatarHeightWidth:self.avatarSize
 andAvatarHeightWidth:self.avatarSize
   andButtonsDelegate:nil
             andIndex:index
-           andUserId:@(user.userId)];
+           andUser:user];
     
     cb.alpha=0.0;
     [self.contentView addSubview:cb];
@@ -436,12 +448,15 @@ andAvatarHeightWidth:self.avatarSize
     }];
 }
 
--(void)commentAvatarTapped:(UIButton*)sender
+
+#pragma mark Comment Box Buttons delegate
+
+-(void)nameButtonTouchUpInside:(UIButton *)sender
 {
     [self callSegueToProfileWitTappedButton:sender];
 }
 
--(void)commentNameTapped:(UIButton*)sender
+-(void)avatarButtonTouchUpInside:(UIButton *)sender
 {
     [self callSegueToProfileWitTappedButton:sender];
 }
@@ -450,61 +465,28 @@ andAvatarHeightWidth:self.avatarSize
 {
     NSInteger index = sender.tag;
     CommentBox *box = self.commentBoxArr[index];
-    self.callingSegueToProfileUserId = box.userID;
-    [self performSegueWithIdentifier:@"fromDescriptionToProfile" sender:self];
+    // self.callingSegueToProfileUserId = box.userID;
+    [self performSegueWithIdentifier:MySegueFromDescriptionToProfile sender:box];
 }
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier] isEqualToString:@"fromDescriptionToProfile"]) {
+    if ([[segue identifier] isEqualToString:MySegueFromDescriptionToProfile]) {
         if([segue.destinationViewController isKindOfClass:[ProfileViewController class]])
         {
             ProfileViewController *profileViewController = (ProfileViewController*)segue.destinationViewController;
-            profileViewController.userID = self.callingSegueToProfileUserId.integerValue;
+            CommentBox *cBox = (CommentBox*)sender;
+            profileViewController.user = cBox.user;
+            profileViewController.userAvatar = cBox.avatarImage;
         }
     }
 }
 
 
-//-(void)commentMessageTapped:(UIButton*)sender
-//{
-//    NSInteger index = sender.tag;
-//    CommentBox *box = self.commentBoxArr[index];
-//
-//    
-//    if (box.isNeedResize==NO)
-//        return;
-//    
-//   box.isBig = !box.isBig;
-//    
-//    __weak DescriptionViewController *weakSelf = self;
-//    if(box.isBig==YES)
-//    {
-//        CGFloat newContentViewHeightConstraint = self.contentViewHeightConstraint.constant - box.messageSmallHeight + box.messageBigHeight;
-//        
-//        [UIView animateWithDuration:0.2 animations:^{
-//            box.commentMessageHeightConstraint.constant = box.messageBigHeight;
-//            weakSelf.contentViewHeightConstraint.constant = newContentViewHeightConstraint;
-//            [weakSelf.contentView layoutIfNeeded];
-//        }];
-//    }
-//    else
-//    {
-//        CGFloat newContentViewHeightConstraint = self.contentViewHeightConstraint.constant - box.messageBigHeight + box.messageSmallHeight;
-//        [UIView animateWithDuration:0.2 animations:^{
-//            box.commentMessageHeightConstraint.constant = box.messageSmallHeight;
-//            weakSelf.contentViewHeightConstraint.constant = newContentViewHeightConstraint;
-//            [weakSelf.contentView layoutIfNeeded];
-//        }];
-//    }
-//
-//}
+
 
 -(void)clearOldDynamicElements
 {
-//    [self.backGreyView removeFromSuperview];
-//    [self.commentBoxArr makeObjectsPerformSelector:@selector(removeElementsFromSuperView)];
-//    [self.commentBoxArr removeAllObjects];
-//    [self.avatarNamesAndImagesDic removeAllObjects];
+
 }
 
 -(void)prepareUIChangeStatusElements

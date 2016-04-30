@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8438D2D91CD156D2002DBE3C /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438D2D81CD156D2002DBE3C /* EditProfileViewController.m */; };
+		8438D2DC1CD4C46D002DBE3C /* ActiveRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438D2DB1CD4C46D002DBE3C /* ActiveRequest.m */; };
 		84522C851CC449B400B84D01 /* NewItemViewControllerPhotoInfoDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84522C841CC449B400B84D01 /* NewItemViewControllerPhotoInfoDelegate.m */; };
 		84725A7E1CB042A90000866D /* CDIssueHistoryAction+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 84725A791CB042A90000866D /* CDIssueHistoryAction+CoreDataProperties.m */; };
 		84725A7F1CB042A90000866D /* CDIssue+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 84725A7B1CB042A90000866D /* CDIssue+CoreDataProperties.m */; };
@@ -34,7 +36,6 @@
 		84DBF47E1CAB16D8001D1EAC /* IssueHistoryAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF46C1CAB16D8001D1EAC /* IssueHistoryAction.m */; };
 		84DBF47F1CAB16D8001D1EAC /* NetworkDataSorce.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF46E1CAB16D8001D1EAC /* NetworkDataSorce.m */; };
 		84DBF4801CAB16D8001D1EAC /* Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF4701CAB16D8001D1EAC /* Parser.m */; };
-		84DBF4811CAB16D8001D1EAC /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF4721CAB16D8001D1EAC /* Reachability.m */; };
 		84DBF4821CAB16D8001D1EAC /* TextFieldValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF4741CAB16D8001D1EAC /* TextFieldValidation.m */; };
 		84DBF4831CAB16D8001D1EAC /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF4761CAB16D8001D1EAC /* User.m */; };
 		84DBF4911CAB171A001D1EAC /* CDIssue.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF4861CAB171A001D1EAC /* CDIssue.m */; };
@@ -59,6 +60,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8438D2D71CD156D2002DBE3C /* EditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditProfileViewController.h; path = VC/EditProfileViewController.h; sourceTree = "<group>"; };
+		8438D2D81CD156D2002DBE3C /* EditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditProfileViewController.m; path = VC/EditProfileViewController.m; sourceTree = "<group>"; };
+		8438D2DA1CD4C46D002DBE3C /* ActiveRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActiveRequest.h; path = singleton/ActiveRequest.h; sourceTree = "<group>"; };
+		8438D2DB1CD4C46D002DBE3C /* ActiveRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActiveRequest.m; path = singleton/ActiveRequest.m; sourceTree = "<group>"; };
 		84522C831CC449B400B84D01 /* NewItemViewControllerPhotoInfoDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewItemViewControllerPhotoInfoDelegate.h; path = "UI custom obj/NewItemViewControllerPhotoInfoDelegate.h"; sourceTree = "<group>"; };
 		84522C841CC449B400B84D01 /* NewItemViewControllerPhotoInfoDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewItemViewControllerPhotoInfoDelegate.m; path = "UI custom obj/NewItemViewControllerPhotoInfoDelegate.m"; sourceTree = "<group>"; };
 		84725A781CB042A90000866D /* CDIssueHistoryAction+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CDIssueHistoryAction+CoreDataProperties.h"; path = "model/coreData/CDIssueHistoryAction+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -111,8 +116,6 @@
 		84DBF46E1CAB16D8001D1EAC /* NetworkDataSorce.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetworkDataSorce.m; path = model/NetworkDataSorce.m; sourceTree = "<group>"; };
 		84DBF46F1CAB16D8001D1EAC /* Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Parser.h; path = model/Parser.h; sourceTree = "<group>"; };
 		84DBF4701CAB16D8001D1EAC /* Parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Parser.m; path = model/Parser.m; sourceTree = "<group>"; };
-		84DBF4711CAB16D8001D1EAC /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = model/Reachability.h; sourceTree = "<group>"; };
-		84DBF4721CAB16D8001D1EAC /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = model/Reachability.m; sourceTree = "<group>"; };
 		84DBF4731CAB16D8001D1EAC /* TextFieldValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextFieldValidation.h; path = model/TextFieldValidation.h; sourceTree = "<group>"; };
 		84DBF4741CAB16D8001D1EAC /* TextFieldValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TextFieldValidation.m; path = model/TextFieldValidation.m; sourceTree = "<group>"; };
 		84DBF4751CAB16D8001D1EAC /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = model/User.h; sourceTree = "<group>"; };
@@ -232,6 +235,8 @@
 				84DBF44A1CAB1674001D1EAC /* SingUpViewController.m */,
 				84E15C331CBEEF8E0018BD9F /* TakePhotoViewController.h */,
 				84E15C341CBEEF8E0018BD9F /* TakePhotoViewController.m */,
+				8438D2D71CD156D2002DBE3C /* EditProfileViewController.h */,
+				8438D2D81CD156D2002DBE3C /* EditProfileViewController.m */,
 			);
 			name = VC;
 			sourceTree = "<group>";
@@ -269,8 +274,6 @@
 				84DBF46E1CAB16D8001D1EAC /* NetworkDataSorce.m */,
 				84DBF46F1CAB16D8001D1EAC /* Parser.h */,
 				84DBF4701CAB16D8001D1EAC /* Parser.m */,
-				84DBF4711CAB16D8001D1EAC /* Reachability.h */,
-				84DBF4721CAB16D8001D1EAC /* Reachability.m */,
 				84DBF4731CAB16D8001D1EAC /* TextFieldValidation.h */,
 				84DBF4741CAB16D8001D1EAC /* TextFieldValidation.m */,
 				84DBF4751CAB16D8001D1EAC /* User.h */,
@@ -351,6 +354,8 @@
 				84E358CF1CAC14D800521AA4 /* CurrentItems.m */,
 				84E358D01CAC14D800521AA4 /* IssueCategories.h */,
 				84E358D11CAC14D800521AA4 /* IssueCategories.m */,
+				8438D2DA1CD4C46D002DBE3C /* ActiveRequest.h */,
+				8438D2DB1CD4C46D002DBE3C /* ActiveRequest.m */,
 			);
 			name = singleton;
 			sourceTree = "<group>";
@@ -432,6 +437,7 @@
 				84E2B43F1CBAA1210027B1A0 /* MyAlert.m in Sources */,
 				84DBF45A1CAB16A6001D1EAC /* CommentBox.m in Sources */,
 				84B8F7651CAD6795003A0477 /* CDIssueHistoryAction.m in Sources */,
+				8438D2D91CD156D2002DBE3C /* EditProfileViewController.m in Sources */,
 				84DBF4A21CAB186C001D1EAC /* AvatarView.m in Sources */,
 				84DBF47F1CAB16D8001D1EAC /* NetworkDataSorce.m in Sources */,
 				84DBF4591CAB16A6001D1EAC /* ChangerBox.m in Sources */,
@@ -449,7 +455,6 @@
 				84DBF44F1CAB1674001D1EAC /* ProfileViewController.m in Sources */,
 				84DBF4791CAB16D8001D1EAC /* HTTPConnector.m in Sources */,
 				84DBF41E1CAB0A5F001D1EAC /* main.m in Sources */,
-				84DBF4811CAB16D8001D1EAC /* Reachability.m in Sources */,
 				84E358D21CAC14D800521AA4 /* CurrentItems.m in Sources */,
 				84E358D31CAC14D800521AA4 /* IssueCategories.m in Sources */,
 				84DBF4931CAB171A001D1EAC /* CDUser.m in Sources */,
@@ -462,6 +467,7 @@
 				84DBF4B11CAB18AE001D1EAC /* UIView+Addition.m in Sources */,
 				84DBF4951CAB171A001D1EAC /* CoreDataSorce.m in Sources */,
 				84DBF4911CAB171A001D1EAC /* CDIssue.m in Sources */,
+				8438D2DC1CD4C46D002DBE3C /* ActiveRequest.m in Sources */,
 				84DBF49B1CAB17A5001D1EAC /* CustomTableCell.m in Sources */,
 				84DBF4501CAB1674001D1EAC /* SingUpViewController.m in Sources */,
 				84DBF44B1CAB1674001D1EAC /* DescriptionViewController.m in Sources */,

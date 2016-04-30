@@ -10,18 +10,21 @@
 @protocol UserImageDelegate <NSObject>
 
 -(void)userImageDidLoad;
+-(void)userImageDidFailedLoad;
 
 @end
 
 @protocol IssueImageDelegate <NSObject>
 
 -(void)issueImageDidLoad;
+-(void)issueImageDidFailedLoad;
 
 @end
 
 #import <UIKit/UIKit.h>
 #import "User.h"
 #import "Issue.h"
+#import "ActiveRequest.h"
 
 @interface CurrentItems : NSObject
 
@@ -35,7 +38,7 @@
 @property(strong, nonatomic) UIManagedDocument *managedDocument;
 @property(strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
-@property(strong, nonatomic) NSMutableDictionary <NSString*, id> *activeRequests;
+@property(strong, nonatomic) NSMutableDictionary <NSString*, ActiveRequest*> *activeRequests;
 
 +(instancetype)alloc __attribute__((unavailable("not available, use sharedItems")));
 -(instancetype)init __attribute__((unavailable("not available, use sharedItems")));
@@ -44,8 +47,8 @@
 
 +(instancetype)sharedItems;
 
--(void)setUser:(User *)user withChangingImageViewBloc:(void(^)()) changinImageView;
--(void)setIssue:(Issue *)issue withChangingImageViewBloc:(void(^)()) changinImageView;
+// -(void)setUser:(User *)user withChangingImageViewBloc:(void(^)()) changinImageView;
+// -(void)setIssue:(Issue *)issue withChangingImageViewBloc:(void(^)()) changinImageView;
 
 -(void)setUser:(User *)user;
 -(void)setIssue:(Issue *)issue;

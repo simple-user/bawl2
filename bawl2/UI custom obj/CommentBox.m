@@ -16,7 +16,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *avatarButton;
 @property (weak, nonatomic) IBOutlet UIButton *nameButton;
-@property (weak, nonatomic) IBOutlet UIButton *messageButton;
+@property (weak, nonatomic) UIButton *messageButton;
 
 
 
@@ -68,7 +68,7 @@ andAvatarStringName:(NSString*)avatarStringName
 andAvatarHeightWidth:(CGFloat)avatarHeightWidth
  andButtonsDelegate:(id)delegate
            andIndex:(NSUInteger)index
-          andUserId:(NSNumber*)userID
+          andUser:(User*)user
 {
     self.nameLabel.text = name;
     [self justifyMessage:message]; //self.messageLabel.text = message; --> setting with attributed string + sizetofit + numberLines
@@ -77,7 +77,7 @@ andAvatarHeightWidth:(CGFloat)avatarHeightWidth
     self.avatarStringName = avatarStringName;
     self.buttonsDelegate = delegate;
     self.index = index;
-    self.userID  =userID;
+    self.user  =user;
     
     // temp init
     self.messageSmallHeight = self.messageHeightConstraint.constant;
@@ -165,70 +165,27 @@ andAvatarHeightWidth:(CGFloat)avatarHeightWidth
 
 
 - (IBAction)messageTapped:(UIButton *)sender {
-    if(self.isNeedResize==NO)
-        return;
-    else if (self.messageSmallHeight==0 || self.messageBigHeight==0)
-        return;
-    
-    self.isBig = !self.isBig;
-    if(self.isBig)
+    if(!self.isNeedResize==NO && !(self.messageSmallHeight==0 || self.messageBigHeight==0))
     {
-        self.messageHeightConstraint.constant = self.messageBigHeight;
+        self.isBig = !self.isBig;
+        if(self.isBig)
+        {
+            self.messageHeightConstraint.constant = self.messageBigHeight;
+        }
+        else
+        {
+            self.messageHeightConstraint.constant = self.messageSmallHeight;
+        }
+        [self updateConstraintsIfNeeded];
     }
-    else
-    {
-        self.messageHeightConstraint.constant = self.messageSmallHeight;
-    }
-    [self updateConstraintsIfNeeded];
     
+    // after change(or not) size - we call delegate message
+    // so we can add some reaction on touch in controller
+    [self.buttonsDelegate messageButtonTouchUpInside:sender];
 }
 
 
 
-//-(instancetype)initWithView:(UIView*)view
-//                andUserName:(UILabel*)name
-//              andButtonName:(UIButton*)buttonName
-//             andUserMessage:(UILabel*)message
-//           andButtonMessage:(UIButton*)buttonMessage
-//                  andAvatar:(AvatarView*) avatar
-//            andButtonAvatar:(UIButton*) buttonAvatar;
-//{
-//    if(self = [super init])
-//    {
-//        _avatar = avatar;
-//        _buttonImage = buttonAvatar;
-//        _commentLabelMessage = message;
-//        _buttonMessage = buttonMessage;
-//        _commentLabelName = name;
-//        _buttonName = buttonName;
-//        _commentView = view;
-//    }
-//    return self;
-//}
-//
-//-(void)removeElementsFromSuperView
-//{
-//    [self.avatar removeFromSuperview];
-//    [self.buttonImage removeFromSuperview];
-//    [self.commentLabelName removeFromSuperview];
-//    [self.buttonName removeFromSuperview];
-//    [self.commentLabelMessage removeFromSuperview];
-//    [self.buttonMessage removeFromSuperview];
-//    [self.commentView removeFromSuperview];
-//}
-//
-//-(void)takeElementsToTop
-//{
-//    UIView *superView = self.avatar.superview;
-//    [superView bringSubviewToFront:self.avatar];
-//    [superView bringSubviewToFront:self.buttonImage];
-//    [superView bringSubviewToFront:self.commentLabelName];
-//    [superView bringSubviewToFront:self.buttonName];
-//    [superView bringSubviewToFront:self.commentLabelMessage];
-//    [superView bringSubviewToFront:self.buttonMessage];
-//}
-//
-//
 
 @end
 

@@ -8,13 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "User.h"
 #import "AvatarView.h"
 
 
-@protocol CommentBoxButtunsDelegate <NSObject>
+@protocol CommentBoxButtonsDelegate <NSObject>
 
 -(void)avatarButtonTouchUpInside:(UIButton*)sender;
 -(void)nameButtonTouchUpInside:(UIButton*)sender;
+-(void)messageButtonTouchUpInside:(UIButton*)sender;
 
 @end
 
@@ -22,7 +24,11 @@
 @interface CommentBox : UIView
 
 
-@property(strong, nonatomic)NSNumber *userID;
+@property(strong, nonatomic)User *user;
+// by tapping name on description we will passing to frofile.
+// in the first variant of code, segwey passed only userID.
+// but this coused to request all users on profile and find our user in array
+// so, i think it will be more constructive to pass User Object
 @property(nonatomic)NSNumber *issueID;
 
 
@@ -33,7 +39,7 @@
 @property(strong, nonatomic) UIImage *avatarImage;
 @property(nonatomic) CGFloat avatarHeightWidth;
 
-@property(strong, nonatomic) id <CommentBoxButtunsDelegate> buttonsDelegate;
+@property(strong, nonatomic) id <CommentBoxButtonsDelegate> buttonsDelegate;
 
 @property(nonatomic)NSUInteger index;
 @property(nonatomic)BOOL isBig;
@@ -52,7 +58,7 @@ andAvatarStringName:(NSString*)avatarStringName
       andAvatarHeightWidth:(CGFloat)avatarHeightWidth
  andButtonsDelegate:(id)delegate
            andIndex:(NSUInteger)index
-          andUserId:(NSNumber*)userID;
+          andUser:(User*)user;
 
 
 

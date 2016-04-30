@@ -11,6 +11,7 @@
 #import "CurrentItems.h"
 #import "NetworkDataSorce.h"
 #import "Constants.h"
+#import "MyAlert.h"
 
 @interface AppDelegate ()
 
@@ -34,17 +35,25 @@
     {
         CurrentItems *ci = [CurrentItems sharedItems];
         NetworkDataSorce *dataSorce = [[NetworkDataSorce alloc] init];
-        NSURLSessionDataTask* requestDataTask = [dataSorce requestLogInWithUser:[userDictionary objectForKey:@"LOGIN"]
-                                                                        andPass:[userDictionary objectForKey:@"PASSWORD"]
-                    andViewControllerHandler:^(User *resUser, NSError *error)
-         {
-             dispatch_async(dispatch_get_main_queue(), ^ {
-                 ci.user = resUser;
-                 [ci.activeRequests removeObjectForKey:ActiveRequestCheckCurrentUser];
-                 [[NSNotificationCenter defaultCenter] postNotificationName:MyNotificationUserCheckedAndLogIned object:nil];
-             });
+        [dataSorce requestLogInWithUser:[userDictionary objectForKey:@"LOGIN"] andPass:[userDictionary objectForKey:@"PASSWORD"]
+            andViewControllerHandler:^(User *resUser, NSError *error) {
+                if (resUser!=nil)
+                {
+                    ci.user = resUser;
+                    [[NSNotificationCenter defaultCenter] postNotificationName:MyNotificationUserCheckedAndLogIned object:nil];
+                    //NetworkDataSorce *dataSorce = [[NetworkDataSorce alloc] init];
+                    // download of current user image is already strated in setter or ci.user
+                }
+                else
+                {
+                    // fail log in
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [MyAlert alertWithTitle:@"User log in" andMessage:@"Something wrong. Try log in once more."];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:MyNotificationUserCheckAndLogInFaild object:nil];
+                    });
+                }
          }];
-        [ci.activeRequests setObject:requestDataTask forKey:ActiveRequestCheckCurrentUser];
+        
     }
 }
 

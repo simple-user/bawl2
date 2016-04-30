@@ -16,46 +16,47 @@
 
 @protocol DataSorceProtocol <NSObject>
 
-@required
 
+// category
 -(void)requestCategories:(void (^)(NSArray<IssueCategory*> * issueCategories, NSError *error))viewControllerHandler;
 
+//user
 -(void)requestAllUsers:(void (^)(NSArray <User *> *users, NSError *error))handler;
--(void)requestAllIssues:(void (^)(NSArray <Issue *> *issues, NSError *error))handler;
-
-
--(void)requestCommentsWithIssueID:(NSNumber*)issueID
-                       andHandler:(void (^)(NSArray <NSDictionary <NSString*,id> *> *commentDics, NSError *error))handler;
-
-
--(void)requestSendNewComment:(NSString*)strComment forIssueID:(NSNumber*)issueID
-                  andHandler:(void (^)(NSArray <NSDictionary <NSString*,id> *> *commentDics, NSError *error))handler;
-
-
-
--(void)requestImageWithName:(NSString*)name andHandler:(void (^)(UIImage *image, NSError *error))viewControllerHandler;
 
 -(void)requestLogInWithUser:(NSString*)user
                     andPass:(NSString*)pass
    andViewControllerHandler:(void (^)(User *resPerson, NSError *error))viewControllerHandler;
-
 
 -(void)requestSingUpWithUser:(User*)user
     andViewControllerHandler:(void (^)(User *resPerson, NSError *error))viewControllerHandler;
 
 -(void)requestSignOutWithHandler:(void (^)(NSString * stringAnswer, NSError *error))viewControllerHandler;
 
+
+//issue
+-(void)requestAllIssues:(void (^)(NSArray <Issue *> *issues, NSError *error))handler;
+
 -(void)requestChangeStatusWithID:(NSNumber*)issueIdNumber
                         toStatus:(NSString*)stringStatus
-        andViewControllerHandler:(void (^)(NSString *stringAnswer, Issue *issue, NSError *error))viewControllerHandler; // e.g. user is not logined (string answer parametr)
+        andViewControllerHandler:(void (^)(NSString *stringAnswer, Issue *issue, NSError *error))viewControllerHandler;
 
+-(void)requestAddNewIssue:(Issue*)issue
+              withHandler:(void(^)(Issue *returnedIssue, NSError *error))handler;
+
+//comment
+-(void)requestCommentsWithIssueID:(NSNumber*)issueID
+                       andHandler:(void (^)(NSArray <NSDictionary <NSString*,id> *> *commentDics, NSError *error))handler;
+
+-(void)requestSendNewComment:(NSString*)strComment forIssueID:(NSNumber*)issueID
+                  andHandler:(void (^)(NSArray <NSDictionary <NSString*,id> *> *commentDics, NSError *error))handler;
+
+
+// image
+-(void)requestImageWithName:(NSString*)name andImageType:(NSString*)imageType andHandler:(void (^)(UIImage *image, NSError *error))viewControllerHandler;
 
 -(void)requestSendImage:(UIImage*)image
                  ofType:(NSString*)type
-             withHandler:(void(^)(NSString *fileName, NSError *error))handler;
-
--(void)requestAddNewIssue:(Issue*)issue
-            withHandler:(void(^)(Issue *returnedIssue, NSError *error))handler;
+            withHandler:(void(^)(NSString *fileName, NSError *error))handler;
 
 
 
