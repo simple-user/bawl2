@@ -232,39 +232,52 @@
         
         dataTask = [connector requestImageWithName:name andDataSorceHandler:^(NSData *data, NSError *error) {
             UIImage *image = nil;
-            if (data.length > 0 && error==nil)
+            // logic:
+            //   if it's cancel - we won't call controller handler and won't remove active request
+            //   otherwise:
+            //     any way we remove active request (because it's complited (even with error)) and call controller handler
+            //     if we don't have errors - we will create image and pass it to cotroller handler
+            //     (when we got eggor and pass image to handler - we pass nil, so controller will use no_attach for this issue and it won't be blank)
+            if(error !=  nil && error.code==NSURLErrorCancelled)
             {
-                image = [[UIImage alloc] initWithData:data];
-                
+                NSLog(@"_requestImageWithName_: error code = canceled (name: %@)", [ci.activeRequests objectForKey:ActiveRequestGetCurrentIssueImage].name);
             }
-            // here dowloadin is complited, so we can del dataTask
-            if([imageType isEqualToString:ImageNameCurrentUserImage])
+            else
             {
-                ActiveRequest *ar = [ci.activeRequests objectForKey:ActiveRequestGetCurrentUserImage];
-                if (ar != nil)
+                if (data.length > 0 && error==nil)
                 {
-                    [ci.activeRequests removeObjectForKey:ActiveRequestGetCurrentUserImage];
-                    NSLog(@"_requestImageWithName_: Download user image done! (filename:%@)", ar.name);
+                    image = [[UIImage alloc] initWithData:data];
+                    
                 }
-                else
+                // here dowloadin is complited, so we can del dataTask
+                if([imageType isEqualToString:ImageNameCurrentUserImage])
                 {
-                    NSLog(@"_requestImageWithName_: Download user image done! BUT WE DIDN'T FIND ACTIVE REQUEST");
+                    ActiveRequest *ar = [ci.activeRequests objectForKey:ActiveRequestGetCurrentUserImage];
+                    if (ar != nil)
+                    {
+                        [ci.activeRequests removeObjectForKey:ActiveRequestGetCurrentUserImage];
+                        NSLog(@"_requestImageWithName_: Download user image done! (filename:%@)", ar.name);
+                    }
+                    else
+                    {
+                        NSLog(@"_requestImageWithName_: Download user image done! BUT WE DIDN'T FIND ACTIVE REQUEST");
+                    }
                 }
+                else if([imageType isEqualToString:ImageNameCurrentIssueImage])
+                {
+                    ActiveRequest *ar = [ci.activeRequests objectForKey:ActiveRequestGetCurrentIssueImage];
+                    if (ar != nil)
+                    {
+                        [ci.activeRequests removeObjectForKey:ActiveRequestGetCurrentIssueImage];
+                        NSLog(@"_requestImageWithName_: Download issue image done! (filename:%@)", ar.name);
+                    }
+                    else
+                    {
+                        NSLog(@"_requestImageWithName_: Download issue image done! BUT WE DIDN'T FIND ACTIVE REQUEST");
+                    }
+                }
+                viewControllerHandler(image, error);
             }
-            else if([imageType isEqualToString:ImageNameCurrentIssueImage])
-            {
-                ActiveRequest *ar = [ci.activeRequests objectForKey:ActiveRequestGetCurrentIssueImage];
-                if (ar != nil)
-                {
-                    [ci.activeRequests removeObjectForKey:ActiveRequestGetCurrentIssueImage];
-                    NSLog(@"_requestImageWithName_: Download issue image done! (filename:%@)", ar.name);
-                }
-                else
-                {
-                    NSLog(@"_requestImageWithName_: Download issue image done! BUT WE DIDN'T FIND ACTIVE REQUEST");
-                }
-            }
-            viewControllerHandler(image, error);
         }];
     }
     
