@@ -212,7 +212,7 @@
     else if ([name isEqualToString:ImageNameForBLankIssue])
     {
         NSLog(@"_requestImageWithName_: local file for blank issue (filename:%@)", name);
-        viewControllerHandler([UIImage imageNamed:ImageNameNoUser], nil);
+        viewControllerHandler([UIImage imageNamed:ImageNameNoIssue], nil);
     }
     else if([name isEqual:[NSNull null]])
     {
@@ -233,11 +233,11 @@
         dataTask = [connector requestImageWithName:name andDataSorceHandler:^(NSData *data, NSError *error) {
             UIImage *image = nil;
             // logic:
-            //   if it's cancel - we won't call controller handler and won't remove active request
+            //   if it's cancel - we won't call controller handler and won't remove active request (it's already removed, and created new one)
             //   otherwise:
-            //     any way we remove active request (because it's complited (even with error)) and call controller handler
-            //     if we don't have errors - we will create image and pass it to cotroller handler
-            //     (when we got eggor and pass image to handler - we pass nil, so controller will use no_attach for this issue and it won't be blank)
+            //     we remove active request (because it's complited (even with error)) and call controller handler
+            //     if we don't have errors - we will create image and pass it to controller handler
+            //     (when we got error and pass image to handler - we pass nil, so controller will use no_attach for this issue and it won't be blank)
             if(error !=  nil && error.code==NSURLErrorCancelled)
             {
                 NSLog(@"_requestImageWithName_: error code = canceled");
@@ -249,7 +249,7 @@
                     image = [[UIImage alloc] initWithData:data];
                     
                 }
-                // here dowloadin is complited, so we can del dataTask
+                // here dowloading is complited, so we can del dataTask
                 if([imageType isEqualToString:ImageNameCurrentUserImage])
                 {
                     ActiveRequest *ar = [ci.activeRequests objectForKey:ActiveRequestGetCurrentUserImage];
@@ -283,7 +283,7 @@
     
     // hook info if it's currrent user image or current issue image
     // but we are doing it only if data task is not nil!
-    // otherwise is seems we'he took local file
+    // otherwise is seems we've took local file
     if(dataTask != nil)
     {
         if([imageType isEqualToString:ImageNameCurrentUserImage])
@@ -312,7 +312,7 @@
         {
             resStr = [Parser parseAnswer:data andReturnObjectForKey:@"message"];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"userDictionary"];
-            // if user tapped Log out during avatar downloadin - then we can cancel data task, and remove active request
+            // if user tapped Log out during avatar downloading - then we can cancel data task, and remove active request
             ActiveRequest *ar = [[CurrentItems sharedItems].activeRequests objectForKey:ActiveRequestGetCurrentUserImage];
             if(ar != nil)
             {

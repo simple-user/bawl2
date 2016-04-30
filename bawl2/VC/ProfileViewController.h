@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "User.h"
+#import "ProfileImageBox.h"
 
 @interface ProfileViewController : UIViewController
 
@@ -15,6 +16,7 @@
 @property(nonatomic)BOOL isEditable;
 @property(strong, nonatomic) User *user;
 @property(strong, nonatomic) UIImage *userAvatar;
+@property (strong, nonatomic) ProfileImageBox *profileImageBox;
 
 
 @end

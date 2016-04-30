@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8438D2D91CD156D2002DBE3C /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438D2D81CD156D2002DBE3C /* EditProfileViewController.m */; };
 		8438D2DC1CD4C46D002DBE3C /* ActiveRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438D2DB1CD4C46D002DBE3C /* ActiveRequest.m */; };
+		8438D2DF1CD563BE002DBE3C /* ProfileImageBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438D2DE1CD563BE002DBE3C /* ProfileImageBox.m */; };
 		84522C851CC449B400B84D01 /* NewItemViewControllerPhotoInfoDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84522C841CC449B400B84D01 /* NewItemViewControllerPhotoInfoDelegate.m */; };
 		84725A7E1CB042A90000866D /* CDIssueHistoryAction+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 84725A791CB042A90000866D /* CDIssueHistoryAction+CoreDataProperties.m */; };
 		84725A7F1CB042A90000866D /* CDIssue+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 84725A7B1CB042A90000866D /* CDIssue+CoreDataProperties.m */; };
@@ -64,6 +65,8 @@
 		8438D2D81CD156D2002DBE3C /* EditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditProfileViewController.m; path = VC/EditProfileViewController.m; sourceTree = "<group>"; };
 		8438D2DA1CD4C46D002DBE3C /* ActiveRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActiveRequest.h; path = singleton/ActiveRequest.h; sourceTree = "<group>"; };
 		8438D2DB1CD4C46D002DBE3C /* ActiveRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActiveRequest.m; path = singleton/ActiveRequest.m; sourceTree = "<group>"; };
+		8438D2DD1CD563BE002DBE3C /* ProfileImageBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileImageBox.h; path = "UI custom obj/ProfileImageBox.h"; sourceTree = "<group>"; };
+		8438D2DE1CD563BE002DBE3C /* ProfileImageBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileImageBox.m; path = "UI custom obj/ProfileImageBox.m"; sourceTree = "<group>"; };
 		84522C831CC449B400B84D01 /* NewItemViewControllerPhotoInfoDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewItemViewControllerPhotoInfoDelegate.h; path = "UI custom obj/NewItemViewControllerPhotoInfoDelegate.h"; sourceTree = "<group>"; };
 		84522C841CC449B400B84D01 /* NewItemViewControllerPhotoInfoDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewItemViewControllerPhotoInfoDelegate.m; path = "UI custom obj/NewItemViewControllerPhotoInfoDelegate.m"; sourceTree = "<group>"; };
 		84725A781CB042A90000866D /* CDIssueHistoryAction+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CDIssueHistoryAction+CoreDataProperties.h"; path = "model/coreData/CDIssueHistoryAction+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -250,6 +253,8 @@
 				84DBF4551CAB16A6001D1EAC /* ChangerBox.m */,
 				84522C831CC449B400B84D01 /* NewItemViewControllerPhotoInfoDelegate.h */,
 				84522C841CC449B400B84D01 /* NewItemViewControllerPhotoInfoDelegate.m */,
+				8438D2DD1CD563BE002DBE3C /* ProfileImageBox.h */,
+				8438D2DE1CD563BE002DBE3C /* ProfileImageBox.m */,
 			);
 			name = "UI Custom object";
 			sourceTree = "<group>";
@@ -474,6 +479,7 @@
 				84522C851CC449B400B84D01 /* NewItemViewControllerPhotoInfoDelegate.m in Sources */,
 				84DBF4B01CAB18AE001D1EAC /* UIScrollView+getContentSize.m in Sources */,
 				84DBF4801CAB16D8001D1EAC /* Parser.m in Sources */,
+				8438D2DF1CD563BE002DBE3C /* ProfileImageBox.m in Sources */,
 				84DBF47E1CAB16D8001D1EAC /* IssueHistoryAction.m in Sources */,
 				84725A801CB042A90000866D /* CDUser+CoreDataProperties.m in Sources */,
 			);

@@ -37,7 +37,11 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Bawl (Map)" id="WjN-q6-QKa">
-                        <barButtonItem key="leftBarButtonItem" title="Profile" id="Oxj-sC-fzu"/>
+                        <barButtonItem key="leftBarButtonItem" title="Profile" id="Oxj-sC-fzu">
+                            <connections>
+                                <segue destination="JVX-rd-mug" kind="show" identifier="FromMapToProfile" id="aA2-iY-niP"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Log In" id="iEJ-Mn-1nQ">
                             <connections>
                                 <action selector="sequeToLogInButton:" destination="BYZ-38-t0r" id="NDL-JN-fDe"/>
@@ -1439,4 +1443,7 @@
         <image name="share" width="22" height="14"/>
         <image name="tittle" width="284" height="152"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="aA2-iY-niP"/>
+    </inferredMetricsTieBreakers>
 </document>

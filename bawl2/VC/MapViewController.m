@@ -15,6 +15,7 @@
 #import "UIColor+Bawl.h"
 #import "MyAlert.h"
 #import "NewItemViewController.h"
+#import "ProfileViewController.h"
 
 @interface MapViewController () <MKMapViewDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -168,6 +169,13 @@
         UINavigationController *navigationController = (UINavigationController*)segue.destinationViewController;
         NewItemViewController *newItemController = (NewItemViewController*)navigationController.topViewController;
         newItemController.mapLoaction = self.newItemCoordinate;
+    }
+    else if([segue.identifier isEqualToString:MySegueFromMapToProfile])
+    {
+        ProfileViewController *profileController = (ProfileViewController*)segue.destinationViewController;
+        profileController.isEditable = YES;
+        profileController.user = [CurrentItems sharedItems].user;
+        profileController.userAvatar = [CurrentItems sharedItems].userImage;
     }
 }
 

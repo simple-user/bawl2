@@ -19,10 +19,11 @@
 #import "ProfileViewController.h"
 #import "MyAlert.h"
 #import "Constants.h"
-
+#import "ProfileImageBox.h"
 
 
 @interface DescriptionViewController () <IssueImageDelegate, CommentBoxButtonsDelegate>
+
 @property (weak, nonatomic) IBOutlet UIImageView *categoryImageView;
 
 @property (weak, nonatomic) IBOutlet UILabel *currentStatusLabel;
@@ -51,6 +52,7 @@
 @property (strong, nonatomic) NSMutableArray <CommentBox*> *commentBoxArr;
 
 @property (strong,nonatomic) NSMutableDictionary <NSString*, UIImage*> *avatarNamesAndImagesDic;
+@property (strong, nonatomic) ProfileImageBox *profileImageBox;
 
 @property(nonatomic) CGFloat avatarSize;
 @property(nonatomic) CGFloat contentStaticHeight;
@@ -108,6 +110,11 @@
                                                                           action:@selector(tapOnCoverScrollView)];
     
     [self.coverScrollView addGestureRecognizer:tap];
+    // it have to update avatars even if user passed to edit view
+    // and this observer will be removed only if view dealocates
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateAvatarImages:)
+                                                 name:@"updateAvatarImages" object:nil];
 }
 
 
@@ -159,17 +166,18 @@
                                              selector:@selector(keyboardWillHide)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updateAvatarImages:)
-                                                 name:@"updateAvatarImages" object:nil];
+   
 
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
     [self clearOldDynamicElements];
 }
+
 
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -192,12 +200,20 @@
 -(void)updateAvatarImages:(NSNotification*)notification
 {
     NSDictionary *userInfo = notification.userInfo;
+    NSString *dictionaryKey = userInfo.allKeys.firstObject;
+    UIImage *dictionaryVal = userInfo.allValues.firstObject;
     for (CommentBox *box in self.commentBoxArr)
     {
-        if ([box.avatarStringName isEqualToString:userInfo.allKeys.firstObject])
+        if ([box.avatarStringName isEqualToString:dictionaryKey])
         {
-            box.avatarImage = [userInfo objectForKey:box.avatarStringName];
+            box.avatarImage = dictionaryVal;
         }
+        
+        if(self.profileImageBox!=nil && self.profileImageBox.image == nil && [self.profileImageBox.name isEqualToString:dictionaryKey])
+        {
+            self.profileImageBox.image = dictionaryVal;
+        }
+        
     }
 }
 
@@ -475,8 +491,18 @@ andAvatarHeightWidth:self.avatarSize
         {
             ProfileViewController *profileViewController = (ProfileViewController*)segue.destinationViewController;
             CommentBox *cBox = (CommentBox*)sender;
+            profileViewController.isEditable = NO;
             profileViewController.user = cBox.user;
-            profileViewController.userAvatar = cBox.avatarImage;
+            if(cBox.avatarImage != nil)
+            {
+                profileViewController.userAvatar = cBox.avatarImage;
+                self.profileImageBox = nil;
+            }
+            else
+            {
+                self.profileImageBox = profileViewController.profileImageBox;
+                self.profileImageBox.name = cBox.avatarStringName;
+            }
         }
     }
 }
