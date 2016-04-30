@@ -240,7 +240,7 @@
             //     (when we got eggor and pass image to handler - we pass nil, so controller will use no_attach for this issue and it won't be blank)
             if(error !=  nil && error.code==NSURLErrorCancelled)
             {
-                NSLog(@"_requestImageWithName_: error code = canceled (name: %@)", [ci.activeRequests objectForKey:ActiveRequestGetCurrentIssueImage].name);
+                NSLog(@"_requestImageWithName_: error code = canceled");
             }
             else
             {
@@ -312,6 +312,13 @@
         {
             resStr = [Parser parseAnswer:data andReturnObjectForKey:@"message"];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"userDictionary"];
+            // if user tapped Log out during avatar downloadin - then we can cancel data task, and remove active request
+            ActiveRequest *ar = [[CurrentItems sharedItems].activeRequests objectForKey:ActiveRequestGetCurrentUserImage];
+            if(ar != nil)
+            {
+                [ar.dataTask cancel];
+                [[CurrentItems sharedItems].activeRequests removeObjectForKey:ActiveRequestGetCurrentUserImage];
+            }
         }
         viewControllerHandler(resStr, error);
 

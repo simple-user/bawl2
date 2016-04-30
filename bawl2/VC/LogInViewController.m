@@ -196,8 +196,6 @@
             weakSelf.signupButton.backgroundColor = [UIColor bawlRedColor];
             self.loginButton.enabled = YES;
             self.signupButton.enabled = YES;
-
-
             if (resUser == nil)
             {
                 [MyAlert alertWithTitle:@"Log In" andMessage:@"Fail to log in!"];
@@ -205,28 +203,10 @@
             }
             else
             {
-                
                 CurrentItems *ci = [CurrentItems sharedItems];
                 ci.user = resUser;
-                NetworkDataSorce *dataSorce = [[NetworkDataSorce alloc] init];
-                [dataSorce requestImageWithName:resUser.avatar andImageType:ImageNameCurrentUserImage andHandler:^(UIImage *image, NSError *error) {
-                if(image!=nil)
-                {
-                    ci.userImage = image;
-                    [[NSNotificationCenter defaultCenter] postNotificationName:MyNotificationUserAvatarDownloadSuccess object:nil];
-                }
-                else
-                {
-                    //fail load user avatar
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [MyAlert alertWithTitle:@"We have a problem cap!" andMessage:[NSString stringWithFormat:@"Avatar download for user %@ failed.", resUser]];
-                        ci.userImage = [UIImage imageNamed:ImageNameNoUser];
-                        [[NSNotificationCenter defaultCenter] postNotificationName:MyNotificationUserAvatarDownloadFailed object:nil];
-                    });
-                }
-                }];
-
-                    [weakSelf.navigationController popViewControllerAnimated:YES];
+                // avatar will start loading in setter
+                [weakSelf.navigationController popViewControllerAnimated:YES];
             }
        });
    }];

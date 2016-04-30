@@ -165,24 +165,27 @@
     // NSString *unchangedName = _user.avatar;
     // we don't even need to check name after download image, because when we start
     // download new one - prewious will be canceled
-    [self.dataSorce requestImageWithName:_user.avatar andImageType:ImageNameCurrentUserImage
-    andHandler:^(UIImage *image, NSError *error) {
-        NSLog(@"We've got response from server about current user avatar.");
-        if(image!=nil)
-        {
-            self.userImage = image;
-            [self.userImageDelegates makeObjectsPerformSelector:@selector(userImageDidLoad)];
-        }
-        else
-        {
-            //fail load user avatar
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [MyAlert alertWithTitle:@"We have a problem cap!" andMessage:[NSString stringWithFormat:@"Avatar download for user %@ failed.", self.user.name]];
-                self.userImage = [UIImage imageNamed:ImageNameNoUser];
-                [self.userImageDelegates makeObjectsPerformSelector:@selector(userImageDidFailedLoad)];
-            });
-        }
-    }];
+    if(user!=nil)
+    {
+        [self.dataSorce requestImageWithName:_user.avatar andImageType:ImageNameCurrentUserImage
+        andHandler:^(UIImage *image, NSError *error) {
+            NSLog(@"_setUser_: We've got response from server about current user avatar.");
+            if(image!=nil)
+            {
+                self.userImage = image;
+                [self.userImageDelegates makeObjectsPerformSelector:@selector(userImageDidLoad)];
+            }
+            else
+            {
+                //fail load user avatar
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [MyAlert alertWithTitle:@"We have a problem cap!" andMessage:[NSString stringWithFormat:@"Avatar download for user %@ failed.", self.user.name]];
+                    self.userImage = [UIImage imageNamed:ImageNameNoUser];
+                    [self.userImageDelegates makeObjectsPerformSelector:@selector(userImageDidFailedLoad)];
+                });
+            }
+        }];
+    }
 }
 //
 //-(void)setUser:(User *)user withChangingImageViewBloc:(void(^)()) changinImageView

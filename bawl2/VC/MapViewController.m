@@ -242,6 +242,7 @@
                     [MyAlert alertWithTitle:@"Log Out" andMessage:[@"Something has gone wrong! (server answer: )" stringByAppendingString:stringAnswer]];
                 }
                 ci.user = nil;
+                ci.userImage = nil;
                 [wSelf updateBarButtons];
                 sender.tintColor = [sender.tintColor colorWithAlphaComponent:1];
                 sender.enabled = YES;
