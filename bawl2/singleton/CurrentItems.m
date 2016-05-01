@@ -164,7 +164,7 @@
     _user = user;
     // NSString *unchangedName = _user.avatar;
     // we don't even need to check name after download image, because when we start
-    // download new one - prewious will be canceled
+    // download new one - previous will be canceled
     if(user!=nil)
     {
         [self.dataSorce requestImageWithName:_user.avatar andImageType:ImageNameCurrentUserImage
@@ -173,7 +173,9 @@
             if(image!=nil)
             {
                 self.userImage = image;
-                [self.userImageDelegates makeObjectsPerformSelector:@selector(userImageDidLoad)];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.userImageDelegates makeObjectsPerformSelector:@selector(userImageDidLoad)];
+                });
             }
             else
             {

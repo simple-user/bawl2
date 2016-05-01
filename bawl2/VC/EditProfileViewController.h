@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "User.h"
+#import "ProfileImageBox.h"
 
-@interface EditProfileViewController : UIViewController
+@interface EditProfileViewController : UIViewController <ProfileImageBoxDelegate>
 
-// user can be only Current user
-@property(strong,nonatomic) UIImage *userAvatar;
+// if user went from map thrue profile to edit, edit can appear before avatar is loaded.
+// so we need to pass profile image box
+@property(strong,nonatomic) ProfileImageBox *profileImageBox;
 
 @end

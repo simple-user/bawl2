@@ -69,6 +69,16 @@
 #pragma mark - Lasy instantiation
 
 
+-(ProfileImageBox*)profileImageBox
+{
+    if(_profileImageBox == nil)
+    {
+        _profileImageBox = [[ProfileImageBox alloc] init];
+    }
+    return _profileImageBox;
+}
+
+
 -(NSMutableDictionary <NSString*, UIImage*> *)avatarNamesAndImagesDic
 {
     if(_avatarNamesAndImagesDic==nil)
@@ -209,9 +219,9 @@
             box.avatarImage = dictionaryVal;
         }
         
-        if(self.profileImageBox!=nil && self.profileImageBox.image == nil && [self.profileImageBox.name isEqualToString:dictionaryKey])
+        if([self.profileImageBox.name isEqualToString:dictionaryKey])
         {
-            self.profileImageBox.image = dictionaryVal;
+            [self.profileImageBox updateImageForSubscribersWithImage:dictionaryVal];
         }
         
     }
@@ -500,8 +510,9 @@ andAvatarHeightWidth:self.avatarSize
             }
             else
             {
-                self.profileImageBox = profileViewController.profileImageBox;
                 self.profileImageBox.name = cBox.avatarStringName;
+                [self.profileImageBox.subscribersImageLoad addObject:profileViewController];
+                profileViewController.profileImageBox = self.profileImageBox;
             }
         }
     }

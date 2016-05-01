@@ -14,7 +14,7 @@
 #import "Constants.h"
 #import "EditProfileViewController.h"
 
-@interface ProfileViewController () <UserImageDelegate, ProfileImageBoxDelegate>
+@interface ProfileViewController () <UserImageDelegate>
 
 @property (weak, nonatomic) IBOutlet AvatarView *avatarView;
 
@@ -36,15 +36,6 @@
 #pragma - Lasy Instantiation
 
 
--(ProfileImageBox*)profileImageBox
-{
-    if(_profileImageBox == nil)
-    {
-        _profileImageBox = [[ProfileImageBox alloc] init];
-        _profileImageBox.delegate = self;
-    }
-    return _profileImageBox;
-}
 
 // every time, when view appears
 -(void)updateUserIfNeeded
@@ -70,20 +61,11 @@
     }
 }
 
-// once on load
--(void)setEditButton:(UIBarButtonItem *)editButton
-{
-    _editButton = editButton;
-    _editButton.enabled = self.isEditable;
-    
-        
-}
-
-
 #pragma mark - Init / appear ...
 
 -(void)viewDidLoad
 {
+     _editButton.enabled = self.isEditable;
     CurrentItems *ci = [CurrentItems sharedItems];
     [ci.userImageDelegates addObject:self];
 }
@@ -112,7 +94,20 @@
 #pragma mark - Profile image box delegate
 -(void)profileImageBoxUpdatedImage:(UIImage *)image
 {
-    self.avatarView.image = image;
+#pragma message "very important to delete subscribers (profile and edit) after user changed his avatar with new one!!!!!"
+        self.avatarView.image = image;
+}
+
+
+#pragma mark - Segue
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:MySegueFromProfileToEditProfile])
+    {
+        EditProfileViewController *editPController = (EditProfileViewController*)segue.destinationViewController;
+        editPController.profileImageBox = self.profileImageBox;
+        [self.profileImageBox.subscribersImageLoad addObject:editPController];
+    }
 }
 
 @end

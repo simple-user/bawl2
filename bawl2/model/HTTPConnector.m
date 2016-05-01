@@ -26,6 +26,7 @@
 @property(strong, nonatomic)NSString *defaultUserImage;
 @property(strong, nonatomic)NSString *comments;
 @property(strong, nonatomic)NSString *addIssueImage;
+@property(strong, nonatomic)NSString *addAvatarImage;
 @property(strong, nonatomic)NSString *addNewIssue;
 
 
@@ -68,6 +69,7 @@
         _defaultUserImage = @"no_avatar.png";
         _comments = @"issue/commentIDNumber/comments";
         _addIssueImage = @"image/add/issue";
+        _addAvatarImage = @"image/add/avatar";
         _addNewIssue = @"issue";
         
     }
@@ -275,6 +277,7 @@
     [request setHTTPBody:body];
 
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+    config.sharedContainerIdentifier = textUrl;
     NSURLSession *session = [NSURLSession sessionWithConfiguration:config
                                                           delegate:self
                                                      delegateQueue:nil];
@@ -286,15 +289,29 @@
                                           handler(data, error);
                                       }];
     [dataTask resume];
-
-
+    
+    
+    
 }
 
 -(void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didSendBodyData:(int64_t)bytesSent totalBytesSent:(int64_t)totalBytesSent totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 {
     float progress = (double)totalBytesSent / (double)totalBytesExpectedToSend;
-    [[NSNotificationCenter defaultCenter] postNotificationName:MyNotificationUploadIssueImageInfo
-                                                        object:self userInfo:@{CustomDictionaryKeyUploadIssueImageInfoForProgress : [NSNumber numberWithFloat:progress]}];
-}
     
+    NSString *avatar = [self.globalURL stringByAppendingString:self.addAvatarImage];
+    NSString *issue = [self.globalURL stringByAppendingString:self.addIssueImage];
+    
+    if([session.configuration.sharedContainerIdentifier isEqualToString:issue])
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:MyNotificationUploadIssueImageInfo
+                                                        object:self userInfo:@{CustomDictionaryKeyUploadIssueImageInfoForProgress : [NSNumber numberWithFloat:progress]}];
+    }
+    else if ([session.configuration.sharedContainerIdentifier isEqualToString:avatar])
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:MyNotificationUploadAvatarImageInfo
+                                                            object:self userInfo:@{CustomDictionaryKeyUploadAvatarImageInfoForProgress : [NSNumber numberWithFloat:progress]}];
+    }
+    
+}
+
 @end

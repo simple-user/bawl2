@@ -11,21 +11,21 @@
 
 @implementation ProfileImageBox
 
--(instancetype)initWithName:(NSString*)name andImage:(UIImage*)image
+-(instancetype)initWithName:(NSString*)name
 {
     if(self=[super init])
     {
         _name = name;
-        _image = image;
     }
     return self;
 }
 
--(void)setImage:(UIImage *)image
+-(void)updateImageForSubscribersWithImage:(UIImage *)image
 {
-    _image = image;
-    [self.delegate profileImageBoxUpdatedImage:image];
+    for (id<ProfileImageBoxDelegate> subscriber in self.subscribersImageLoad)
+    {
+        [subscriber profileImageBoxUpdatedImage:image];
+    }
 }
-
 
 @end

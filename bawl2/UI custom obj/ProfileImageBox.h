@@ -19,10 +19,11 @@
 
 @interface ProfileImageBox : NSObject
 
-@property(strong, nonatomic)UIImage *image;
 @property(strong, nonatomic)NSString *name;
-@property(strong, nonatomic)id <ProfileImageBoxDelegate> delegate;
+@property(strong, nonatomic)NSMutableArray < id <ProfileImageBoxDelegate> > *subscribersImageLoad;
 
--(instancetype)initWithName:(NSString*)name andImage:(UIImage*)image;
+-(instancetype)initWithName:(NSString*)name;
+
+-(void)updateImageForSubscribersWithImage:(UIImage*)image;
 
 @end

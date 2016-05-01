@@ -24,6 +24,13 @@
 
 // notifications during upload issue image (with info)
 #define MyNotificationUploadIssueImageInfo @"UploadIssueImageInfo"
+#define MyNotificationUploadAvatarImageInfo @"UploadAvatarImageInfo"
+
+#pragma mark - names of keys in custom dictionaries
+// this key is in nsnotification userinfo
+#define CustomDictionaryKeyUploadIssueImageInfoForProgress @"UploadIssueImageInfoForProgress"
+#define CustomDictionaryKeyUploadAvatarImageInfoForProgress @"UploadAvatarImageInfoForProgress"
+
 
 #pragma mark - Segue identificators
 
@@ -60,11 +67,6 @@
 #define CustomCellName @"name"
 #define CustomCellCategory @"category"
 #define CustomCellForEditProfile @"EditProfileCell"
-
-#pragma mark - names dof keys in custom dictionaries
-// this key is in nsnotification userinfo
-#define CustomDictionaryKeyUploadIssueImageInfoForProgress @"UploadIssueImageInfoForProgress"
-
 
 #pragma mark - String constants for image download type
 // description: we have a single method to download image from server.

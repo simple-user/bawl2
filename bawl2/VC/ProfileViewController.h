@@ -10,7 +10,7 @@
 #import "User.h"
 #import "ProfileImageBox.h"
 
-@interface ProfileViewController : UIViewController
+@interface ProfileViewController : UIViewController <ProfileImageBoxDelegate>
 
 
 @property(nonatomic)BOOL isEditable;
