@@ -43,6 +43,10 @@
                       ofType:(NSString*)type
                  andHandler:(void(^)(NSData *data, NSError *error))handler;
 
+-(void)requestSendAvatarImage:(UIImage*)image
+                      ofType:(NSString*)type
+                  andHandler:(void(^)(NSData *data, NSError *error))handler;
+
 
 
 

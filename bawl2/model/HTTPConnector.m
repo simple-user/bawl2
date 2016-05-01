@@ -81,6 +81,11 @@
     [self requestSendImage:image ofType:type toTextURL:[self.globalURL stringByAppendingString:self.addIssueImage] andHandler:handler];
 }
 
+-(void)requestSendAvatarImage:(UIImage*)image ofType:(NSString*)type andHandler:(void(^)(NSData *data, NSError *error))handler
+{
+    [self requestSendImage:image ofType:type toTextURL:[self.globalURL stringByAppendingString:self.addAvatarImage] andHandler:handler];
+}
+
 -(void)requestIssues:(void(^)(NSData *data, NSError *error))dataSorceHandler
 {
     [self getRequestBlankToUrl:[self.globalURL stringByAppendingString:self.allIssues] andHandler:dataSorceHandler];

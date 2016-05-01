@@ -106,6 +106,7 @@
     {
         EditProfileViewController *editPController = (EditProfileViewController*)segue.destinationViewController;
         editPController.profileImageBox = self.profileImageBox;
+        editPController.profileViewController = self;
         [self.profileImageBox.subscribersImageLoad addObject:editPController];
     }
 }

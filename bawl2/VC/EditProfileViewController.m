@@ -12,8 +12,9 @@
 #import "CurrentItems.h"
 #import "NetworkDataSorce.h"
 #import "MyAlert.h"
+#import "TextFieldValidation.h"
 
-@interface EditProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface EditProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate>
 
 
 @property (strong, nonatomic) IBOutlet UIImageView *avatarView;
@@ -29,6 +30,20 @@
 @property(strong, nonatomic) User *user;
 @property (weak, nonatomic) IBOutlet UIProgressView *progress;
 
+@property(strong, nonatomic) UITextField *currentTextField;
+@property(strong, nonatomic) TextFieldValidation *textFieldValidator;
+
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *bottomScrollViewConstraint;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet UIView *contentView;
+
+// out properties
+@property(strong, nonatomic)NSString *outAvatarFileName;
+@property(strong, nonatomic)UIImage *outAvatarImage;
+@property(strong, nonatomic)NSString *outName;
+@property(strong, nonatomic)NSString *outEmail;
+
+
 @end
 
 @implementation EditProfileViewController
@@ -37,17 +52,41 @@
 #pragma mark - Init / appear / load view
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserverForName:MyNotificationUploadAvatarImageInfo
                                                       object:nil
                                                        queue:[NSOperationQueue mainQueue]
                                                   usingBlock:^(NSNotification * _Nonnull note) {
                                                       self.progress.progress = [note.userInfo[CustomDictionaryKeyUploadAvatarImageInfoForProgress] floatValue];
                                                   }];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardDidShow:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
-
 #pragma mark - Lasy Instantiation
+
+-(TextFieldValidation*)textFieldValidator
+{
+    if(_textFieldValidator==nil)
+        _textFieldValidator = [[TextFieldValidation alloc] init];
+    return _textFieldValidator;
+}
+
 
 -(void)setProgress:(UIProgressView *)progress
 {
@@ -125,6 +164,19 @@
 
 }
 
+- (IBAction)doneWithThisControler
+{
+    self.textFieldValidator.fields = @[self.nameText, self.emailText];
+    
+    if (![self.textFieldValidator isFilled])
+        return;
+    
+    if(![self.textFieldValidator isValidFields])
+        return;
+
+}
+
+
 #pragma mark - Imasge Picker Controller Delegate
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
@@ -146,6 +198,7 @@
     NetworkDataSorce *datasorce = [[NetworkDataSorce alloc] init];
     [datasorce requestSendImage:imageForSend
                          ofType:stringType
+                           kind:ImageKindAvatar
                     withHandler:^(NSString *fileName, NSError *error) {
                         dispatch_async(dispatch_get_main_queue(), ^{
                             if(fileName != nil && error == nil)
@@ -158,9 +211,8 @@
                                                  animations:^{
                                                      self.avatarView.alpha = 1.0;
                                                  }];
-#pragma message "Hook new photo!!!"
-//                                self.outFileName = fileName;
-//                                self.outImage = imageForSend;
+                                self.outAvatarFileName = fileName;
+                                self.outAvatarImage = imageForSend;
                             }
                             else
                             {
@@ -172,6 +224,71 @@
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
+
+#pragma mark - UITextFild delegate + keyboard
+
+#define TEXTFIELD_OFFSET 10
+
+-(void)keyboardDidShow:(NSNotification*)notification
+{
+    NSDictionary *dic = notification.userInfo;
+    NSValue *keyboardFrame = dic[UIKeyboardFrameEndUserInfoKey];
+    CGRect frame = [keyboardFrame CGRectValue];
+    CGRect viewFrame = [self.view convertRect:frame fromView:nil];
+    CGFloat keyboardHeight = viewFrame.size.height;
+    
+    self.bottomScrollViewConstraint.constant = keyboardHeight;
+    [self.view layoutIfNeeded];
+    
+    if (self.currentTextField == nil)
+        return;
+    
+    CGPoint scrollOffset = self.scrollView.contentOffset;
+    
+    CGFloat bottomCurrentFieldByScrollView = self.currentTextField.frame.origin.y - scrollOffset.y + self.currentTextField.bounds.size.height + TEXTFIELD_OFFSET;
+    CGFloat bottomScrollView = self.scrollView.bounds.size.height;
+    
+    if(bottomCurrentFieldByScrollView != bottomScrollView)
+    {
+        CGFloat yMove = bottomCurrentFieldByScrollView - bottomScrollView;
+        CGFloat newY = (scrollOffset.y + yMove < 0) ? 0 : scrollOffset.y + yMove;
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            self.scrollView.contentOffset = CGPointMake(scrollOffset.x, newY);
+        }];
+        
+    }
+    
+}
+
+-(void)keyboardWillHide
+{
+    self.bottomScrollViewConstraint.constant = 0;
+    [self.view layoutIfNeeded];
+}
+
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    self.currentTextField = textField;
+    textField.backgroundColor = [UIColor whiteColor];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    textField.placeholder = textField.restorationIdentifier;
+    self.currentTextField = nil;
+    [self.textFieldValidator isValidField:textField];
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self.currentTextField resignFirstResponder];
+    self.currentTextField = nil;
+    return YES;
+}
+
+
 
 
 @end

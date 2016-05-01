@@ -53,7 +53,10 @@
 #define ImageNameNoUser @"no_avatar"
 #define ImageNameNoIssue @"no_attach"
 
-
+#pragma mark - Kinds of image for upload request
+// to edintify it in delegate method (for progress bar)
+#define ImageKindIssue @"ImageKindIssue"
+#define ImageKindAvatar @"ImageKindAvatar"
 
 #pragma mark - names of requests (for active requests)
 

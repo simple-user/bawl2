@@ -91,6 +91,7 @@
     NetworkDataSorce *datasorce = [[NetworkDataSorce alloc] init];
     [datasorce requestSendImage:imageForSend
                          ofType:stringType
+                           kind:ImageKindIssue
                     withHandler:^(NSString *fileName, NSError *error) {
                         dispatch_async(dispatch_get_main_queue(), ^{
                             if(fileName != nil && error == nil)

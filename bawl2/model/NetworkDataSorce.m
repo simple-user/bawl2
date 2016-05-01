@@ -460,18 +460,29 @@
 
 -(void)requestSendImage:(UIImage*)image
                  ofType:(NSString*)type
-            withHandler:(void(^)(NSString *fileName, NSError *error))handler
+                   kind:(NSString*)kind
+            withHandler:(void(^)(NSString *fileName, NSError *error))handler;
 {
     HTTPConnector *connector = [[HTTPConnector alloc] init];
-    [connector requestSendIssueImage:image ofType:type 
-          andHandler:^(NSData *data, NSError *error) {
-              NSString *filename = nil;
-              if (data.length > 0 && error == nil)
-              {
-                  filename = [Parser parseAnswer:data andReturnObjectForKey:@"filename"];
-              }
-              handler(filename, error);
-          }];
+    
+    void(^handlerBlock)(NSData *data, NSError *error) =
+    ^(NSData *data, NSError *error) {
+        NSString *filename = nil;
+        if (data.length > 0 && error == nil)
+        {
+            filename = [Parser parseAnswer:data andReturnObjectForKey:@"filename"];
+        }
+        handler(filename, error);
+    };
+    
+    if ([kind isEqualToString:ImageKindIssue])
+    {
+        [connector requestSendIssueImage:image ofType:type andHandler:handlerBlock];
+    }
+    else if ([kind isEqualToString:ImageKindAvatar])
+    {
+        [connector requestSendAvatarImage:image ofType:type andHandler:handlerBlock];
+    }
 }
 
 -(void)requestAddNewIssue:(Issue*)issue

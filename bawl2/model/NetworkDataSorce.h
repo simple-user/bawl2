@@ -53,6 +53,7 @@
 
 -(void)requestSendImage:(UIImage*)image
                  ofType:(NSString*)type
+                   kind:(NSString*)kind
             withHandler:(void(^)(NSString *fileName, NSError *error))handler;
 
 

@@ -234,12 +234,12 @@
 				84DBF4461CAB1674001D1EAC /* MapViewController.m */,
 				84DBF4471CAB1674001D1EAC /* ProfileViewController.h */,
 				84DBF4481CAB1674001D1EAC /* ProfileViewController.m */,
+				8438D2D71CD156D2002DBE3C /* EditProfileViewController.h */,
+				8438D2D81CD156D2002DBE3C /* EditProfileViewController.m */,
 				84DBF4491CAB1674001D1EAC /* SingUpViewController.h */,
 				84DBF44A1CAB1674001D1EAC /* SingUpViewController.m */,
 				84E15C331CBEEF8E0018BD9F /* TakePhotoViewController.h */,
 				84E15C341CBEEF8E0018BD9F /* TakePhotoViewController.m */,
-				8438D2D71CD156D2002DBE3C /* EditProfileViewController.h */,
-				8438D2D81CD156D2002DBE3C /* EditProfileViewController.m */,
 			);
 			name = VC;
 			sourceTree = "<group>";

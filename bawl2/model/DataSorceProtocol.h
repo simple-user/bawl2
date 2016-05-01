@@ -54,9 +54,6 @@
 // image
 -(void)requestImageWithName:(NSString*)name andImageType:(NSString*)imageType andHandler:(void (^)(UIImage *image, NSError *error))viewControllerHandler;
 
--(void)requestSendImage:(UIImage*)image
-                 ofType:(NSString*)type
-            withHandler:(void(^)(NSString *fileName, NSError *error))handler;
 
 
 

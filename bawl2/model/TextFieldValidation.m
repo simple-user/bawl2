@@ -103,8 +103,12 @@
     
     for (UITextField *field in self.fields)
     {
-        [self isValidField:field];
-        
+        res = [self isValidField:field];
+        if(res==NO)
+        {
+            [MyAlert alertWithTitle:@"We have a problem" andMessage:@"There are validation errors!"];
+            return NO;
+        }
     }
     
     
