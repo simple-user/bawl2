@@ -10,6 +10,7 @@
 		8438D2D91CD156D2002DBE3C /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438D2D81CD156D2002DBE3C /* EditProfileViewController.m */; };
 		8438D2DC1CD4C46D002DBE3C /* ActiveRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438D2DB1CD4C46D002DBE3C /* ActiveRequest.m */; };
 		8438D2DF1CD563BE002DBE3C /* ProfileImageBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438D2DE1CD563BE002DBE3C /* ProfileImageBox.m */; };
+		8438D2E21CD7A010002DBE3C /* CircleProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438D2E11CD7A010002DBE3C /* CircleProgressView.m */; };
 		84522C851CC449B400B84D01 /* NewItemViewControllerPhotoInfoDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84522C841CC449B400B84D01 /* NewItemViewControllerPhotoInfoDelegate.m */; };
 		84725A7E1CB042A90000866D /* CDIssueHistoryAction+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 84725A791CB042A90000866D /* CDIssueHistoryAction+CoreDataProperties.m */; };
 		84725A7F1CB042A90000866D /* CDIssue+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 84725A7B1CB042A90000866D /* CDIssue+CoreDataProperties.m */; };
@@ -67,6 +68,8 @@
 		8438D2DB1CD4C46D002DBE3C /* ActiveRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActiveRequest.m; path = singleton/ActiveRequest.m; sourceTree = "<group>"; };
 		8438D2DD1CD563BE002DBE3C /* ProfileImageBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileImageBox.h; path = "UI custom obj/ProfileImageBox.h"; sourceTree = "<group>"; };
 		8438D2DE1CD563BE002DBE3C /* ProfileImageBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileImageBox.m; path = "UI custom obj/ProfileImageBox.m"; sourceTree = "<group>"; };
+		8438D2E01CD7A010002DBE3C /* CircleProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CircleProgressView.h; path = "UI custom obj/CircleProgressView.h"; sourceTree = "<group>"; };
+		8438D2E11CD7A010002DBE3C /* CircleProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CircleProgressView.m; path = "UI custom obj/CircleProgressView.m"; sourceTree = "<group>"; };
 		84522C831CC449B400B84D01 /* NewItemViewControllerPhotoInfoDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewItemViewControllerPhotoInfoDelegate.h; path = "UI custom obj/NewItemViewControllerPhotoInfoDelegate.h"; sourceTree = "<group>"; };
 		84522C841CC449B400B84D01 /* NewItemViewControllerPhotoInfoDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewItemViewControllerPhotoInfoDelegate.m; path = "UI custom obj/NewItemViewControllerPhotoInfoDelegate.m"; sourceTree = "<group>"; };
 		84725A781CB042A90000866D /* CDIssueHistoryAction+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CDIssueHistoryAction+CoreDataProperties.h"; path = "model/coreData/CDIssueHistoryAction+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -255,6 +258,10 @@
 				84522C841CC449B400B84D01 /* NewItemViewControllerPhotoInfoDelegate.m */,
 				8438D2DD1CD563BE002DBE3C /* ProfileImageBox.h */,
 				8438D2DE1CD563BE002DBE3C /* ProfileImageBox.m */,
+				8438D2E01CD7A010002DBE3C /* CircleProgressView.h */,
+				8438D2E11CD7A010002DBE3C /* CircleProgressView.m */,
+				84DBF49E1CAB186C001D1EAC /* AvatarView.h */,
+				84DBF49F1CAB186C001D1EAC /* AvatarView.m */,
 			);
 			name = "UI Custom object";
 			sourceTree = "<group>";
@@ -334,8 +341,6 @@
 				84DBF4AB1CAB18AE001D1EAC /* UIView+Addition.m */,
 				84DBF4AC1CAB18AE001D1EAC /* UIViewController+backViewController.h */,
 				84DBF4AD1CAB18AE001D1EAC /* UIViewController+backViewController.m */,
-				84DBF49E1CAB186C001D1EAC /* AvatarView.h */,
-				84DBF49F1CAB186C001D1EAC /* AvatarView.m */,
 				84DBF4A01CAB186C001D1EAC /* UIColor+Bawl.h */,
 				84DBF4A11CAB186C001D1EAC /* UIColor+Bawl.m */,
 			);
@@ -456,6 +461,7 @@
 				84DBF4831CAB16D8001D1EAC /* User.m in Sources */,
 				84DBF44E1CAB1674001D1EAC /* MapViewController.m in Sources */,
 				84DBF4771CAB16D8001D1EAC /* Comment.m in Sources */,
+				8438D2E21CD7A010002DBE3C /* CircleProgressView.m in Sources */,
 				84DBF4AE1CAB18AE001D1EAC /* NSMutableArray+isEmpty.m in Sources */,
 				84DBF44F1CAB1674001D1EAC /* ProfileViewController.m in Sources */,
 				84DBF4791CAB16D8001D1EAC /* HTTPConnector.m in Sources */,

@@ -13,6 +13,7 @@
 #import "NetworkDataSorce.h"
 #import "MyAlert.h"
 #import "TextFieldValidation.h"
+#import "CircleProgressView.h"
 
 @interface EditProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate>
 
@@ -36,6 +37,7 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *bottomScrollViewConstraint;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIView *contentView;
+@property (strong, nonatomic) IBOutlet CircleProgressView *circleProgress;
 
 // out properties
 @property(strong, nonatomic)NSString *outAvatarFileName;
@@ -50,15 +52,23 @@
 
 
 #pragma mark - Init / appear / load view
+
+-(void)viewDidLoad
+{
+    self.circleProgress.hidden = YES;
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserverForName:MyNotificationUploadAvatarImageInfo
                                                       object:nil
                                                        queue:[NSOperationQueue mainQueue]
-                                                  usingBlock:^(NSNotification * _Nonnull note) {
-                                                      self.progress.progress = [note.userInfo[CustomDictionaryKeyUploadAvatarImageInfoForProgress] floatValue];
-                                                  }];
+      usingBlock:^(NSNotification * _Nonnull note) {
+          CGFloat floatPercent =  [note.userInfo[CustomDictionaryKeyUploadAvatarImageInfoForProgress] floatValue];
+          self.circleProgress.percent = roundf(floatPercent * 100);
+          [self.circleProgress setNeedsDisplay];
+      }];
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardDidShow:)
@@ -79,6 +89,7 @@
 
 
 #pragma mark - Lasy Instantiation
+
 
 -(TextFieldValidation*)textFieldValidator
 {
@@ -144,6 +155,17 @@
     return _user;
 }
 
+-(void)setCircleProgress:(CircleProgressView *)circleProgress
+{
+    _circleProgress = circleProgress;
+    _circleProgress.percent = 0;
+    _circleProgress.startAngle = 0;
+    _circleProgress.endAngle = M_PI * 2;
+    _circleProgress.lineWidth = 4;
+    _circleProgress.fontSize = 40;
+    _circleProgress.lineColor = [UIColor bawlRedColor05alpha];
+    _circleProgress.innerOffset = 50;
+}
 
 #pragma mark - Profile image box delegata
 
@@ -182,7 +204,10 @@
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
     self.progress.progress = 0;
+    self.circleProgress.percent = 0;
+    [self.circleProgress setNeedsDisplay];
     self.progress.hidden = NO;
+    self.circleProgress.hidden = NO;
     self.avatarView.image = nil;
     
     // UIImagePickerControllerEditedImage - uiimage
@@ -205,6 +230,7 @@
                             {
                                 [self.profileImageBox.subscribersImageLoad removeAllObjects];
                                 self.progress.hidden = YES;
+                                self.circleProgress.hidden = YES;
                                 self.avatarView.alpha = 0.0;
                                 self.avatarView.image = imageForSend;
                                 [UIView animateWithDuration:0.4

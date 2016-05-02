@@ -1334,6 +1334,10 @@
                                                     <constraint firstAttribute="height" constant="260" id="15a-Hf-JOD"/>
                                                 </constraints>
                                             </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wO0-ID-oW5" userLabel="Circle progress view" customClass="CircleProgressView">
+                                                <rect key="frame" x="180" y="0.0" width="240" height="240"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </view>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="u3r-de-LZ4">
                                                 <rect key="frame" x="180" y="0.0" width="240" height="240"/>
                                                 <constraints>
@@ -1409,10 +1413,14 @@
                                             <constraint firstItem="oRL-MR-xWZ" firstAttribute="top" secondItem="UPO-y3-3A1" secondAttribute="bottom" constant="-8" id="MJs-Z6-wuF"/>
                                             <constraint firstItem="yxY-Vi-B9C" firstAttribute="top" secondItem="sgg-8Y-UxT" secondAttribute="bottom" constant="13" id="OLw-A9-EFJ"/>
                                             <constraint firstItem="qWH-gY-IP0" firstAttribute="leading" secondItem="EK4-a5-WXw" secondAttribute="leading" id="Oua-nD-mKj"/>
+                                            <constraint firstItem="wO0-ID-oW5" firstAttribute="trailing" secondItem="u3r-de-LZ4" secondAttribute="trailing" id="Xxq-mt-FnG"/>
                                             <constraint firstItem="u3r-de-LZ4" firstAttribute="centerX" secondItem="EK4-a5-WXw" secondAttribute="centerX" id="czS-d5-WcA"/>
                                             <constraint firstItem="Xt4-p9-jfn" firstAttribute="top" secondItem="yxY-Vi-B9C" secondAttribute="bottom" constant="8" id="eL7-rK-4HE"/>
                                             <constraint firstItem="OVu-bu-tLB" firstAttribute="bottom" secondItem="u3r-de-LZ4" secondAttribute="bottom" constant="-15" id="f63-VX-unM"/>
+                                            <constraint firstItem="wO0-ID-oW5" firstAttribute="leading" secondItem="u3r-de-LZ4" secondAttribute="leading" id="gjL-Al-9yy"/>
                                             <constraint firstItem="u3r-de-LZ4" firstAttribute="top" secondItem="EK4-a5-WXw" secondAttribute="top" id="kIP-6p-Nlx"/>
+                                            <constraint firstItem="wO0-ID-oW5" firstAttribute="top" secondItem="u3r-de-LZ4" secondAttribute="top" id="kbD-wS-t2I"/>
+                                            <constraint firstItem="wO0-ID-oW5" firstAttribute="bottom" secondItem="u3r-de-LZ4" secondAttribute="bottom" id="ki1-2y-cFt"/>
                                             <constraint firstItem="yxY-Vi-B9C" firstAttribute="leading" secondItem="sgg-8Y-UxT" secondAttribute="leading" id="nYi-PC-Tht"/>
                                             <constraint firstAttribute="trailing" secondItem="qWH-gY-IP0" secondAttribute="trailing" id="pNO-ho-qiy"/>
                                             <constraint firstItem="sgg-8Y-UxT" firstAttribute="top" secondItem="UPO-y3-3A1" secondAttribute="bottom" constant="8" id="txH-Vr-8I8"/>
@@ -1455,6 +1463,7 @@
                         <outlet property="avatarView" destination="u3r-de-LZ4" id="Qsg-9h-5ST"/>
                         <outlet property="background" destination="qWH-gY-IP0" id="cAo-9C-ee6"/>
                         <outlet property="bottomScrollViewConstraint" destination="Wwh-t6-trH" id="cQb-dD-eIc"/>
+                        <outlet property="circleProgress" destination="wO0-ID-oW5" id="89t-hR-5gU"/>
                         <outlet property="contentView" destination="EK4-a5-WXw" id="BAP-mU-PzD"/>
                         <outlet property="emailLabel" destination="yxY-Vi-B9C" id="aQU-Xy-F5C"/>
                         <outlet property="emailText" destination="Xt4-p9-jfn" id="Xke-P2-Kmq"/>
