@@ -248,7 +248,7 @@
                         else
                         {
                             
-                            [CurrentItems sharedItems].user = resUser;
+                            [[CurrentItems sharedItems] setUserAndUpdateImage:resUser];
                             [self.navigationController popToRootViewControllerAnimated:YES];
                         }
                     });

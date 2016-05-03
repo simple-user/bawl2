@@ -232,13 +232,14 @@
     }
     else
     {
-        CurrentItems *ci = [CurrentItems sharedItems];
+        
         __weak MapViewController *wSelf = self;
         sender.tintColor = [sender.tintColor colorWithAlphaComponent:0.3];
         sender.enabled = NO;
         
         [self.dataSorce requestSignOutWithHandler:^(NSString *stringAnswer, NSError *error) {
             dispatch_async(dispatch_get_main_queue(), ^{
+                CurrentItems *ci = [CurrentItems sharedItems];
                 if([stringAnswer isEqualToString:[@"Bye " stringByAppendingString:ci.user.name]])
                 {
                     // alert - good

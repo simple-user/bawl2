@@ -28,6 +28,7 @@
 @property(strong, nonatomic)NSString *addIssueImage;
 @property(strong, nonatomic)NSString *addAvatarImage;
 @property(strong, nonatomic)NSString *addNewIssue;
+@property(strong, nonatomic)NSString *updateUser;
 
 
 -(NSURLSessionDataTask*)postRequest:(NSData*) postData
@@ -71,6 +72,7 @@
         _addIssueImage = @"image/add/issue";
         _addAvatarImage = @"image/add/avatar";
         _addNewIssue = @"issue";
+        _updateUser = @"users/userIDNumber";
         
     }
     return self;
@@ -149,6 +151,12 @@
         andDataSorceHandler:(void(^)(NSData *data, NSError *error))dataSorceHandler;
 {
     [self postRequest:data toURL:[self.globalURL stringByAppendingString:self.userSingUp] andHandler:dataSorceHandler];
+}
+
+-(void)requestUpdateUser:(NSUInteger)userId withData:(NSData*)data andDatasorceHandler:(void (^)(NSData* returnedData, NSError *error))datasorceHandler
+{
+    NSString *endOfURL = [self.updateUser stringByReplacingOccurrencesOfString:@"userIDNumber" withString:[NSString stringWithFormat:@"%lu", userId]];
+    [self putRequestToUrl:[self.globalURL stringByAppendingString:endOfURL] withData:data andHandler:datasorceHandler];
 }
 
 -(void)requestChangeStatusWithStringIssueID:(NSString*)strindIssueID
@@ -305,6 +313,7 @@
     
     NSString *avatar = [self.globalURL stringByAppendingString:self.addAvatarImage];
     NSString *issue = [self.globalURL stringByAppendingString:self.addIssueImage];
+    
     
     if([session.configuration.sharedContainerIdentifier isEqualToString:issue])
     {

@@ -29,6 +29,8 @@
 
 -(void)requestSignOutWithHandler:(void (^)(NSString * stringAnswer, NSError *error))viewControllerHandler;
 
+-(void)requestUpdateUser:(User*)user andControllerHandler:(void (^)(User* returneduser, NSError *error))controllerHandler;
+
 
 //issue
 -(void)requestAllIssues:(void (^)(NSArray <Issue *> *issues, NSError *error))handler;

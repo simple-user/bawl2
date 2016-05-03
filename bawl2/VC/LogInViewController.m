@@ -204,7 +204,7 @@
             else
             {
                 CurrentItems *ci = [CurrentItems sharedItems];
-                ci.user = resUser;
+                [ci setUserAndUpdateImage:resUser];
                 // avatar will start loading in setter
                 [weakSelf.navigationController popViewControllerAnimated:YES];
             }

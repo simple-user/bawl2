@@ -17,6 +17,18 @@
 @implementation User
 
 
+-(instancetype)copy
+{
+    User *user = [[User alloc] init];
+    user.login = self.login;
+    user.name = self.name;
+    user.email = self.email;
+    user.password = self.password;
+    user.userId = self.userId;
+    user.role = self.role;
+    user.avatar = self.avatar;
+    return user;
+}
 
 -(instancetype)initWithName:(NSString *)name andLogin:(NSString *)login andPass:(NSString *)pass andEmail:(NSString *)email
 {

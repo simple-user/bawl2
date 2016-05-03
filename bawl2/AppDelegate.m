@@ -39,7 +39,7 @@
             andViewControllerHandler:^(User *resUser, NSError *error) {
                 if (resUser!=nil)
                 {
-                    ci.user = resUser;
+                    [ci setUserAndUpdateImage:resUser];
                     [[NSNotificationCenter defaultCenter] postNotificationName:MyNotificationUserCheckedAndLogIned object:nil];
                     //NetworkDataSorce *dataSorce = [[NetworkDataSorce alloc] init];
                     // download of current user image is already strated in setter or ci.user

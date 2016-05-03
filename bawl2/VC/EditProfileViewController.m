@@ -29,10 +29,11 @@
 @property (strong, nonatomic) IBOutlet UIView *background;
 
 @property(strong, nonatomic) User *user;
-@property (weak, nonatomic) IBOutlet UIProgressView *progress;
 
 @property(strong, nonatomic) UITextField *currentTextField;
 @property(strong, nonatomic) TextFieldValidation *textFieldValidator;
+
+@property(strong, nonatomic) id <DataSorceProtocol> dataSorce;
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *bottomScrollViewConstraint;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -40,10 +41,11 @@
 @property (strong, nonatomic) IBOutlet CircleProgressView *circleProgress;
 
 // out properties
-@property(strong, nonatomic)NSString *outAvatarFileName;
+// @property(strong, nonatomic)NSString *outAvatarFileName;
 @property(strong, nonatomic)UIImage *outAvatarImage;
-@property(strong, nonatomic)NSString *outName;
-@property(strong, nonatomic)NSString *outEmail;
+@property(strong, nonatomic)User *outUser;
+// @property(strong, nonatomic)NSString *outName;
+// @property(strong, nonatomic)NSString *outEmail;
 
 
 @end
@@ -91,6 +93,15 @@
 #pragma mark - Lasy Instantiation
 
 
+-(id <DataSorceProtocol>)dataSorce
+{
+    if(_dataSorce==nil)
+    {
+        _dataSorce = [[NetworkDataSorce alloc] init];
+    }
+    return _dataSorce;
+}
+
 -(TextFieldValidation*)textFieldValidator
 {
     if(_textFieldValidator==nil)
@@ -98,12 +109,6 @@
     return _textFieldValidator;
 }
 
-
--(void)setProgress:(UIProgressView *)progress
-{
-    _progress = progress;
-    _progress.hidden = YES;
-}
 
 -(void)setNameLabel:(UILabel *)nameLabel
 {
@@ -155,6 +160,18 @@
     return _user;
 }
 
+-(User*)outUser
+{
+    if (_outUser == nil)
+    {
+        _outUser = [self.user copy];
+        // it's lasy instantiation, so copy of current user will be created only if it needs to update some of properties
+        // I created a copy because I don't want to check all properties of out user for nil value
+        // so I can send in my request all three properties (name, avartar, email) without cheking
+    }
+    return _outUser;
+}
+
 -(void)setCircleProgress:(CircleProgressView *)circleProgress
 {
     _circleProgress = circleProgress;
@@ -196,6 +213,23 @@
     if(![self.textFieldValidator isValidFields])
         return;
 
+    [self.dataSorce requestUpdateUser:self.outUser andControllerHandler:^(User *returneduser, NSError *error) {
+        if(returneduser != nil)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                CurrentItems *ci = [CurrentItems sharedItems];
+                // user
+                ci.user = returneduser; // we don't need to download user avatar!!!! :)
+                self.profileViewController.user = returneduser;
+                // user avatar
+                ci.userImage = self.outAvatarImage;
+                self.profileViewController.userAvatar = self.outAvatarImage;
+                
+                [self.navigationController popViewControllerAnimated:YES];
+            });
+        }
+    }];
+    
 }
 
 
@@ -203,10 +237,8 @@
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
-    self.progress.progress = 0;
     self.circleProgress.percent = 0;
     [self.circleProgress setNeedsDisplay];
-    self.progress.hidden = NO;
     self.circleProgress.hidden = NO;
     self.avatarView.image = nil;
     
@@ -220,8 +252,8 @@
     NSString *stringType = [lastComp substringFromIndex:lastComp.length-3];
     UIImage *imageForSend = info[UIImagePickerControllerEditedImage];
     
-    NetworkDataSorce *datasorce = [[NetworkDataSorce alloc] init];
-    [datasorce requestSendImage:imageForSend
+    
+    [self.dataSorce requestSendImage:imageForSend
                          ofType:stringType
                            kind:ImageKindAvatar
                     withHandler:^(NSString *fileName, NSError *error) {
@@ -229,7 +261,6 @@
                             if(fileName != nil && error == nil)
                             {
                                 [self.profileImageBox.subscribersImageLoad removeAllObjects];
-                                self.progress.hidden = YES;
                                 self.circleProgress.hidden = YES;
                                 self.avatarView.alpha = 0.0;
                                 self.avatarView.image = imageForSend;
@@ -237,7 +268,7 @@
                                                  animations:^{
                                                      self.avatarView.alpha = 1.0;
                                                  }];
-                                self.outAvatarFileName = fileName;
+                                self.outUser.avatar = fileName;
                                 self.outAvatarImage = imageForSend;
                             }
                             else
@@ -302,6 +333,7 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
+    [self checkForUpdateTextField:textField];
     textField.placeholder = textField.restorationIdentifier;
     self.currentTextField = nil;
     [self.textFieldValidator isValidField:textField];
@@ -310,9 +342,33 @@
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [self.currentTextField resignFirstResponder];
-    self.currentTextField = nil;
     return YES;
 }
+
+-(void)checkForUpdateTextField:(UITextField*)textField
+{
+    if([textField.restorationIdentifier isEqualToString:@"Full name"])
+    {
+        NSString *oldUserName = self.user.name;
+        NSString *newUserName = textField.text;
+        if(![oldUserName isEqualToString:newUserName])
+        {
+            self.outUser.name = newUserName;
+        }
+    }
+    else if ([textField.restorationIdentifier isEqualToString:@"Email"])
+    {
+        NSString *oldUserEmail = self.user.email;
+        NSString *newUserEmail = textField.text;
+        if(![oldUserEmail isEqualToString:newUserEmail])
+        {
+            self.outUser.email = newUserEmail;
+        }
+
+    }
+
+}
+
 
 
 

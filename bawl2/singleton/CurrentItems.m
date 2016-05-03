@@ -159,7 +159,7 @@
 }
 
 
--(void)setUser:(User *)user
+-(void)setUserAndUpdateImage:(User*)user
 {
     _user = user;
     // NSString *unchangedName = _user.avatar;
@@ -168,27 +168,31 @@
     if(user!=nil)
     {
         [self.dataSorce requestImageWithName:_user.avatar andImageType:ImageNameCurrentUserImage
-        andHandler:^(UIImage *image, NSError *error) {
-            NSLog(@"_setUser_: We've got response from server about current user avatar.");
-            if(image!=nil)
-            {
-                self.userImage = image;
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.userImageDelegates makeObjectsPerformSelector:@selector(userImageDidLoad)];
-                });
-            }
-            else
-            {
-                //fail load user avatar
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [MyAlert alertWithTitle:@"We have a problem cap!" andMessage:[NSString stringWithFormat:@"Avatar download for user %@ failed.", self.user.name]];
-                    self.userImage = [UIImage imageNamed:ImageNameNoUser];
-                    [self.userImageDelegates makeObjectsPerformSelector:@selector(userImageDidFailedLoad)];
-                });
-            }
-        }];
+                                  andHandler:^(UIImage *image, NSError *error) {
+                                      NSLog(@"_setUser_: We've got response from server about current user avatar.");
+                                      if(image!=nil)
+                                      {
+                                          self.userImage = image;
+                                          dispatch_async(dispatch_get_main_queue(), ^{
+                                              [self.userImageDelegates makeObjectsPerformSelector:@selector(userImageDidLoad)];
+                                          });
+                                      }
+                                      else
+                                      {
+                                          //fail load user avatar
+                                          dispatch_async(dispatch_get_main_queue(), ^{
+                                              [MyAlert alertWithTitle:@"We have a problem cap!" andMessage:[NSString stringWithFormat:@"Avatar download for user %@ failed.", self.user.name]];
+                                              self.userImage = [UIImage imageNamed:ImageNameNoUser];
+                                              [self.userImageDelegates makeObjectsPerformSelector:@selector(userImageDidFailedLoad)];
+                                          });
+                                      }
+                                  }];
     }
+
+
 }
+
+
 //
 //-(void)setUser:(User *)user withChangingImageViewBloc:(void(^)()) changinImageView
 //{

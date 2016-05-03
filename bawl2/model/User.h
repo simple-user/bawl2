@@ -41,5 +41,7 @@ typedef enum : NSUInteger {
 
 -(NSDictionary <NSString*, NSString*> *)puckToDictionary;
 
+-(instancetype)copy;
+
 -(NSString*)stringRole;
 @end

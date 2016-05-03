@@ -1384,12 +1384,6 @@
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="oRL-MR-xWZ">
-                                                <rect key="frame" x="283" y="276" width="150" height="2"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="150" id="7sX-Bn-uKB"/>
-                                                </constraints>
-                                            </progressView>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="Email" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="email@host.com" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xt4-p9-jfn">
                                                 <rect key="frame" x="8" y="357" width="584" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1403,14 +1397,12 @@
                                         <constraints>
                                             <constraint firstItem="OVu-bu-tLB" firstAttribute="trailing" secondItem="u3r-de-LZ4" secondAttribute="trailing" constant="-15" id="0hZ-jY-eQb"/>
                                             <constraint firstItem="sgg-8Y-UxT" firstAttribute="leading" secondItem="UPO-y3-3A1" secondAttribute="leading" id="1YT-BN-rfd"/>
-                                            <constraint firstItem="oRL-MR-xWZ" firstAttribute="leading" secondItem="UPO-y3-3A1" secondAttribute="trailing" constant="242" id="3fC-zk-TW4"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="Xt4-p9-jfn" secondAttribute="trailing" id="86A-VZ-Wd1"/>
                                             <constraint firstItem="UPO-y3-3A1" firstAttribute="leading" secondItem="EK4-a5-WXw" secondAttribute="leadingMargin" id="EdA-MJ-Yqt"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="sgg-8Y-UxT" secondAttribute="trailing" id="Fsc-DK-4GH"/>
                                             <constraint firstAttribute="bottom" secondItem="Xt4-p9-jfn" secondAttribute="bottom" constant="20" id="GiP-q7-5V8"/>
                                             <constraint firstItem="qWH-gY-IP0" firstAttribute="top" secondItem="EK4-a5-WXw" secondAttribute="top" id="HwZ-fK-Qdu"/>
                                             <constraint firstItem="UPO-y3-3A1" firstAttribute="top" secondItem="qWH-gY-IP0" secondAttribute="bottom" constant="10" id="JJg-h2-gDB"/>
-                                            <constraint firstItem="oRL-MR-xWZ" firstAttribute="top" secondItem="UPO-y3-3A1" secondAttribute="bottom" constant="-8" id="MJs-Z6-wuF"/>
                                             <constraint firstItem="yxY-Vi-B9C" firstAttribute="top" secondItem="sgg-8Y-UxT" secondAttribute="bottom" constant="13" id="OLw-A9-EFJ"/>
                                             <constraint firstItem="qWH-gY-IP0" firstAttribute="leading" secondItem="EK4-a5-WXw" secondAttribute="leading" id="Oua-nD-mKj"/>
                                             <constraint firstItem="wO0-ID-oW5" firstAttribute="trailing" secondItem="u3r-de-LZ4" secondAttribute="trailing" id="Xxq-mt-FnG"/>
@@ -1469,7 +1461,6 @@
                         <outlet property="emailText" destination="Xt4-p9-jfn" id="Xke-P2-Kmq"/>
                         <outlet property="nameLabel" destination="UPO-y3-3A1" id="uyV-8x-isl"/>
                         <outlet property="nameText" destination="sgg-8Y-UxT" id="yYA-iG-bLq"/>
-                        <outlet property="progress" destination="oRL-MR-xWZ" id="ma4-Ce-CIS"/>
                         <outlet property="scrollView" destination="oOR-lh-uQy" id="0DO-8R-fOl"/>
                     </connections>
                 </viewController>

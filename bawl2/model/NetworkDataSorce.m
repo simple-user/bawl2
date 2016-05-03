@@ -30,7 +30,29 @@
 
 @implementation NetworkDataSorce
 
+-(void)requestUpdateUser:(User*)user andControllerHandler:(void (^)(User* returneduser, NSError *error))controllerHandler
+{
+    NSError *err;
+    NSDictionary *dictionary = @{@"name" : user.name, @"email" : user.email, @"avatar" : user.avatar};
+    NSData *data = [NSJSONSerialization dataWithJSONObject:dictionary
+                                                       options:0
+                                                         error:&err];
+    HTTPConnector *connector = [[HTTPConnector alloc] init];
+    [connector requestUpdateUser:user.userId withData:data andDatasorceHandler:^(NSData *returnedData, NSError *error) {
+        User *tempUser = nil;
+        if(returnedData.length >0 && error == nil)
+        {
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:returnedData options:0 error:&error];
+            if (dic != nil && [dic isKindOfClass:[NSDictionary class]])
+            {
+                tempUser = [[User alloc] initWitDictionary:dic];
+            }
+        }
+        controllerHandler(tempUser, error);
+    }];
+    
 
+}
 
 
 -(void)requestCategories:(void (^)(NSArray<IssueCategory*> * issueCategories, NSError *error))viewControllerHandler
