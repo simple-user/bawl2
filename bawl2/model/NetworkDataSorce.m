@@ -211,7 +211,7 @@
         if(activeRequest!=nil) // if exists -> stop
         {
             [activeRequest.dataTask cancel];
-            NSLog(@"_requestImageWithName_: Download user image canceled! (filename:%@)", activeRequest.name);
+//            NSLog(@"_requestImageWithName_: Download user image canceled! (filename:%@)", activeRequest.name);
         }
     }
     else if([imageType isEqualToString:ImageNameCurrentIssueImage])
@@ -220,7 +220,7 @@
         if(activeRequest!=nil)
         {
             [activeRequest.dataTask cancel];
-            NSLog(@"_requestImageWithName_: Download issue image canceled! (filename:%@)",  activeRequest.name);
+//            NSLog(@"_requestImageWithName_: Download issue image canceled! (filename:%@)",  activeRequest.name);
         }
     }
 
@@ -228,12 +228,12 @@
     NSURLSessionDataTask *dataTask = nil;
     if([name isEqualToString:ImageNameForBLankUser])
     {
-        NSLog(@"_requestImageWithName_: local file for blank user (filename:%@)", name);
+//        NSLog(@"_requestImageWithName_: local file for blank user (filename:%@)", name);
         viewControllerHandler([UIImage imageNamed:ImageNameNoUser], nil);
     }
     else if ([name isEqualToString:ImageNameForBLankIssue])
     {
-        NSLog(@"_requestImageWithName_: local file for blank issue (filename:%@)", name);
+//        NSLog(@"_requestImageWithName_: local file for blank issue (filename:%@)", name);
         viewControllerHandler([UIImage imageNamed:ImageNameNoIssue], nil);
     }
     else if([name isEqual:[NSNull null]])
@@ -242,7 +242,7 @@
         // but for safety...
         // it can be either blank user and blank issue
         // so we need to check type
-        NSLog(@"_requestImageWithName_: local file for [NSNull null]");
+//        NSLog(@"_requestImageWithName_: local file for [NSNull null]");
         if([imageType isEqualToString:ImageNameCurrentUserImage] || [imageType isEqualToString:ImageNameSimpleUserImage])
             viewControllerHandler([UIImage imageNamed:ImageNameNoUser], nil);
         else if ([imageType isEqualToString:ImageNameCurrentIssueImage] || [imageType isEqualToString:ImageNameSimpleIssueImage])
@@ -262,7 +262,7 @@
             //     (when we got error and pass image to handler - we pass nil, so controller will use no_attach for this issue and it won't be blank)
             if(error !=  nil && error.code==NSURLErrorCancelled)
             {
-                NSLog(@"_requestImageWithName_: error code = canceled");
+//                NSLog(@"_requestImageWithName_: error code = canceled");
             }
             else
             {
@@ -278,11 +278,11 @@
                     if (ar != nil)
                     {
                         [ci.activeRequests removeObjectForKey:ActiveRequestGetCurrentUserImage];
-                        NSLog(@"_requestImageWithName_: Download user image done! (filename:%@)", ar.name);
+//                        NSLog(@"_requestImageWithName_: Download user image done! (filename:%@)", ar.name);
                     }
                     else
                     {
-                        NSLog(@"_requestImageWithName_: Download user image done! BUT WE DIDN'T FIND ACTIVE REQUEST");
+//                        NSLog(@"_requestImageWithName_: Download user image done! BUT WE DIDN'T FIND ACTIVE REQUEST");
                     }
                 }
                 else if([imageType isEqualToString:ImageNameCurrentIssueImage])
@@ -291,11 +291,11 @@
                     if (ar != nil)
                     {
                         [ci.activeRequests removeObjectForKey:ActiveRequestGetCurrentIssueImage];
-                        NSLog(@"_requestImageWithName_: Download issue image done! (filename:%@)", ar.name);
+//                        NSLog(@"_requestImageWithName_: Download issue image done! (filename:%@)", ar.name);
                     }
                     else
                     {
-                        NSLog(@"_requestImageWithName_: Download issue image done! BUT WE DIDN'T FIND ACTIVE REQUEST");
+//                        NSLog(@"_requestImageWithName_: Download issue image done! BUT WE DIDN'T FIND ACTIVE REQUEST");
                     }
                 }
                 viewControllerHandler(image, error);
@@ -312,13 +312,13 @@
         {
             activeRequest = [[ActiveRequest alloc] initWithName:name andDataTask:dataTask];
             [ci.activeRequests setObject:activeRequest forKey:ActiveRequestGetCurrentUserImage];
-            NSLog(@"_requestImageWithName_: New download user image data task added! (filename:%@)", name);
+//            NSLog(@"_requestImageWithName_: New download user image data task added! (filename:%@)", name);
         }
         else if([imageType isEqualToString:ImageNameCurrentIssueImage])
         {
             activeRequest = [[ActiveRequest alloc] initWithName:name andDataTask:dataTask];
             [ci.activeRequests setObject:activeRequest forKey:ActiveRequestGetCurrentIssueImage];
-            NSLog(@"_requestImageWithName_: New download issue image data task added! (filename:%@)", name);
+//            NSLog(@"_requestImageWithName_: New download issue image data task added! (filename:%@)", name);
         }
     }
     
@@ -385,11 +385,11 @@
         if (ar != nil)
         {
          [ci.activeRequests removeObjectForKey:ActiveRequestLogInUser];
-         NSLog(@"_requestLogInWithUser_: Logging done! (user name:%@)", ar.name);
+//         NSLog(@"_requestLogInWithUser_: Logging done! (user name:%@)", ar.name);
         }
         else
         {
-         NSLog(@"_requestLogInWithUser_: Logging done! BUT WE DIDN'T FIND ACTIVE REQUEST");
+//         NSLog(@"_requestLogInWithUser_: Logging done! BUT WE DIDN'T FIND ACTIVE REQUEST");
         }
         viewControllerHandler(tempUser, error);
         }];
@@ -398,12 +398,12 @@
     if(activeRequest!=nil) // if exists -> stop
     {
         [activeRequest.dataTask cancel];
-        NSLog(@"_requestLogInWithUser_: Logging canceled! (user name:%@)",  activeRequest.name);
+//        NSLog(@"_requestLogInWithUser_: Logging canceled! (user name:%@)",  activeRequest.name);
     }
     // then set new object for this value
     activeRequest = [[ActiveRequest alloc] initWithName:login andDataTask:dataTask];
     [ci.activeRequests setObject:activeRequest forKey:ActiveRequestLogInUser];
-    NSLog(@"_requestLogInWithUser_: New logging user data task added! (user name:%@)", login);
+//    NSLog(@"_requestLogInWithUser_: New logging user data task added! (user name:%@)", login);
 }
 
 

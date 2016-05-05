@@ -16,8 +16,10 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *avatarButton;
 @property (weak, nonatomic) IBOutlet UIButton *nameButton;
-@property (weak, nonatomic) UIButton *messageButton;
 
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *bottomMessageConstraint;
+
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *bottomAvatarConstraint;
 
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageHeightConstraint;
@@ -79,11 +81,63 @@ andAvatarHeightWidth:(CGFloat)avatarHeightWidth
     self.index = index;
     self.user  =user;
     
-    // temp init
-    self.messageSmallHeight = self.messageHeightConstraint.constant;
-    self.messageBigHeight = self.messageSmallHeight + 50;
+    
+    // sizes!
+    
     self.isBig = NO;
-    self.isNeedResize = YES;
+    self.isNeedResize = NO;
+
+    self.avatarView.layer.borderColor = [[UIColor blackColor] CGColor];
+    self.avatarView.layer.borderWidth = 1.0;
+
+    self.messageLabel.layer.borderColor = [[UIColor blackColor] CGColor];
+    self.messageLabel.layer.borderWidth = 1.0;
+
+    
+    CGFloat avatarBottom = self.avatarView.frame.origin.y + self.avatarView.bounds.size.height;
+    CGFloat messageBottom = self.messageLabel.frame.origin.y + self.messageLabel.bounds.size.height;
+    NSLog(@"%f - %f", avatarBottom, messageBottom);
+    
+
+//    self.messageSmallHeight = self.messageHeightConstraint.constant;
+//    self.messageBigHeight = self.messageHeightConstraint.constant;
+    
+//    
+//    CGFloat hSmall = self.messageHeightConstraint.constant;
+//    CGFloat hBig = [self getMessageBigHeight];
+//    
+//    self.messageBigHeight = hBig;
+//    if (hBig > hSmall)
+//    {
+//        // it needs transition, small size -> sets to default (auto layout in view)
+//        self.isNeedResize = YES;
+//        self.messageSmallHeight = self.messageHeightConstraint.constant;
+//    }
+//    else
+//    {
+//        // it doesn't need transition, and it's smaller then usual
+//        // so for good vertical aling text, we change size of message label
+//        // besides we need switch over bottom constraint
+//        CGFloat avatarBottom = self.avatarView.frame.origin.y + self.avatarView.bounds.size.height;
+//        CGFloat messageBottom = self.messageLabel.frame.origin.y + self.messageLabel.bounds.size.height;
+//        messageBottom = messageBottom - hSmall + hBig;
+//        NSLog(@"116 - %f (messageBottom)",messageBottom);
+//        
+//        self.isNeedResize = NO;
+//        self.messageSmallHeight = hBig;
+//        self.messageHeightConstraint.constant = hBig;
+//        
+//        
+//        if (messageBottom < avatarBottom)
+//        {
+//            // change constraint rules, if message bottom is upper than avatar botton :)
+//            self.bottomMessageConstraint.active = NO;
+//            self.bottomAvatarConstraint.active = YES;
+//        }
+        [self layoutIfNeeded];
+//    }
+    
+    
 }
 
 -(void)justifyMessage:(NSString*)message
@@ -97,11 +151,27 @@ andAvatarHeightWidth:(CGFloat)avatarHeightWidth
                                      NSBaselineOffsetAttributeName : @0};
         self.messageLabel.attributedText = [[NSAttributedString alloc] initWithString:message attributes:attributes];
         self.messageLabel.numberOfLines = 0;
-        [self.messageLabel sizeToFit];
+        // [self.messageLabel sizeToFit];
         
     }
 
 }
+
+-(CGFloat)getMessageBigHeight
+{
+    CGFloat messageWidth = self.messageLabel.bounds.size.width;
+    NSDictionary *attributes = [self.messageLabel.attributedText attributesAtIndex:0 effectiveRange:NULL];
+    CGRect messageLabelRect =  [self.messageLabel.attributedText.string boundingRectWithSize:CGSizeMake(messageWidth, MAXFLOAT)
+                                                                      options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading | NSStringDrawingUsesDeviceMetrics)
+                                                                                  attributes:attributes
+                                                                      context:nil];
+    CGRect messageLabelRect2 = CGRectIntegral(messageLabelRect);
+    CGFloat messageLabelHeight = messageLabelRect2.size.height;
+    
+    return messageLabelHeight;
+    
+}
+
 
 -(void)updateInfoAbodutChandgingHeight
 {
@@ -113,9 +183,9 @@ andAvatarHeightWidth:(CGFloat)avatarHeightWidth
 
 -(void)setIndex:(NSUInteger)index
 {
+    _index = index;
     self.avatarButton.tag = index;
     self.nameButton.tag = index;
-    self.messageButton.tag = index;
 }
 
 -(void)setName:(NSString *)name
@@ -170,18 +240,26 @@ andAvatarHeightWidth:(CGFloat)avatarHeightWidth
         self.isBig = !self.isBig;
         if(self.isBig)
         {
-            self.messageHeightConstraint.constant = self.messageBigHeight;
+            [UIView animateWithDuration:0.3 animations:^{
+                self.messageHeightConstraint.constant = self.messageBigHeight;
+                [self layoutIfNeeded];
+            }];
+
         }
         else
         {
-            self.messageHeightConstraint.constant = self.messageSmallHeight;
+            [UIView animateWithDuration:0.3 animations:^{
+                self.messageHeightConstraint.constant = self.messageSmallHeight;
+                [self layoutIfNeeded];
+            }];
         }
-        [self updateConstraintsIfNeeded];
+        
+        
     }
     
     // after change(or not) size - we call delegate message
     // so we can add some reaction on touch in controller
-    [self.buttonsDelegate messageButtonTouchUpInside:sender];
+    [self.buttonsDelegate messageButtonTouchUpInside:self.index];
 }
 
 

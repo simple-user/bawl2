@@ -138,7 +138,6 @@
 {
     [self addObservers];
     [self setDataToView];
-    [self requestUsersAndComments];
     // [self drawTwoComments];
     
 }
@@ -193,6 +192,7 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [self calculateContentViewStaticHeight];
+    [self requestUsersAndComments];
 }
 
 -(void)orientationChanged:(NSNotification*)notification
@@ -425,6 +425,10 @@ andAvatarHeightWidth:self.avatarSize
                weakSelf.contentViewHeightConstraint.constant = newContentViewHeight;
            
            [weakSelf.view layoutIfNeeded];
+//           NSLog(@"Content static height: %f", weakSelf.contentStaticHeight);
+//           NSLog(@"Content dynamic height: %f", weakSelf.contentDynamicHeight);
+//           NSLog(@"Content height: %f", newContentViewHeight);
+//           NSLog(@"Scroll height: %f", scrollViewHeight);
        });
     }];
     
@@ -450,15 +454,7 @@ andAvatarHeightWidth:self.avatarSize
 {
     NSArray *nibContext = [[NSBundle mainBundle] loadNibNamed:@"commentView" owner:nil options:nil];
     CommentBox *cb = [nibContext firstObject];
-    cb.buttonsDelegate = self;
     Comment *comment = [[Comment alloc] initWithCommentDictionary:commentDic andUser:user andUIImage:cb.avatarImage andImageDictionary:self.avatarNamesAndImagesDic];
-    [cb fillWithName:comment.userName
-          andMessage:comment.userMessage
- andAvatarStringName:user.avatar
-andAvatarHeightWidth:self.avatarSize
-  andButtonsDelegate:nil
-            andIndex:index
-           andUser:user];
     
     cb.alpha=0.0;
     [self.contentView addSubview:cb];
@@ -470,13 +466,29 @@ andAvatarHeightWidth:self.avatarSize
     self.contentDynamicHeight += cb.frame.size.height;
     self.contentViewHeightConstraint.constant += cb.frame.size.height;
     [self.view layoutIfNeeded];
+    
+    cb.layer.borderWidth = 1.0;
+    cb.layer.borderColor = [[UIColor blackColor] CGColor];
+    
+    // we need correct value of self.bounds.size.width
+    // so we call fill method after adding layout stuff
+    
+    [cb fillWithName:comment.userName
+          andMessage:comment.userMessage
+ andAvatarStringName:user.avatar
+andAvatarHeightWidth:self.avatarSize
+  andButtonsDelegate:self
+            andIndex:index
+             andUser:user];
+    
+    
     [UIView animateWithDuration:0.3 animations:^{
         cb.alpha = 1.0;
     }];
 }
 
 
-#pragma mark Comment Box Buttons delegate
+#pragma mark - Comment Box Buttons delegate
 
 -(void)nameButtonTouchUpInside:(UIButton *)sender
 {
@@ -486,6 +498,18 @@ andAvatarHeightWidth:self.avatarSize
 -(void)avatarButtonTouchUpInside:(UIButton *)sender
 {
     [self callSegueToProfileWitTappedButton:sender];
+}
+
+-(void)messageButtonTouchUpInside:(NSInteger)index
+{
+    CommentBox *box = self.commentBoxArr[index];
+    CGFloat changeHeight = box.messageBigHeight - box.messageSmallHeight;
+    CGFloat newContentHeight = self.contentViewHeightConstraint.constant + changeHeight;
+
+    [UIView animateWithDuration:0.3 animations:^{
+        self.contentViewHeightConstraint.constant = newContentHeight;
+        [self.contentView layoutIfNeeded];
+    }];
 }
 
 -(void)callSegueToProfileWitTappedButton:(UIButton*) sender

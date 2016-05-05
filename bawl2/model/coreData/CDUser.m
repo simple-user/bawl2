@@ -106,12 +106,12 @@
         if ([fileExtension isEqualToString:@"png"] || [cdUser.avatarString isEqualToString:ImageNameForBLankUser])
         {
             cdUser.avatarData = UIImagePNGRepresentation(image);
-            NSLog(@"(setAvatar) in CD (png) for avatar: %@", cdUser.avatarString);
+//            NSLog(@"(setAvatar) in CD (png) for avatar: %@", cdUser.avatarString);
         }
         else if ([fileExtension isEqualToString:@"jpg"])
         {
             cdUser.avatarData = UIImageJPEGRepresentation(image, 1.0);
-            NSLog(@"(setAvatar) in CD (jpg) for avatar: %@", cdUser.avatarString);
+//            NSLog(@"(setAvatar) in CD (jpg) for avatar: %@", cdUser.avatarString);
             
         }
         return YES;

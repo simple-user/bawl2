@@ -1001,7 +1001,6 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="g4Y-6D-zT0" firstAttribute="centerY" secondItem="Tcf-b5-5Mc" secondAttribute="centerY" id="0ka-Bi-pBL"/>
                                             <constraint firstItem="ds8-KB-sHS" firstAttribute="top" secondItem="mC8-Hz-Dl9" secondAttribute="bottom" constant="8" id="3X9-ht-rLP"/>
@@ -1054,7 +1053,6 @@
                                         </variation>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="YB2-fd-gOK" secondAttribute="bottom" id="APK-Df-IJ8"/>
                                     <constraint firstAttribute="trailing" secondItem="ID7-3X-pCP" secondAttribute="trailing" id="Hez-Ql-YVm"/>
@@ -1067,7 +1065,6 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="X7Q-cd-rrd" firstAttribute="top" secondItem="HUO-cY-Bmp" secondAttribute="top" id="B9E-z2-Cem"/>
                             <constraint firstItem="Hna-L6-63t" firstAttribute="leading" secondItem="HUO-cY-Bmp" secondAttribute="leading" id="Cja-NX-x4J"/>
@@ -1585,6 +1582,6 @@
         <image name="tittle" width="284" height="152"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="uwN-xD-Bd2"/>
+        <segue reference="0Ve-Vm-JVq"/>
     </inferredMetricsTieBreakers>
 </document>

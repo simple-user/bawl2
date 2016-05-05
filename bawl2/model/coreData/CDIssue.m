@@ -80,12 +80,12 @@
              if ([fileExtension isEqualToString:@"png"] || [cdIssue.imageString isEqualToString:ImageNameForBLankUser])
              {
                  cdIssue.imageData = UIImagePNGRepresentation(image);
-                 NSLog(@"Update issue image in CD (png) for avatar: %@", cdIssue.imageString);
+//                 NSLog(@"Update issue image in CD (png) for avatar: %@", cdIssue.imageString);
              }
              else if ([fileExtension isEqualToString:@"jpg"])
              {
                  cdIssue.imageData = UIImageJPEGRepresentation(image, 1.0);
-                 NSLog(@"Update issue image in CD (jpg) for avatar: %@", cdIssue.imageString);
+//                 NSLog(@"Update issue image in CD (jpg) for avatar: %@", cdIssue.imageString);
                  
              }
              else

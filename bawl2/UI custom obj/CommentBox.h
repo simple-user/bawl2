@@ -16,7 +16,7 @@
 
 -(void)avatarButtonTouchUpInside:(UIButton*)sender;
 -(void)nameButtonTouchUpInside:(UIButton*)sender;
--(void)messageButtonTouchUpInside:(UIButton*)sender;
+-(void)messageButtonTouchUpInside:(NSInteger)index;
 
 @end
 
@@ -31,15 +31,17 @@
 // so, i think it will be more constructive to pass User Object
 @property(nonatomic)NSNumber *issueID;
 
-
+//-----------------
+// no synthesize iVar!
 @property(strong, nonatomic) NSString *name;
 @property(strong, nonatomic) NSString *message;
-
-@property(strong, nonatomic) NSString *avatarStringName;
 @property(strong, nonatomic) UIImage *avatarImage;
 @property(nonatomic) CGFloat avatarHeightWidth;
+//-------------------------
 
-@property(strong, nonatomic) id <CommentBoxButtonsDelegate> buttonsDelegate;
+@property(strong, nonatomic) NSString *avatarStringName;
+
+@property(weak, nonatomic) id <CommentBoxButtonsDelegate> buttonsDelegate;
 
 @property(nonatomic)NSUInteger index;
 @property(nonatomic)BOOL isBig;

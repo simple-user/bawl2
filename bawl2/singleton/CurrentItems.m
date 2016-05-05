@@ -169,7 +169,7 @@
     {
         [self.dataSorce requestImageWithName:_user.avatar andImageType:ImageNameCurrentUserImage
                                   andHandler:^(UIImage *image, NSError *error) {
-                                      NSLog(@"_setUser_: We've got response from server about current user avatar.");
+//                                      NSLog(@"_setUser_: We've got response from server about current user avatar.");
                                       if(image!=nil)
                                       {
                                           self.userImage = image;
@@ -215,18 +215,17 @@
     self.issueImage = nil;
     // NSString *unchangedName = self.issue.attachments;
     //temp
-    NSString *tempAttach = _issue.attachments;
     [self.dataSorce requestImageWithName:_issue.attachments andImageType:ImageNameCurrentIssueImage
     andHandler:^(UIImage *image, NSError *error) {
         if(image != nil)
         {
-            NSLog(@"_setIssue_: current issue image is DOWNLOADED. (filename:%@)", tempAttach);
+//            NSLog(@"_setIssue_: current issue image is DOWNLOADED. (filename:%@)", tempAttach);
             self.issueImage = image;
             [self.issueImageDelegates makeObjectsPerformSelector:@selector(issueImageDidLoad)];
         }
         else
         {
-            NSLog(@"_setIssue_: current issue image download is FAILED . (filename:%@)", tempAttach);
+//            NSLog(@"_setIssue_: current issue image download is FAILED . (filename:%@)", tempAttach);
             self.issueImage = [UIImage imageNamed:ImageNameNoIssue];
             [self.issueImageDelegates makeObjectsPerformSelector:@selector(issueImageDidFailedLoad)];
         }

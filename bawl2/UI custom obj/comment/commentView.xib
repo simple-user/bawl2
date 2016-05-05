@@ -13,20 +13,25 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YDs-Dc-m5W" userLabel="AvatarView" customClass="AvatarView">
                     <rect key="frame" x="4" y="4" width="112" height="112"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y7K-4q-41n" userLabel="Avatar Button">
+                            <rect key="frame" x="0.0" y="0.0" width="112" height="112"/>
+                        </button>
+                    </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="112" id="EwE-Q7-J4O"/>
                         <constraint firstAttribute="height" constant="112" id="rAF-Ld-Utz"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y7K-4q-41n" userLabel="Avatar Button">
-                    <rect key="frame" x="4" y="4" width="112" height="112"/>
-                </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nuN-7I-BTa" userLabel="Name">
                     <rect key="frame" x="124" y="4" width="441" height="30"/>
                     <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="w5F-Ma-gRX"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PWr-ZF-fwL" userLabel="Name button">
@@ -34,12 +39,12 @@
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nBU-18-GTe" userLabel="Message">
                     <rect key="frame" x="124" y="38" width="441" height="78"/>
-                    <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.19215686269999999" green="0.54901960780000003" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="78" id="h48-Sn-oku"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Glc-uo-RsS" userLabel="Message Button">
@@ -49,19 +54,17 @@
                     </connections>
                 </button>
             </subviews>
+            <color key="backgroundColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="Glc-uo-RsS" firstAttribute="trailing" secondItem="nBU-18-GTe" secondAttribute="trailing" id="1iY-KI-twG"/>
                 <constraint firstItem="nuN-7I-BTa" firstAttribute="leading" secondItem="PWr-ZF-fwL" secondAttribute="leading" id="1rk-ca-0Yy"/>
                 <constraint firstItem="Glc-uo-RsS" firstAttribute="top" secondItem="nBU-18-GTe" secondAttribute="top" id="5HE-GQ-LBf"/>
-                <constraint firstItem="Y7K-4q-41n" firstAttribute="top" secondItem="YDs-Dc-m5W" secondAttribute="top" id="ACr-Vm-ggc"/>
-                <constraint firstItem="Y7K-4q-41n" firstAttribute="bottom" secondItem="YDs-Dc-m5W" secondAttribute="bottom" id="GAo-FR-VTB"/>
                 <constraint firstItem="Glc-uo-RsS" firstAttribute="leading" secondItem="nBU-18-GTe" secondAttribute="leading" id="GNT-lY-d1Q"/>
                 <constraint firstItem="nBU-18-GTe" firstAttribute="leading" secondItem="nuN-7I-BTa" secondAttribute="leading" id="Gad-BZ-GDx"/>
+                <constraint firstAttribute="bottom" secondItem="YDs-Dc-m5W" secondAttribute="bottom" constant="4" id="GhN-79-gg4"/>
                 <constraint firstItem="YDs-Dc-m5W" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="4" id="O5P-pv-LHN"/>
                 <constraint firstItem="nuN-7I-BTa" firstAttribute="leading" secondItem="YDs-Dc-m5W" secondAttribute="trailing" constant="8" id="QBY-xX-BDg"/>
                 <constraint firstAttribute="trailing" secondItem="nuN-7I-BTa" secondAttribute="trailing" constant="4" id="VcS-ni-y1H"/>
-                <constraint firstItem="Y7K-4q-41n" firstAttribute="trailing" secondItem="YDs-Dc-m5W" secondAttribute="trailing" id="XvR-0O-WrD"/>
-                <constraint firstItem="Y7K-4q-41n" firstAttribute="leading" secondItem="YDs-Dc-m5W" secondAttribute="leading" id="YUf-vy-wta"/>
                 <constraint firstItem="PWr-ZF-fwL" firstAttribute="bottom" secondItem="nuN-7I-BTa" secondAttribute="bottom" id="lKu-12-6rL"/>
                 <constraint firstItem="nuN-7I-BTa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="4" id="lmE-Ne-5jf"/>
                 <constraint firstItem="nuN-7I-BTa" firstAttribute="trailing" secondItem="PWr-ZF-fwL" secondAttribute="trailing" id="lxR-Xd-Rej"/>
@@ -76,6 +79,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
                 <mask key="constraints">
+                    <exclude reference="GhN-79-gg4"/>
                     <exclude reference="rFW-WT-eoe"/>
                 </mask>
             </variation>
@@ -84,6 +88,8 @@
                 <outlet property="avatarHeightConstraint" destination="rAF-Ld-Utz" id="3ig-b1-H0q"/>
                 <outlet property="avatarView" destination="YDs-Dc-m5W" id="UH3-2L-VOX"/>
                 <outlet property="avatarWidthConstraint" destination="EwE-Q7-J4O" id="AHQ-VB-gUD"/>
+                <outlet property="bottomAvatarConstraint" destination="GhN-79-gg4" id="6yy-ET-uEg"/>
+                <outlet property="bottomMessageConstraint" destination="oGb-Gd-6Nl" id="xiy-TY-fvF"/>
                 <outlet property="messageHeightConstraint" destination="h48-Sn-oku" id="1kq-2j-irJ"/>
                 <outlet property="messageLabel" destination="nBU-18-GTe" id="I8q-ld-yQJ"/>
                 <outlet property="nameButton" destination="PWr-ZF-fwL" id="W74-cv-S2V"/>
