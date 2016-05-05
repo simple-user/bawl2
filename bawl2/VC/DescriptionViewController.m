@@ -8,6 +8,7 @@
 
 #import "UIColor+Bawl.h"
 #import "DescriptionViewController.h"
+#import "HistoryViewController.h"
 #import "IssueChangeStatus.h"
 #import "NetworkDataSorce.h"
 #import "ChangerBox.h"

@@ -23,7 +23,6 @@
 		84DBF4291CAB0A5F001D1EAC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84DBF4281CAB0A5F001D1EAC /* Assets.xcassets */; };
 		84DBF42C1CAB0A5F001D1EAC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84DBF42A1CAB0A5F001D1EAC /* LaunchScreen.storyboard */; };
 		84DBF44B1CAB1674001D1EAC /* DescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF4401CAB1674001D1EAC /* DescriptionViewController.m */; };
-		84DBF44C1CAB1674001D1EAC /* IssueHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF4421CAB1674001D1EAC /* IssueHistoryViewController.m */; };
 		84DBF44D1CAB1674001D1EAC /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF4441CAB1674001D1EAC /* LogInViewController.m */; };
 		84DBF44E1CAB1674001D1EAC /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF4461CAB1674001D1EAC /* MapViewController.m */; };
 		84DBF44F1CAB1674001D1EAC /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF4481CAB1674001D1EAC /* ProfileViewController.m */; };
@@ -44,8 +43,6 @@
 		84DBF4931CAB171A001D1EAC /* CDUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF48A1CAB171A001D1EAC /* CDUser.m */; };
 		84DBF4951CAB171A001D1EAC /* CoreDataSorce.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF48E1CAB171A001D1EAC /* CoreDataSorce.m */; };
 		84DBF4961CAB171A001D1EAC /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF48F1CAB171A001D1EAC /* Model.xcdatamodeld */; };
-		84DBF49B1CAB17A5001D1EAC /* CustomTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF4991CAB17A5001D1EAC /* CustomTableCell.m */; };
-		84DBF49C1CAB17A5001D1EAC /* CustomTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84DBF49A1CAB17A5001D1EAC /* CustomTableCell.xib */; };
 		84DBF4A21CAB186C001D1EAC /* AvatarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF49F1CAB186C001D1EAC /* AvatarView.m */; };
 		84DBF4A31CAB186C001D1EAC /* UIColor+Bawl.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF4A11CAB186C001D1EAC /* UIColor+Bawl.m */; };
 		84DBF4AE1CAB18AE001D1EAC /* NSMutableArray+isEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DBF4A51CAB18AE001D1EAC /* NSMutableArray+isEmpty.m */; };
@@ -59,6 +56,9 @@
 		84E2B4421CBAB23F0027B1A0 /* NewItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E2B4411CBAB23F0027B1A0 /* NewItemViewController.m */; };
 		84E358D21CAC14D800521AA4 /* CurrentItems.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E358CF1CAC14D800521AA4 /* CurrentItems.m */; };
 		84E358D31CAC14D800521AA4 /* IssueCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E358D11CAC14D800521AA4 /* IssueCategories.m */; };
+		84E881C41CDA2DA800CB4A69 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E881C31CDA2DA800CB4A69 /* HistoryViewController.m */; };
+		84E881C61CDA440600CB4A69 /* historyCellXib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E881C51CDA440600CB4A69 /* historyCellXib.xib */; };
+		84E881C91CDA488200CB4A69 /* HistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E881C81CDA488200CB4A69 /* HistoryCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,8 +91,6 @@
 		84DBF42D1CAB0A5F001D1EAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84DBF43F1CAB1674001D1EAC /* DescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DescriptionViewController.h; path = VC/DescriptionViewController.h; sourceTree = "<group>"; };
 		84DBF4401CAB1674001D1EAC /* DescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DescriptionViewController.m; path = VC/DescriptionViewController.m; sourceTree = "<group>"; };
-		84DBF4411CAB1674001D1EAC /* IssueHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IssueHistoryViewController.h; path = VC/IssueHistoryViewController.h; sourceTree = "<group>"; };
-		84DBF4421CAB1674001D1EAC /* IssueHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IssueHistoryViewController.m; path = VC/IssueHistoryViewController.m; sourceTree = "<group>"; };
 		84DBF4431CAB1674001D1EAC /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LogInViewController.h; path = VC/LogInViewController.h; sourceTree = "<group>"; };
 		84DBF4441CAB1674001D1EAC /* LogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogInViewController.m; path = VC/LogInViewController.m; sourceTree = "<group>"; };
 		84DBF4451CAB1674001D1EAC /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapViewController.h; path = VC/MapViewController.h; sourceTree = "<group>"; };
@@ -133,9 +131,6 @@
 		84DBF48D1CAB171A001D1EAC /* CoreDataSorce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataSorce.h; path = model/coreData/CoreDataSorce.h; sourceTree = "<group>"; };
 		84DBF48E1CAB171A001D1EAC /* CoreDataSorce.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreDataSorce.m; path = model/coreData/CoreDataSorce.m; sourceTree = "<group>"; };
 		84DBF4901CAB171A001D1EAC /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		84DBF4981CAB17A5001D1EAC /* CustomTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomTableCell.h; path = "UI custom obj/CustomTableCell/CustomTableCell.h"; sourceTree = "<group>"; };
-		84DBF4991CAB17A5001D1EAC /* CustomTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomTableCell.m; path = "UI custom obj/CustomTableCell/CustomTableCell.m"; sourceTree = "<group>"; };
-		84DBF49A1CAB17A5001D1EAC /* CustomTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomTableCell.xib; path = "UI custom obj/CustomTableCell/CustomTableCell.xib"; sourceTree = "<group>"; };
 		84DBF49E1CAB186C001D1EAC /* AvatarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AvatarView.h; path = category/AvatarView.h; sourceTree = "<group>"; };
 		84DBF49F1CAB186C001D1EAC /* AvatarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AvatarView.m; path = category/AvatarView.m; sourceTree = "<group>"; };
 		84DBF4A01CAB186C001D1EAC /* UIColor+Bawl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+Bawl.h"; path = "category/UIColor+Bawl.h"; sourceTree = "<group>"; };
@@ -162,6 +157,11 @@
 		84E358CF1CAC14D800521AA4 /* CurrentItems.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CurrentItems.m; path = singleton/CurrentItems.m; sourceTree = "<group>"; };
 		84E358D01CAC14D800521AA4 /* IssueCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IssueCategories.h; path = singleton/IssueCategories.h; sourceTree = "<group>"; };
 		84E358D11CAC14D800521AA4 /* IssueCategories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IssueCategories.m; path = singleton/IssueCategories.m; sourceTree = "<group>"; };
+		84E881C21CDA2DA800CB4A69 /* HistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HistoryViewController.h; path = VC/HistoryViewController.h; sourceTree = "<group>"; };
+		84E881C31CDA2DA800CB4A69 /* HistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HistoryViewController.m; path = VC/HistoryViewController.m; sourceTree = "<group>"; };
+		84E881C51CDA440600CB4A69 /* historyCellXib.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = historyCellXib.xib; path = "UI custom obj/HistoryCell/historyCellXib.xib"; sourceTree = "<group>"; };
+		84E881C71CDA488200CB4A69 /* HistoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HistoryCell.h; path = "UI custom obj/HistoryCell/HistoryCell.h"; sourceTree = "<group>"; };
+		84E881C81CDA488200CB4A69 /* HistoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HistoryCell.m; path = "UI custom obj/HistoryCell/HistoryCell.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,8 +229,6 @@
 				84E2B4411CBAB23F0027B1A0 /* NewItemViewController.m */,
 				84DBF43F1CAB1674001D1EAC /* DescriptionViewController.h */,
 				84DBF4401CAB1674001D1EAC /* DescriptionViewController.m */,
-				84DBF4411CAB1674001D1EAC /* IssueHistoryViewController.h */,
-				84DBF4421CAB1674001D1EAC /* IssueHistoryViewController.m */,
 				84DBF4431CAB1674001D1EAC /* LogInViewController.h */,
 				84DBF4441CAB1674001D1EAC /* LogInViewController.m */,
 				84DBF4451CAB1674001D1EAC /* MapViewController.h */,
@@ -243,6 +241,8 @@
 				84DBF44A1CAB1674001D1EAC /* SingUpViewController.m */,
 				84E15C331CBEEF8E0018BD9F /* TakePhotoViewController.h */,
 				84E15C341CBEEF8E0018BD9F /* TakePhotoViewController.m */,
+				84E881C21CDA2DA800CB4A69 /* HistoryViewController.h */,
+				84E881C31CDA2DA800CB4A69 /* HistoryViewController.m */,
 			);
 			name = VC;
 			sourceTree = "<group>";
@@ -251,7 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				84E294161CC94E9D0015F2CA /* comment */,
-				84DBF4971CAB1796001D1EAC /* CustomTableCell */,
+				84DBF4971CAB1796001D1EAC /* HistoryCell */,
 				84DBF4541CAB16A6001D1EAC /* ChangerBox.h */,
 				84DBF4551CAB16A6001D1EAC /* ChangerBox.m */,
 				84522C831CC449B400B84D01 /* NewItemViewControllerPhotoInfoDelegate.h */,
@@ -318,14 +318,14 @@
 			name = "core data";
 			sourceTree = "<group>";
 		};
-		84DBF4971CAB1796001D1EAC /* CustomTableCell */ = {
+		84DBF4971CAB1796001D1EAC /* HistoryCell */ = {
 			isa = PBXGroup;
 			children = (
-				84DBF4981CAB17A5001D1EAC /* CustomTableCell.h */,
-				84DBF4991CAB17A5001D1EAC /* CustomTableCell.m */,
-				84DBF49A1CAB17A5001D1EAC /* CustomTableCell.xib */,
+				84E881C51CDA440600CB4A69 /* historyCellXib.xib */,
+				84E881C71CDA488200CB4A69 /* HistoryCell.h */,
+				84E881C81CDA488200CB4A69 /* HistoryCell.m */,
 			);
-			name = CustomTableCell;
+			name = HistoryCell;
 			sourceTree = "<group>";
 		};
 		84DBF49D1CAB17BD001D1EAC /* categories */ = {
@@ -430,7 +430,7 @@
 				84DBF42C1CAB0A5F001D1EAC /* LaunchScreen.storyboard in Resources */,
 				84DBF4291CAB0A5F001D1EAC /* Assets.xcassets in Resources */,
 				84DBF4271CAB0A5F001D1EAC /* Main.storyboard in Resources */,
-				84DBF49C1CAB17A5001D1EAC /* CustomTableCell.xib in Resources */,
+				84E881C61CDA440600CB4A69 /* historyCellXib.xib in Resources */,
 				84E294181CC94EE30015F2CA /* commentView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -450,12 +450,13 @@
 				8438D2D91CD156D2002DBE3C /* EditProfileViewController.m in Sources */,
 				84DBF4A21CAB186C001D1EAC /* AvatarView.m in Sources */,
 				84DBF47F1CAB16D8001D1EAC /* NetworkDataSorce.m in Sources */,
+				84E881C91CDA488200CB4A69 /* HistoryCell.m in Sources */,
 				84DBF4591CAB16A6001D1EAC /* ChangerBox.m in Sources */,
 				84DBF47C1CAB16D8001D1EAC /* IssueCategory.m in Sources */,
 				84DBF4B21CAB18AE001D1EAC /* UIViewController+backViewController.m in Sources */,
 				84DBF4211CAB0A5F001D1EAC /* AppDelegate.m in Sources */,
 				84DBF4AF1CAB18AE001D1EAC /* NSString+stringIsEmpry.m in Sources */,
-				84DBF44C1CAB1674001D1EAC /* IssueHistoryViewController.m in Sources */,
+				84E881C41CDA2DA800CB4A69 /* HistoryViewController.m in Sources */,
 				84DBF44D1CAB1674001D1EAC /* LogInViewController.m in Sources */,
 				84725A7E1CB042A90000866D /* CDIssueHistoryAction+CoreDataProperties.m in Sources */,
 				84DBF4831CAB16D8001D1EAC /* User.m in Sources */,
@@ -479,7 +480,6 @@
 				84DBF4951CAB171A001D1EAC /* CoreDataSorce.m in Sources */,
 				84DBF4911CAB171A001D1EAC /* CDIssue.m in Sources */,
 				8438D2DC1CD4C46D002DBE3C /* ActiveRequest.m in Sources */,
-				84DBF49B1CAB17A5001D1EAC /* CustomTableCell.m in Sources */,
 				84DBF4501CAB1674001D1EAC /* SingUpViewController.m in Sources */,
 				84DBF44B1CAB1674001D1EAC /* DescriptionViewController.m in Sources */,
 				84522C851CC449B400B84D01 /* NewItemViewControllerPhotoInfoDelegate.m in Sources */,

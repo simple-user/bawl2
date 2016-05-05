@@ -20,6 +20,17 @@
     return self;
 }
 
+
+-(NSMutableArray < id <ProfileImageBoxDelegate> > *)subscribersImageLoad
+{
+    if(_subscribersImageLoad == nil)
+    {
+        _subscribersImageLoad = [[NSMutableArray alloc] init];
+    }
+    return _subscribersImageLoad;
+}
+
+
 -(void)updateImageForSubscribersWithImage:(UIImage *)image
 {
     for (id<ProfileImageBoxDelegate> subscriber in self.subscribersImageLoad)

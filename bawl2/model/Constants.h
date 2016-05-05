@@ -43,6 +43,8 @@
 #define MySegueFromNewIssueToGetPhoto @"FromNewIssueToGetPhoto"
 #define MySegueUnwindSegueFromNewItemToMap @"UnwindSegueFromNewItemToMap"
 #define MySegueFromProfileToEditProfile @"FromProfileToEditProfile"
+#define MySegueFromDescriptionToHistory @"FromDescriptionToHistory"
+#define MySegueFromHistoryToProfile @"FromHistoryToProfile"
 
 #pragma mark - default names for blank images (user, issue)
 //names wich chenge [NSNull null]
@@ -70,6 +72,8 @@
 #define CustomCellName @"name"
 #define CustomCellCategory @"category"
 #define CustomCellForEditProfile @"EditProfileCell"
+#define CustomCellHistoryCellXib @"historyCellXib"
+#define CustomCellHistoryCell @"historyCell"
 
 #pragma mark - String constants for image download type
 // description: we have a single method to download image from server.

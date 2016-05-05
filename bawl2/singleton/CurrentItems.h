@@ -30,7 +30,7 @@
 
 @property(strong, nonatomic) User *user;
 @property(strong, nonatomic) Issue *issue;
-@property(strong, nonatomic) NSArray <NSDictionary*> *issueHistroy;
+// @property(strong, nonatomic) NSArray <NSDictionary*> *issueHistroy;
 @property(strong, nonatomic) UIImage *userImage;
 @property(strong, nonatomic) UIImage *issueImage;
 @property(strong, nonatomic) NSMutableArray<id<UserImageDelegate>> *userImageDelegates;
