@@ -61,7 +61,8 @@
     [self.avatarButton addTarget:self.buttonsDelegate action:@selector(avatarButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
     [self.nameButton addTarget:self.buttonsDelegate action:@selector(nameButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
     self.translatesAutoresizingMaskIntoConstraints = NO;
-
+    
+    self.layer.cornerRadius = 6;
 }
 
 -(void)fillWithName:(NSString*)name
@@ -73,69 +74,50 @@ andAvatarHeightWidth:(CGFloat)avatarHeightWidth
           andUser:(User*)user
 {
     self.nameLabel.text = name;
-    [self justifyMessage:message]; //self.messageLabel.text = message; --> setting with attributed string + sizetofit + numberLines
-    self.avatarHeightConstraint.constant = avatarHeightWidth;
-    self.avatarWidthConstraint.constant = avatarHeightWidth;
+    self.messageLabel.text = message;
+    //[self justifyMessage:message]; //self.messageLabel.text = message; --> setting with attributed string + sizetofit + numberLines
     self.avatarStringName = avatarStringName;
     self.buttonsDelegate = delegate;
     self.index = index;
     self.user  =user;
     
+    self.avatarHeightConstraint.constant = avatarHeightWidth;
+    self.avatarWidthConstraint.constant = avatarHeightWidth;
+    [self layoutIfNeeded];
     
     // sizes!
     
-    self.isBig = NO;
-    self.isNeedResize = NO;
+    CGFloat hSmall = self.messageHeightConstraint.constant;
+    CGFloat hBig = [self getMessageBigHeight];
+    self.messageBigHeight = hBig;
 
-    self.avatarView.layer.borderColor = [[UIColor blackColor] CGColor];
-    self.avatarView.layer.borderWidth = 1.0;
-
-    self.messageLabel.layer.borderColor = [[UIColor blackColor] CGColor];
-    self.messageLabel.layer.borderWidth = 1.0;
-
-    
-    CGFloat avatarBottom = self.avatarView.frame.origin.y + self.avatarView.bounds.size.height;
-    CGFloat messageBottom = self.messageLabel.frame.origin.y + self.messageLabel.bounds.size.height;
-    NSLog(@"%f - %f", avatarBottom, messageBottom);
-    
-
-//    self.messageSmallHeight = self.messageHeightConstraint.constant;
-//    self.messageBigHeight = self.messageHeightConstraint.constant;
-    
-//    
-//    CGFloat hSmall = self.messageHeightConstraint.constant;
-//    CGFloat hBig = [self getMessageBigHeight];
-//    
-//    self.messageBigHeight = hBig;
-//    if (hBig > hSmall)
-//    {
-//        // it needs transition, small size -> sets to default (auto layout in view)
-//        self.isNeedResize = YES;
-//        self.messageSmallHeight = self.messageHeightConstraint.constant;
-//    }
-//    else
-//    {
-//        // it doesn't need transition, and it's smaller then usual
-//        // so for good vertical aling text, we change size of message label
-//        // besides we need switch over bottom constraint
-//        CGFloat avatarBottom = self.avatarView.frame.origin.y + self.avatarView.bounds.size.height;
-//        CGFloat messageBottom = self.messageLabel.frame.origin.y + self.messageLabel.bounds.size.height;
-//        messageBottom = messageBottom - hSmall + hBig;
-//        NSLog(@"116 - %f (messageBottom)",messageBottom);
-//        
-//        self.isNeedResize = NO;
-//        self.messageSmallHeight = hBig;
-//        self.messageHeightConstraint.constant = hBig;
-//        
-//        
-//        if (messageBottom < avatarBottom)
-//        {
-//            // change constraint rules, if message bottom is upper than avatar botton :)
-//            self.bottomMessageConstraint.active = NO;
-//            self.bottomAvatarConstraint.active = YES;
-//        }
+    if (hBig > hSmall)
+    {
+        // it needs transition, small size -> sets to default (auto layout in view)
+        self.isNeedResize = YES;
+        self.messageSmallHeight = self.messageHeightConstraint.constant;
+    }
+    else
+    {
+        // it doesn't need transition, and it's smaller then usual
+        // so for good vertical aling text, we change size of message label
+        // besides we need switch over bottom constraint
+        CGFloat avatarBottom = self.avatarView.frame.origin.y + self.avatarView.bounds.size.height;
+        CGFloat messageBottom = self.messageLabel.frame.origin.y + hBig;
+        
+        self.isNeedResize = NO;
+        self.messageSmallHeight = hBig; // it doesn't have any matter
+        self.messageHeightConstraint.constant = hBig;
+        
+        // by default we have active bottom message constraint
+        if (messageBottom < avatarBottom)
+        {
+            // change constraint rules, if message bottom is upper than avatar botton :)
+            self.bottomMessageConstraint.active = NO;
+            self.bottomAvatarConstraint.active = YES;
+        }
         [self layoutIfNeeded];
-//    }
+    }
     
     
 }

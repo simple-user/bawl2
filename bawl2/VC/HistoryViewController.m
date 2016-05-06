@@ -78,6 +78,10 @@
     return [self.issue.historyActions count];
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 60.0;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     HistoryCell *cell = [tableView dequeueReusableCellWithIdentifier:CustomCellHistoryCell forIndexPath:indexPath];
@@ -89,7 +93,7 @@
     
     if(user== nil)
     {
-        cell.fullName.text = @"update info...";
+        cell.fullName.text = nil;
         cell.login.text = nil;
     }
     else

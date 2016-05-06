@@ -191,8 +191,11 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    [self calculateContentViewStaticHeight];
-    [self requestUsersAndComments];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [self calculateContentViewStaticHeight];
+        [self requestUsersAndComments];
+    });
 }
 
 -(void)orientationChanged:(NSNotification*)notification
@@ -458,17 +461,12 @@ andAvatarHeightWidth:self.avatarSize
     
     cb.alpha=0.0;
     [self.contentView addSubview:cb];
-    [cb.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor].active=YES;
-    [cb.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor].active=YES;
-    [cb.topAnchor constraintEqualToAnchor:self.viewToConnectDynamicItems.bottomAnchor].active=YES;
+    [cb.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor constant:3].active=YES;
+    [cb.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor constant:-3].active=YES;
+    [cb.topAnchor constraintEqualToAnchor:self.viewToConnectDynamicItems.bottomAnchor constant:2].active=YES;
     self.viewToConnectDynamicItems = cb;
     [self.commentBoxArr addObject:cb];
-    self.contentDynamicHeight += cb.frame.size.height;
-    self.contentViewHeightConstraint.constant += cb.frame.size.height;
     [self.view layoutIfNeeded];
-    
-    cb.layer.borderWidth = 1.0;
-    cb.layer.borderColor = [[UIColor blackColor] CGColor];
     
     // we need correct value of self.bounds.size.width
     // so we call fill method after adding layout stuff
@@ -481,10 +479,15 @@ andAvatarHeightWidth:self.avatarSize
             andIndex:index
              andUser:user];
     
+    // we2
+    self.contentDynamicHeight += cb.frame.size.height;
+    self.contentViewHeightConstraint.constant += cb.frame.size.height;
+
     
     [UIView animateWithDuration:0.3 animations:^{
         cb.alpha = 1.0;
     }];
+    
 }
 
 
@@ -504,6 +507,8 @@ andAvatarHeightWidth:self.avatarSize
 {
     CommentBox *box = self.commentBoxArr[index];
     CGFloat changeHeight = box.messageBigHeight - box.messageSmallHeight;
+    if(box.isBig == NO)
+        changeHeight *= -1;
     CGFloat newContentHeight = self.contentViewHeightConstraint.constant + changeHeight;
 
     [UIView animateWithDuration:0.3 animations:^{
