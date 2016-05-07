@@ -75,6 +75,11 @@
 #define CustomCellHistoryCellXib @"historyCellXib"
 #define CustomCellHistoryCell @"historyCell"
 
+
+#pragma mark - CustomView (XIB name)
+#define CustomViewCommentView @"commentView"
+#define CustomViewNewCommentView @"newCommentView"
+
 #pragma mark - String constants for image download type
 // description: we have a single method to download image from server.
 // we need to hook urlSessionDataTask object for downloading current issue and current user

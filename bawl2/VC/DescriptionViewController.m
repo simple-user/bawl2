@@ -21,6 +21,7 @@
 #import "MyAlert.h"
 #import "Constants.h"
 #import "ProfileImageBox.h"
+#import "NewCommentView.h"
 
 
 @interface DescriptionViewController () <IssueImageDelegate, CommentBoxButtonsDelegate>
@@ -41,6 +42,8 @@
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollViewBottomConstraint;
+
 @property (weak, nonatomic) IBOutlet UIView *coverScrollView;
 
 @property (strong, nonatomic) IssueChangeStatus *statusChanger;
@@ -297,10 +300,6 @@
 {
 }
 
-- (IBAction)addNewComment:(UIButton *)sender
-{
-
-}
 
 -(void)sendCommentPressed
 {
@@ -310,11 +309,24 @@
 #pragma mark - Keyboard notifications
 -(void)keyboardDidShow:(NSNotification *)notification
 {
+    NSDictionary *dic = notification.userInfo;
+    NSValue *keyboardFrame = dic[UIKeyboardFrameEndUserInfoKey];
+    CGRect frame = [keyboardFrame CGRectValue];
+    CGRect viewFrame = [self.view convertRect:frame fromView:nil];
+    CGFloat keyboardHeight = viewFrame.size.height;
+    
+    self.scrollViewBottomConstraint.constant = keyboardHeight;
+    [self.view layoutIfNeeded];
 
+    
+    
+    
 }
 
 -(void)keyboardWillHide
 {
+    self.scrollViewBottomConstraint.constant = 0;
+    [self.view layoutIfNeeded];
   
 }
 
@@ -381,7 +393,7 @@
 
 -(void)addOneComment:(NSDictionary <NSString*, id> *)commentDic withIndex:(NSInteger)index user:(User *) user
 {
-    NSArray *nibContext = [[NSBundle mainBundle] loadNibNamed:@"commentView" owner:nil options:nil];
+    NSArray *nibContext = [[NSBundle mainBundle] loadNibNamed:CustomViewCommentView owner:nil options:nil];
     CommentBox *cb = [nibContext firstObject];
     Comment *comment = [[Comment alloc] initWithCommentDictionary:commentDic andUser:user andUIImage:cb.avatarImage andImageDictionary:self.avatarNamesAndImagesDic];
     
@@ -412,6 +424,51 @@ andAvatarHeightWidth:self.avatarSize
         cb.alpha = 1.0;
     }];
     
+}
+
+
+#pragma mark - Adding new comment
+
+- (IBAction)addNewCommentPressed
+{
+    // first - backup left and right bar items
+    self.leftBarButtonItems = self.navigationItem.leftBarButtonItems;
+    self.rightBarButtonItems = self.navigationItem.rightBarButtonItems;
+    
+    UIBarButtonItem *cancelBarButton = [[UIBarButtonItem alloc] initWithTitle:@"cancel" style:UIBarButtonItemStylePlain target:self action:@selector(newCommentCancelPressed)];
+    UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithTitle:@"done" style:UIBarButtonItemStyleDone target:self action:@selector(newCommentDonePressed)];
+    self.navigationItem.leftBarButtonItems = @[cancelBarButton];
+    self.navigationItem.rightBarButtonItems = @[doneBarButton];
+    
+    NSArray *nibContext = [[NSBundle mainBundle] loadNibNamed:CustomViewNewCommentView owner:nil options:nil];
+    NewCommentView *newComment = [nibContext firstObject];
+    newComment.translatesAutoresizingMaskIntoConstraints = NO;
+    // this view will uppear at the top of all views
+    [self.view addSubview:newComment];
+    
+    
+    //layout
+    //if we constraint bottom of this view to bottom of scroll, then it will move with changing height of scroll
+    // when keyboard appears, or it will be in the bottom of view, if keyboard doesn't appear
+    [newComment.leadingAnchor constraintEqualToAnchor:self.scrollView.leadingAnchor].active = YES;
+    [newComment.trailingAnchor constraintEqualToAnchor:self.scrollView.trailingAnchor].active = YES;
+    [newComment.bottomAnchor constraintEqualToAnchor:self.scrollView.bottomAnchor].active = YES;
+    [self.view layoutIfNeeded];
+    
+    [newComment.textView becomeFirstResponder];
+
+    
+    
+}
+
+-(void)newCommentDonePressed
+{
+
+}
+
+-(void)newCommentCancelPressed
+{
+
 }
 
 

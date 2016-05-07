@@ -997,7 +997,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G4K-TM-tWa" userLabel="comment button">
                                                 <rect key="frame" x="189" y="446" width="86" height="30"/>
                                                 <connections>
-                                                    <action selector="addNewComment:" destination="hHh-ss-yDt" eventType="touchUpInside" id="S4F-Ur-9Rp"/>
+                                                    <action selector="addNewCommentPressed" destination="hHh-ss-yDt" eventType="touchUpInside" id="fYc-b4-0Qr"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -1102,6 +1102,7 @@
                         <outlet property="descriptionLabel" destination="mC8-Hz-Dl9" id="hWC-wl-hUG"/>
                         <outlet property="issueImageView" destination="ds8-KB-sHS" id="KJb-IV-UHH"/>
                         <outlet property="scrollView" destination="X7Q-cd-rrd" id="JfC-Qh-cUz"/>
+                        <outlet property="scrollViewBottomConstraint" destination="eVg-9g-YCn" id="rep-V1-YMT"/>
                         <outlet property="titleLabel" destination="a9A-rp-NSL" id="o5O-0J-3pE"/>
                         <outlet property="viewBetweenCommentAndShare" destination="g4Y-6D-zT0" id="ZKA-K5-ATI"/>
                         <segue destination="DvL-gc-8V2" kind="show" identifier="FromDescriptionToHistory" id="VUf-6T-5qU"/>

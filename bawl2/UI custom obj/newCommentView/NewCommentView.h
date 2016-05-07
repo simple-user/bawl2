@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface NewCommentView : UIView
+@property (strong, nonatomic) IBOutlet UITextView *textView;
 
 @end
