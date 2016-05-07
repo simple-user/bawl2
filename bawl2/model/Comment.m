@@ -24,7 +24,7 @@
 
 -(instancetype)initWithCommentDictionary:(NSDictionary <NSString*,id> *)commentDictionary
                              andUser:(User *)user
-                          andUIImage:(UIImage*)image
+                          andComentBox:(CommentBox*)commentBox
                       andImageDictionary:(NSMutableDictionary <NSString*, UIImage*> *) dictionary
 {
     if(self = [super init])
@@ -37,7 +37,7 @@
         if(user == nil)
         {
             _userName = @"Deleted User";
-            image = [UIImage imageNamed:@"deletedUser"];
+            commentBox.avatarImage = [UIImage imageNamed:@"deletedUser"];
         }
         else
         {
@@ -65,7 +65,7 @@
             // so just set it to image
             else if (![avatarImageFromDic isKindOfClass:[NSNull class]])
             {
-                image = avatarImageFromDic;
+                commentBox.avatarImage = avatarImageFromDic;
             }
         }
         

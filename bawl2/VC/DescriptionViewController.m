@@ -72,6 +72,8 @@
 // they will be nil, until user taps adding new comment button
 @property(strong, nonatomic) NSArray *rightBarButtonItems;
 @property(strong, nonatomic) NSArray *leftBarButtonItems;
+@property(weak, nonatomic) NewCommentView *addingCommentView;
+@property(strong, nonatomic) NSString *addingCommentText;
 
 @end
 
@@ -174,6 +176,8 @@
         self.issueImageView.image = ci.issueImage;
     }
     
+    
+    
 }
 
 -(void)addObservers
@@ -206,7 +210,8 @@
     if(self.isCommentLoaded == NO)
     {
         [self calculateContentViewStaticHeight];
-        [self requestUsersAndComments];
+        // this is the first load of comments, so we're doing it from 0 index
+        [self requestUsersAndAddCommentsFromIndex:0];
         self.isCommentLoaded = YES;
     }
     
@@ -245,7 +250,13 @@
 
 -(void)calculateContentViewStaticHeight
 {
-    self.contentStaticHeight = self.viewBetweenCommentAndShare.frame.origin.y + self.viewBetweenCommentAndShare.frame.size.height;
+    CGFloat staticHeight = self.viewBetweenCommentAndShare.frame.origin.y + self.viewBetweenCommentAndShare.frame.size.height;
+    self.contentStaticHeight = staticHeight;
+    self.contentViewHeightConstraint.constant =  staticHeight;
+    [self.view layoutIfNeeded];
+    self.contentDynamicHeight = 0;
+    self.viewToConnectDynamicItems = self.viewBetweenCommentAndShare;
+
 }
 
 // when avatar image is loaded, it sends notification to update all images with this string file name
@@ -333,28 +344,23 @@
 
 #pragma mark - Comments
 
--(void)requestUsersAndComments
+-(void)requestUsersAndAddCommentsFromIndex:(NSUInteger)index
 {
     __weak DescriptionViewController *weakSelf = self;
     [self.dataSorce requestAllUsers:^(NSArray<User *> *users, NSError *error) {
-        [weakSelf commentBlockWithAllUsers:users];
+        [weakSelf commentBlockWithAllUsers:users fromIndex:index];
     }];
 }
 
--(void)commentBlockWithAllUsers:(NSArray<User*> *) users
+-(void)commentBlockWithAllUsers:(NSArray<User*> *) users fromIndex:(NSUInteger)startIndex
 {
     __weak DescriptionViewController *weakSelf = self;
-    self.viewToConnectDynamicItems = self.viewBetweenCommentAndShare;
-    
     [self.dataSorce requestCommentsWithIssueID:[CurrentItems sharedItems].issue.issueId
                                     andHandler:^(NSArray<NSDictionary<NSString *,id> *> *commentDics, NSError *error) {
        dispatch_async(dispatch_get_main_queue(), ^{
-           weakSelf.contentViewHeightConstraint.constant =  weakSelf.contentStaticHeight;
-           [weakSelf.view layoutIfNeeded];
-           weakSelf.contentDynamicHeight = 0;
            if(commentDics==nil || error != nil || [commentDics isKindOfClass: [NSDictionary class]])
                return;
-           for (NSInteger index=0; index<commentDics.count; ++index)
+           for (NSInteger index=startIndex; index<commentDics.count; ++index)
            {
                
                NSDictionary<NSString *,id> *commentDic = commentDics[index];
@@ -364,12 +370,24 @@
 
            CGFloat newContentViewHeight = weakSelf.contentDynamicHeight + weakSelf.contentStaticHeight;
            CGFloat scrollViewHeight = weakSelf.scrollView.frame.size.height;
-           if(newContentViewHeight < scrollViewHeight)
-               weakSelf.contentViewHeightConstraint.constant = scrollViewHeight;
-           else
+//           if(newContentViewHeight < scrollViewHeight)
+//               weakSelf.contentViewHeightConstraint.constant = scrollViewHeight;
+//           else
                weakSelf.contentViewHeightConstraint.constant = newContentViewHeight;
            
            [weakSelf.view layoutIfNeeded];
+           
+           // if we add new coment (index!=0) we have to scroll down, to show this comment
+           if(startIndex!=0)
+           {
+               CGFloat yOffset = newContentViewHeight - scrollViewHeight;
+               if (yOffset > 0)
+               {
+                   [UIView animateWithDuration:0.4 animations:^{
+                       self.scrollView.contentOffset = CGPointMake(0, yOffset);
+                   }];
+               }
+           }
        });
     }];
     
@@ -390,18 +408,19 @@
 }
 
 
+#define COMMENT_UPPER_OFFSET_FROM_PREVIOUS_ELEMENT 2
 
 -(void)addOneComment:(NSDictionary <NSString*, id> *)commentDic withIndex:(NSInteger)index user:(User *) user
 {
     NSArray *nibContext = [[NSBundle mainBundle] loadNibNamed:CustomViewCommentView owner:nil options:nil];
     CommentBox *cb = [nibContext firstObject];
-    Comment *comment = [[Comment alloc] initWithCommentDictionary:commentDic andUser:user andUIImage:cb.avatarImage andImageDictionary:self.avatarNamesAndImagesDic];
+    Comment *comment = [[Comment alloc] initWithCommentDictionary:commentDic andUser:user andComentBox:cb andImageDictionary:self.avatarNamesAndImagesDic];
     
     cb.alpha=0.0;
     [self.contentView addSubview:cb];
     [cb.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor constant:3].active=YES;
     [cb.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor constant:-3].active=YES;
-    [cb.topAnchor constraintEqualToAnchor:self.viewToConnectDynamicItems.bottomAnchor constant:2].active=YES;
+    [cb.topAnchor constraintEqualToAnchor:self.viewToConnectDynamicItems.bottomAnchor constant:COMMENT_UPPER_OFFSET_FROM_PREVIOUS_ELEMENT].active=YES;
     self.viewToConnectDynamicItems = cb;
     [self.commentBoxArr addObject:cb];
 
@@ -417,7 +436,7 @@ andAvatarHeightWidth:self.avatarSize
              andUser:user];
     
     // height of comment could ;change in fillWithName... method (with updating layout). So we update the value of content height after it.
-    self.contentDynamicHeight += cb.frame.size.height;
+    self.contentDynamicHeight += cb.frame.size.height + COMMENT_UPPER_OFFSET_FROM_PREVIOUS_ELEMENT;
     self.contentViewHeightConstraint.constant += cb.frame.size.height;
 
     [UIView animateWithDuration:0.3 animations:^{
@@ -436,12 +455,13 @@ andAvatarHeightWidth:self.avatarSize
     self.rightBarButtonItems = self.navigationItem.rightBarButtonItems;
     
     UIBarButtonItem *cancelBarButton = [[UIBarButtonItem alloc] initWithTitle:@"cancel" style:UIBarButtonItemStylePlain target:self action:@selector(newCommentCancelPressed)];
-    UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithTitle:@"done" style:UIBarButtonItemStyleDone target:self action:@selector(newCommentDonePressed)];
+    UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithTitle:@"post" style:UIBarButtonItemStyleDone target:self action:@selector(newCommentDonePressed)];
     self.navigationItem.leftBarButtonItems = @[cancelBarButton];
     self.navigationItem.rightBarButtonItems = @[doneBarButton];
     
     NSArray *nibContext = [[NSBundle mainBundle] loadNibNamed:CustomViewNewCommentView owner:nil options:nil];
     NewCommentView *newComment = [nibContext firstObject];
+    self.addingCommentView = newComment;
     newComment.translatesAutoresizingMaskIntoConstraints = NO;
     // this view will uppear at the top of all views
     [self.view addSubview:newComment];
@@ -463,12 +483,44 @@ andAvatarHeightWidth:self.avatarSize
 
 -(void)newCommentDonePressed
 {
+    NSString *trimmedString = [self.addingCommentView.textView.text stringByTrimmingCharactersInSet:
+                               [NSCharacterSet whitespaceCharacterSet]];
+    
+    if([trimmedString length] == 0)
+    {
+        [self newCommentCancelPressed];
+        return;
+    }
 
+    self.addingCommentText = trimmedString;
+    
+    // post
+    NSNumber *issueId = [CurrentItems sharedItems].issue.issueId;
+    [self.dataSorce requestSendNewComment:trimmedString forIssueID:issueId
+    andHandler:^(NSArray<NSDictionary<NSString *,id> *> *commentDics, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (commentDics != nil && [commentDics isKindOfClass:[NSArray class]]  && error == nil)
+            {
+                    // we don't update existing comment, just add new (there can be other besides our)
+                    NSUInteger startIndexAddingComments = [self.commentBoxArr count];
+                    [self requestUsersAndAddCommentsFromIndex:startIndexAddingComments];
+            }
+            [self newCommentCancelPressed];
+        });
+
+        
+    }];
+    
 }
 
 -(void)newCommentCancelPressed
 {
-
+    [self.addingCommentView.textView resignFirstResponder];
+    [self.addingCommentView removeFromSuperview];
+    self.navigationItem.leftBarButtonItems = self.leftBarButtonItems;
+    self.navigationItem.rightBarButtonItems = self.rightBarButtonItems;
+    self.leftBarButtonItems = nil;
+    self.rightBarButtonItems = nil;
 }
 
 
