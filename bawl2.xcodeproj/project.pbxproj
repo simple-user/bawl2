@@ -54,6 +54,8 @@
 		84E294181CC94EE30015F2CA /* commentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E294171CC94EE30015F2CA /* commentView.xib */; };
 		84E2B43F1CBAA1210027B1A0 /* MyAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E2B43E1CBAA1210027B1A0 /* MyAlert.m */; };
 		84E2B4421CBAB23F0027B1A0 /* NewItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E2B4411CBAB23F0027B1A0 /* NewItemViewController.m */; };
+		84E34CB61CDE564200A26FAB /* NewCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E34CB51CDE564200A26FAB /* NewCommentView.m */; };
+		84E34CB81CDE566500A26FAB /* newCommentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E34CB71CDE566500A26FAB /* newCommentView.xib */; };
 		84E358D21CAC14D800521AA4 /* CurrentItems.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E358CF1CAC14D800521AA4 /* CurrentItems.m */; };
 		84E358D31CAC14D800521AA4 /* IssueCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E358D11CAC14D800521AA4 /* IssueCategories.m */; };
 		84E881C41CDA2DA800CB4A69 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E881C31CDA2DA800CB4A69 /* HistoryViewController.m */; };
@@ -153,6 +155,9 @@
 		84E2B43E1CBAA1210027B1A0 /* MyAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyAlert.m; path = model/MyAlert.m; sourceTree = "<group>"; };
 		84E2B4401CBAB23F0027B1A0 /* NewItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewItemViewController.h; path = VC/NewItemViewController.h; sourceTree = "<group>"; };
 		84E2B4411CBAB23F0027B1A0 /* NewItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewItemViewController.m; path = VC/NewItemViewController.m; sourceTree = "<group>"; };
+		84E34CB41CDE564200A26FAB /* NewCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewCommentView.h; path = "UI custom obj/newCommentView/NewCommentView.h"; sourceTree = "<group>"; };
+		84E34CB51CDE564200A26FAB /* NewCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewCommentView.m; path = "UI custom obj/newCommentView/NewCommentView.m"; sourceTree = "<group>"; };
+		84E34CB71CDE566500A26FAB /* newCommentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = newCommentView.xib; path = "UI custom obj/newCommentView/newCommentView.xib"; sourceTree = "<group>"; };
 		84E358CE1CAC14D800521AA4 /* CurrentItems.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CurrentItems.h; path = singleton/CurrentItems.h; sourceTree = "<group>"; };
 		84E358CF1CAC14D800521AA4 /* CurrentItems.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CurrentItems.m; path = singleton/CurrentItems.m; sourceTree = "<group>"; };
 		84E358D01CAC14D800521AA4 /* IssueCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IssueCategories.h; path = singleton/IssueCategories.h; sourceTree = "<group>"; };
@@ -250,6 +255,7 @@
 		84DBF4511CAB1694001D1EAC /* UI Custom object */ = {
 			isa = PBXGroup;
 			children = (
+				84E34CB31CDE561600A26FAB /* newComment */,
 				84E294161CC94E9D0015F2CA /* comment */,
 				84DBF4971CAB1796001D1EAC /* HistoryCell */,
 				84DBF4541CAB16A6001D1EAC /* ChangerBox.h */,
@@ -357,6 +363,16 @@
 			name = comment;
 			sourceTree = "<group>";
 		};
+		84E34CB31CDE561600A26FAB /* newComment */ = {
+			isa = PBXGroup;
+			children = (
+				84E34CB41CDE564200A26FAB /* NewCommentView.h */,
+				84E34CB51CDE564200A26FAB /* NewCommentView.m */,
+				84E34CB71CDE566500A26FAB /* newCommentView.xib */,
+			);
+			name = newComment;
+			sourceTree = "<group>";
+		};
 		84E358CD1CAC148600521AA4 /* singleton */ = {
 			isa = PBXGroup;
 			children = (
@@ -432,6 +448,7 @@
 				84DBF4271CAB0A5F001D1EAC /* Main.storyboard in Resources */,
 				84E881C61CDA440600CB4A69 /* historyCellXib.xib in Resources */,
 				84E294181CC94EE30015F2CA /* commentView.xib in Resources */,
+				84E34CB81CDE566500A26FAB /* newCommentView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,6 +462,7 @@
 				84725A7F1CB042A90000866D /* CDIssue+CoreDataProperties.m in Sources */,
 				84DBF4A31CAB186C001D1EAC /* UIColor+Bawl.m in Sources */,
 				84E2B43F1CBAA1210027B1A0 /* MyAlert.m in Sources */,
+				84E34CB61CDE564200A26FAB /* NewCommentView.m in Sources */,
 				84DBF45A1CAB16A6001D1EAC /* CommentBox.m in Sources */,
 				84B8F7651CAD6795003A0477 /* CDIssueHistoryAction.m in Sources */,
 				8438D2D91CD156D2002DBE3C /* EditProfileViewController.m in Sources */,
