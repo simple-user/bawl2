@@ -219,7 +219,7 @@
 -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
     CurrentItems *ci = [CurrentItems sharedItems];
-    ci.issue = view.annotation;
+    [ci setIssueAndUpdateImage:view.annotation];
 }
 
 

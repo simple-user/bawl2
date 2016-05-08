@@ -309,13 +309,44 @@
 
 - (IBAction)changeStatus:(UIButton *)sender
 {
-}
-
-
--(void)sendCommentPressed
-{
+    UIAlertController *changerController = [UIAlertController alertControllerWithTitle:@"Changing issue status"
+                                                                               message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *changerAction = nil;
     
+    for (NSString *newStatus in self.stringNewStatuses)
+    {
+        NSString *newStatusReadable = [self.statusChanger labelTextForNewStatus:newStatus];
+        changerAction = [UIAlertAction actionWithTitle:newStatusReadable style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction * _Nonnull action) {
+                                   [self newStatusPressedWithTitle:action.title];
+                               }];
+        [changerController addAction: changerAction];
+    }
+    
+    changerAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    [changerController addAction:changerAction];
+    [self presentViewController:changerController animated:YES completion:nil];
 }
+
+-(void)newStatusPressedWithTitle:(NSString*)title
+{
+    NSString *originalNewStatus = [self.statusChanger originalNewStatusForLaxbelText:title];
+    NSNumber *issueId = [CurrentItems sharedItems].issue.issueId;
+    [self.dataSorce requestChangeStatusWithID:issueId toStatus:originalNewStatus
+     andViewControllerHandler:^(NSString *stringAnswer, Issue *issue, NSError *error) {
+         if(stringAnswer==nil)
+         {
+             CurrentItems *ci = [CurrentItems sharedItems];
+             ci.issue = issue;
+             dispatch_async(dispatch_get_main_queue(), ^{
+                self.currentStatusLabel.text = issue.status;
+                [self prepareUIChangeStatusButton];
+             });
+         }
+     }];
+}
+
+
 
 #pragma mark - Keyboard notifications
 -(void)keyboardDidShow:(NSNotification *)notification

@@ -59,6 +59,16 @@
                                                   usingBlock:^(NSNotification * _Nonnull note) {
                                                       [self.categoryPicker reloadAllComponents];
                                                   }];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardDidShow:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -255,6 +265,38 @@
     
 }
 
+#pragma mark Kayboard notifications
+
+
+-(void)keyboardDidShow:(NSNotification*)notification
+{
+    NSDictionary *dic = notification.userInfo;
+    NSValue *keyboardFrame = dic[UIKeyboardFrameEndUserInfoKey];
+    CGRect frame = [keyboardFrame CGRectValue];
+    CGRect viewFrame = [self.view convertRect:frame fromView:nil];
+    CGFloat keyboardHeight = viewFrame.size.height;
+    
+    
+
+    UITableViewCell *descCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2]];
+    CGFloat cellY = descCell.frame.origin.y;
+    
+    CGFloat descriptionBottom = cellY + self.descriptionTextView.frame.origin.y + self.descriptionTextView.bounds.size.height;
+    CGFloat keyboardTop = self.tableView.bounds.size.height - keyboardHeight;
+    CGFloat scrollOffset = descriptionBottom - keyboardTop;
+    if(scrollOffset >0)
+    {
+        [UIView animateWithDuration:0.4 animations:^{
+            self.tableView.contentOffset = CGPointMake(0, scrollOffset);
+        }];
+    }
+    
+}
+
+-(void)keyboardWillHide
+{
+
+}
 
 
 

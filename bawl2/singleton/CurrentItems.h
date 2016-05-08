@@ -47,11 +47,9 @@
 
 +(instancetype)sharedItems;
 
-// -(void)setUser:(User *)user withChangingImageViewBloc:(void(^)()) changinImageView;
-// -(void)setIssue:(Issue *)issue withChangingImageViewBloc:(void(^)()) changinImageView;
-
 -(void)setUserAndUpdateImage:(User*)user;
--(void)setIssue:(Issue *)issue;
+-(void)setIssueAndUpdateImage:(Issue *)issue;
+
 
 -(void)startInitManagedObjectcontext;
 

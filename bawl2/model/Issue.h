@@ -28,7 +28,7 @@
 @property (strong, nonatomic, readonly) NSNumber *latitude;  // just get method!!!
 
 // @property (nonatomic) CLLocationCoordinate2D coordinate;
-//@property (strong,nonatomic,readonly) NSString *tittle;
+//@property (strong,nonatomic,readonly) NSString *title;
 
 @property (nonatomic, readonly, copy) NSString *title;       // just get method!!!
 @property (nonatomic, readonly, copy) NSString *subtitle;    // just get method!!!

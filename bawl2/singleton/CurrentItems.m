@@ -192,24 +192,7 @@
 
 }
 
-
-//
-//-(void)setUser:(User *)user withChangingImageViewBloc:(void(^)()) changinImageView
-//{
-//    self.user = user;
-//    
-//    NSString *unchangedName = self.user.avatar;
-//    [self.dataSorce requestImageWithName:self.user.avatar andHandler:^(UIImage *image, NSError *error) {
-//        if ([unchangedName isEqualToString:self.user.avatar])
-//        {
-//            self.userImage = image;
-//            changinImageView();
-//        }
-//    }];
-//    
-//}
-
--(void)setIssue:(Issue *)issue
+-(void)setIssueAndUpdateImage:(Issue *)issue
 {
     _issue = issue;
     self.issueImage = nil;
@@ -219,47 +202,18 @@
     andHandler:^(UIImage *image, NSError *error) {
         if(image != nil)
         {
-//            NSLog(@"_setIssue_: current issue image is DOWNLOADED. (filename:%@)", tempAttach);
             self.issueImage = image;
             [self.issueImageDelegates makeObjectsPerformSelector:@selector(issueImageDidLoad)];
         }
         else
         {
-//            NSLog(@"_setIssue_: current issue image download is FAILED . (filename:%@)", tempAttach);
             self.issueImage = [UIImage imageNamed:ImageNameNoIssue];
             [self.issueImageDelegates makeObjectsPerformSelector:@selector(issueImageDidFailedLoad)];
         }
         
         
     }];
-    
-    
-//    [self.dataSorce requestImageWithName:self.issue.attachments andHandler:^(UIImage *image, NSError *error) {
-//        if ([unchangedName isEqualToString:self.issue.attachments])
-//        {
-//            self.issueImage = image;
-//            [self.issueImageDelegates makeObjectsPerformSelector:@selector(issueImageDidLoad)];
-//        }
-//    }];
 }
-//
-//-(void)setIssue:(Issue *)issue withChangingImageViewBloc:(void(^)()) changinImageView
-//{
-//    self.issue = issue;
-//    
-//    NSString *unchangedName = self.issue.attachments;
-//    [self.dataSorce requestImageWithName:self.issue.attachments andHandler:^(UIImage *image, NSError *error) {
-//        if ([unchangedName isEqualToString:self.issue.attachments])
-//        {
-//            self.issueImage = image;
-//            changinImageView();
-//            
-//        }
-//    }];
-//    
-//}
-
-
 
 
 

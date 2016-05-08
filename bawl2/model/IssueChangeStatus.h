@@ -15,5 +15,6 @@
 -(NSString*)labelTextForNewStatus:(NSString*)newStatus;
 -(NSString*)labelAdditionalTextForNewStatus:(NSString*)newStatus;
 
+-(NSString*)originalNewStatusForLaxbelText:(NSString*)labelText;
 
 @end

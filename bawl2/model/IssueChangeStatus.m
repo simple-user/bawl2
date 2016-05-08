@@ -74,7 +74,20 @@
         return @"Mark issue as resolved";
     else if([newStatus isEqualToString:@"RESOLVED"])
         return @"Conmirm resolving issue";
-    else return nil;
+    else return newStatus;
+}
+
+-(NSString*)originalNewStatusForLaxbelText:(NSString*)labelText
+{
+    if([labelText isEqualToString:@"Approve Issue"])
+        return @"APPROVED";
+    else if([labelText isEqualToString:@"Disaprove issue"])
+        return @"CANCELED";
+    else if([labelText isEqualToString:@"Mark issue as resolved"])
+        return @"TO_RESOLVE" ;
+    else if([labelText isEqualToString:@"Conmirm resolving issue"])
+        return @"RESOLVED";
+    else return labelText;
 }
 
 -(NSString*)labelAdditionalTextForNewStatus:(NSString*)newStatus
