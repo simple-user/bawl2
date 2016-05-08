@@ -13,7 +13,7 @@
 #import "MyAlert.h"
 #import "NetworkDataSorce.h"
 
-@interface NewItemViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
+@interface NewItemViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UITextViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 //name section
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 //category section
@@ -24,6 +24,7 @@
 @property (strong, nonatomic) IssueCategory *selectedCategory;
 //sdescription secrion
 @property (weak, nonatomic) IBOutlet UITextView *descriptionTextView;
+@property (nonatomic) BOOL isDescriptionEditing;
 //photo section
 @property(strong, nonatomic) NewItemViewControllerPhotoInfoDelegate *photoDelegate;
 @property (weak, nonatomic) IBOutlet UIImageView *photoView;
@@ -64,11 +65,6 @@
                                                  name:UIKeyboardDidShowNotification
                                                object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHide)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:nil];
-
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -84,6 +80,16 @@
     return YES;
 }
 
+#pragma mark - TextView delegate
+-(void)textViewDidBeginEditing:(UITextView *)textView
+{
+    self.isDescriptionEditing = YES;
+}
+
+-(void)textViewDidEndEditing:(UITextView *)textView
+{
+    self.isDescriptionEditing = NO;
+}
 
 #pragma mark - TableView Delegate / Sorce
 
@@ -270,6 +276,9 @@
 
 -(void)keyboardDidShow:(NSNotification*)notification
 {
+    if(self.isDescriptionEditing == NO)
+        return;
+    
     NSDictionary *dic = notification.userInfo;
     NSValue *keyboardFrame = dic[UIKeyboardFrameEndUserInfoKey];
     CGRect frame = [keyboardFrame CGRectValue];
@@ -291,11 +300,6 @@
         }];
     }
     
-}
-
--(void)keyboardWillHide
-{
-
 }
 
 
