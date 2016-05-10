@@ -53,8 +53,6 @@
 -(void)setUp
 {
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    [self.nameButton setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
-    
 }
 
 @end
